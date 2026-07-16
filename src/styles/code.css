@@ -7,6 +7,10 @@
       width: min(1120px, 100%);
     }
 
+    .compare.one-column {
+      grid-template-columns: 1fr;
+    }
+
     .code-window {
       border: 1px solid var(--line-2);
       border-radius: 16px;

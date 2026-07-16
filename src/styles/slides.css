@@ -460,6 +460,101 @@
 
     .summary-row p { font-size: 1.05rem; }
 
+    .data-table {
+      width: 100%;
+      border-collapse: collapse;
+      border-top: 1px solid var(--line-2);
+      color: var(--paper);
+      font-size: clamp(0.9rem, 1.08vw, 1.05rem);
+    }
+
+    .data-table th,
+    .data-table td {
+      padding: 14px 16px;
+      border-bottom: 1px solid var(--line);
+      text-align: left;
+      white-space: nowrap;
+    }
+
+    .data-table th {
+      color: var(--copper);
+      font-family: var(--mono);
+      font-size: 0.76rem;
+      letter-spacing: 0.08em;
+      text-transform: uppercase;
+    }
+
+    .data-table th:not(:first-child),
+    .data-table td:not(:first-child) {
+      text-align: right;
+    }
+
+    .data-table tbody tr:hover,
+    .data-table .highlight-row,
+    .data-table .highlight-col {
+      background: rgba(223,132,104,0.07);
+    }
+
+    .chart-figure {
+      width: min(620px, 100%);
+      margin: 0;
+      border: 1px solid var(--line-2);
+      border-radius: 16px;
+      overflow: hidden;
+      background: rgba(238,232,221,0.96);
+      box-shadow: 0 24px 70px rgba(0,0,0,0.24);
+    }
+
+    .chart-figure img {
+      display: block;
+      width: 100%;
+      max-height: 430px;
+      object-fit: contain;
+    }
+
+    .chart-figure figcaption {
+      padding: 11px 14px;
+      border-top: 1px solid rgba(17,16,13,0.13);
+      color: #4c4640;
+      font-size: 0.82rem;
+      line-height: 1.4;
+    }
+
+    .activity-meta {
+      display: flex;
+      flex-wrap: wrap;
+      align-items: center;
+      gap: 12px 18px;
+      margin: 24px 0 8px;
+      color: var(--muted);
+      font-family: var(--mono);
+      font-size: 0.8rem;
+      letter-spacing: 0.04em;
+    }
+
+    .timer-badge {
+      display: inline-flex;
+      align-items: center;
+      min-height: 34px;
+      padding: 7px 13px;
+      border: 1px solid rgba(230,173,98,0.56);
+      border-radius: 999px;
+      color: var(--paper);
+      background: rgba(230,173,98,0.08);
+    }
+
+    .closing-logo {
+      display: block;
+      width: clamp(108px, 10vw, 148px);
+      height: clamp(64px, 6vw, 88px);
+      object-fit: contain;
+      margin-bottom: 24px;
+      padding: 10px 12px;
+      border: 1px solid var(--line-2);
+      border-radius: 12px;
+      background: rgba(238,232,221,0.92);
+    }
+
     .reveal {
       width: min(1120px, 100%);
       margin-top: 22px;
@@ -500,8 +595,15 @@
       .orbital { min-height: 420px; }
       .orbit-label { font-size: 0.8rem; }
       .orbit-label b { font-size: 1.15rem; }
+      .data-table {
+        display: block;
+        overflow-x: auto;
+      }
+      .chart-figure {
+        margin-top: 26px;
+      }
     }
-  
+
     /* Viewport fitting + presentation transitions */
     .slide {
       padding: clamp(34px, 5.4vw, 86px) clamp(34px, 8vw, 146px) !important;
@@ -599,5 +701,17 @@
       @keyframes mobileSlideEnter {
         from { opacity: 0; transform: translateY(10px); }
         to { opacity: 1; transform: translateY(0); }
+      }
+    }
+
+    @media (prefers-reduced-motion: reduce) {
+      .slide,
+      .slide.active .stage,
+      .slide.is-leaving .stage,
+      .top-progress-bar,
+      .dots button {
+        animation: none !important;
+        transition: none !important;
+        filter: none !important;
       }
     }

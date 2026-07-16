@@ -1,57 +1,49 @@
 # SPAI AI Don’t Know Workshop 2
 
-Beginner-friendly workshop on data analytics and visualisation.
+Beginner-friendly data analytics and visualisation workshop for mostly Year 1 students.
 
 ## Workshop information
 
 - Topic: Data Analytics and Visualisation
 - Date: 22 July
-- Time: 3pm to 5pm
-- Audience: Mostly Year 1 beginners
+- Time: 3:00–5:00 PM
 - Speakers: Alson and Murugan
+- Teaching loop: Question → Data → Code → Output/Chart → Insight
 
-## Repository purpose
+The workshop uses pandas as the main table tool, matplotlib as the main chart tool, NumPy for light numerical support, and seaborn briefly as a cleaner plotting alternative.
 
-This repository will contain:
+## Repository contents
 
-- Interactive workshop slides
-- Attendee notebook
-- Completed speaker notebook
-- Workshop assets
-- Setup instructions
+- `index.html`: canonical 31-slide web deck
+- `ai_dont_know_workshop_2.html`: standalone deck with inline CSS and JavaScript
+- `notebooks/AIDK_W2_Workshop.ipynb`: 57-cell attendee notebook with guided activity blanks
+- `notebooks/AIDK_W2_Workshop_Completed.ipynb`: 57-cell executed speaker and facilitator reference
+- `public/assets/images/`: SVG charts generated from the workshop datasets
+- `public/assets/logos/spai-logo.png`: SPAI logo used on the closing slide
+- `scripts/`: deck synchronisation and validation checks
 
 ## Source-of-truth hierarchy
 
-1. `AIDK_W2_Content_Document_Updated.md` controls workshop content.
-2. `slides.md` controls slide design and implementation.
-3. `AGENTS.md` contains repository-level operating rules.
+1. `docs/AIDK_W2_Slide_and_Notebook_Plan.md` is the approved implementation specification.
+2. `AIDK_W2_Content_Document_Updated.md` controls workshop content, sequence, timing, activities, and learning outcomes.
+3. `slides.md` controls the slide design language and technical implementation.
+4. The attendee notebook is authoritative for exact live-demo code, datasets, variable names, activity blanks, and cell order.
 
-## Current status
+## View the slides
 
-> Repository scaffolded from Workshop 1. Workshop 2 slide content and notebooks have not been implemented yet. Do not deploy the inherited Workshop 1 deck as Workshop 2.
-
-The inherited Workshop 1 deck remains temporarily as an implementation reference and must be replaced before deployment.
-
-## JavaScript setup
-
-This is a no-framework static HTML, CSS, and JavaScript slide deck managed with npm.
+This is a no-framework static HTML, CSS, and JavaScript deck. No frontend dependency installation is required for the validation commands.
 
 ```bash
-npm install
 npm run dev
-npm run build
 ```
 
-`npm run build` validates the inherited static deck; it does not create a compiled bundle. The existing focused checks can also be run directly:
+Open the local URL printed by the server. Use `index.html` for the canonical deck or `ai_dont_know_workshop_2.html` for the standalone copy.
 
-```bash
-npm run check:alignment
-npm run check:standalone-visuals
-```
+Navigation supports the on-screen previous/next buttons, slide dots, Arrow Left/Right, Page Up/Down, Space, Home, End, and numbered URL hashes such as `#15`.
 
-## Python setup
+## Run the notebooks
 
-macOS and Linux:
+Create a Python environment and install the existing requirements:
 
 ```bash
 python -m venv .venv
@@ -59,19 +51,44 @@ source .venv/bin/activate
 pip install -r requirements.txt
 ```
 
-Windows:
-
-```bash
-python -m venv .venv
-.venv\Scripts\activate
-pip install -r requirements.txt
-```
-
-## Expected future files
-
-The following notebooks will be created in a later task; they do not exist yet:
+Windows activation:
 
 ```text
-notebooks/AIDK_W2_Workshop.ipynb
-notebooks/AIDK_W2_Workshop_Completed.ipynb
+.venv\Scripts\activate
 ```
+
+Then open either notebook in VS Code, Jupyter, Google Colab, or another compatible notebook editor.
+
+During delivery, use the attendee notebook for demonstrations. Keep the completed notebook open as the speaker/facilitator backup. The completed notebook stores fresh top-to-bottom outputs; the attendee notebook intentionally leaves Cells 20, 22, 24, 26, 28, 49, and 51 incomplete.
+
+## Synchronisation and validation
+
+After changing canonical slide markup, synchronise the standalone deck:
+
+```bash
+npm run sync:standalone
+```
+
+Run the complete production-readiness validation:
+
+```bash
+npm run build
+```
+
+The focused checks are also available:
+
+```bash
+npm run check:alignment
+npm run check:standalone-visuals
+```
+
+`npm run build` does not create a compiled bundle. It verifies the two 57-cell notebooks, exact datasets and outputs, attendee activity blanks, slide-to-notebook code mappings, 31-slide standalone parity, required styles/assets, timings, shell controls, and stale active content.
+
+## Editing contract
+
+- Keep slide code identical to the mapped notebook cell unless the slide is visibly labelled `Excerpt`.
+- Keep all dataset values, names, order, labels, and interpretations identical across slides, notebooks, SVGs, validators, and speaker walkthroughs.
+- Regenerate an affected SVG after changing its notebook plot or data.
+- Never reveal activity solutions in the attendee notebook.
+- Preserve the static HTML/CSS/JavaScript architecture and the existing design tokens.
+- Do not deploy or publish until the full validation and visual review pass.

@@ -1,0 +1,1630 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>AI Don’t Know Workshop 2</title>
+  <link rel="icon" href="data:," />
+  <style>
+:root {
+      --bg: #11100d;
+      --bg-2: #1a1612;
+      --paper: #eee8dd;
+      --muted: #a39b91;
+      --muted-2: #6f6861;
+      --line: rgba(238, 232, 221, 0.13);
+      --line-2: rgba(238, 232, 221, 0.22);
+      --copper: #df8468;
+      --copper-2: #f0a083;
+      --amber: #e6ad62;
+      --green: #9fcb8f;
+      --blue: #89b7d8;
+      --violet: #b7a0e8;
+      --code-bg: rgba(9, 9, 10, 0.72);
+      --sans: Inter, ui-sans-serif, system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
+      --serif: Georgia, "Times New Roman", Times, serif;
+      --mono: "SFMono-Regular", Consolas, "Liberation Mono", Menlo, monospace;
+    }
+
+    * { box-sizing: border-box; }
+
+    html, body {
+      height: 100%;
+      margin: 0;
+      background: #141311;
+      color: var(--paper);
+      font-family: var(--sans);
+      overflow: hidden;
+    }
+
+    body::before {
+      content: "";
+      position: fixed;
+      inset: 0;
+      pointer-events: none;
+      background:
+        radial-gradient(circle at 28% 18%, rgba(223,132,104,0.14), transparent 34%),
+        radial-gradient(circle at 88% 18%, rgba(230,173,98,0.09), transparent 30%),
+        radial-gradient(circle at 65% 82%, rgba(183,160,232,0.08), transparent 30%),
+        linear-gradient(135deg, #15130f 0%, #0e0e0d 55%, #19120e 100%);
+      z-index: -3;
+    }
+
+    body::after {
+      content: "";
+      position: fixed;
+      inset: 0;
+      background-image:
+        linear-gradient(rgba(238,232,221,0.018) 1px, transparent 1px),
+        linear-gradient(90deg, rgba(238,232,221,0.018) 1px, transparent 1px);
+      background-size: 38px 38px;
+      mask-image: radial-gradient(circle at 42% 42%, black, transparent 75%);
+      opacity: 0.9;
+      pointer-events: none;
+      z-index: -2;
+    }
+
+    .grain {
+      position: fixed;
+      inset: 0;
+      pointer-events: none;
+      opacity: 0.18;
+      background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 220 220' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.85' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)' opacity='0.38'/%3E%3C/svg%3E");
+      z-index: -1;
+    }
+
+
+    .kicker {
+      color: var(--copper);
+      font-family: var(--mono);
+      font-size: clamp(0.72rem, 1.05vw, 0.92rem);
+      font-weight: 800;
+      letter-spacing: 0.33em;
+      text-transform: uppercase;
+      margin-bottom: clamp(20px, 3vw, 34px);
+    }
+
+    h1, h2, h3 {
+      font-family: var(--serif);
+      font-weight: 600;
+      line-height: 0.98;
+      letter-spacing: -0.055em;
+      margin: 0;
+    }
+
+    h1 { font-size: clamp(4.5rem, 8.6vw, 8.8rem); max-width: 1180px; }
+    h2 { font-size: clamp(3rem, 4.6vw, 4.8rem); max-width: 1120px; }
+    h3 { font-size: clamp(1.6rem, 2.6vw, 2.5rem); letter-spacing: -0.045em; }
+
+    /* Content slides use a calmer scale than titles and section dividers. */
+    .slide.standard h2,
+    .slide.two h2 {
+      max-width: none;
+      font-size: clamp(2.35rem, 3.6vw, 3.8rem);
+      line-height: 1.02;
+      letter-spacing: -0.045em;
+      text-wrap: balance;
+    }
+
+    .accent { color: var(--copper); }
+    .dim { color: rgba(238,232,221,0.28); }
+
+    p, li {
+      color: var(--muted);
+      font-size: clamp(1rem, 1.3vw, 1.18rem);
+      line-height: 1.55;
+      margin: 0;
+    }
+
+    p.lead {
+      margin-top: 28px;
+      max-width: 760px;
+      font-size: clamp(1.15rem, 1.55vw, 1.6rem);
+      line-height: 1.44;
+    }
+
+    .slide.standard p.lead,
+    .slide.two p.lead {
+      margin-top: 22px;
+      max-width: 720px;
+      font-size: clamp(1.05rem, 1.35vw, 1.35rem);
+      line-height: 1.5;
+    }
+
+    ul { margin: 30px 0 0; padding-left: 1.2em; max-width: 760px; }
+    li + li { margin-top: 14px; }
+    strong, b {
+      color: var(--paper);
+      font-weight: 600;
+    }
+
+    .title-stack {
+      width: min(1160px, 100%);
+      transform: translateY(-10px);
+    }
+
+    .title-sub {
+      margin-top: 26px;
+      max-width: 900px;
+      color: var(--muted);
+      font-size: clamp(1.1rem, 1.45vw, 1.45rem);
+      line-height: 1.45;
+    }
+
+    .hairline {
+      height: 1px;
+      width: min(880px, 100%);
+      background: linear-gradient(90deg, rgba(238,232,221,0.16), transparent);
+      margin: 38px 0 0;
+    }
+
+    .follow-link {
+      margin: 18px 0 0;
+      color: var(--muted);
+      font-size: clamp(0.9rem, 1.05vw, 1.05rem);
+      line-height: 1.45;
+    }
+
+    .follow-link a {
+      color: var(--paper);
+      text-decoration-color: rgba(238,232,221,0.35);
+      text-underline-offset: 0.18em;
+    }
+
+    .follow-link a:hover,
+    .follow-link a:focus-visible {
+      color: var(--copper-2);
+    }
+
+    .section-title {
+      width: min(1060px, 100%);
+    }
+
+    .section-title h2 {
+      max-width: 1050px;
+    }
+
+    .section-title .lead {
+      max-width: 760px;
+    }
+
+    .qr-block {
+      margin-top: 40px;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      gap: 12px;
+    }
+
+    .qr-code {
+      width: clamp(260px, 26vw, 380px);
+      height: clamp(260px, 26vw, 380px);
+      border-radius: 16px;
+      background: #fff;
+      padding: 16px;
+      box-shadow: 0 8px 30px rgba(0,0,0,0.35);
+    }
+
+    .qr-caption {
+      font-family: var(--mono);
+      font-size: 0.85rem;
+      letter-spacing: 0.14em;
+      text-transform: uppercase;
+      color: rgba(238,232,221,0.6);
+    }
+
+    .form-link {
+      margin-top: 28px;
+      font-family: var(--mono);
+      font-size: 0.65rem;
+      letter-spacing: 0.04em;
+      color: rgba(238,232,221,0.35);
+    }
+
+    .download-link {
+      display: block;
+      margin-top: 34px;
+      max-width: 850px;
+      color: var(--paper);
+      font-family: var(--mono);
+      font-size: clamp(1.15rem, 1.7vw, 1.8rem);
+      font-weight: 600;
+      line-height: 1.3;
+      overflow-wrap: anywhere;
+      text-decoration-color: var(--copper);
+      text-decoration-thickness: 2px;
+      text-underline-offset: 0.2em;
+    }
+
+    .download-link:hover,
+    .download-link:focus-visible {
+      color: var(--copper-2);
+    }
+
+    .big-number {
+      font-family: var(--mono);
+      color: rgba(223,132,104,0.72);
+      font-size: clamp(0.9rem, 1.4vw, 1.3rem);
+      letter-spacing: 0.18em;
+      margin-bottom: 24px;
+    }
+
+/* Code compare */
+    .compare {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 22px;
+      margin-top: 36px;
+      width: min(1120px, 100%);
+    }
+
+    .compare.one-column {
+      grid-template-columns: 1fr;
+    }
+
+    .code-window {
+      border: 1px solid var(--line-2);
+      border-radius: 16px;
+      background:
+        linear-gradient(180deg, rgba(255,255,255,0.035), rgba(255,255,255,0.01)),
+        var(--code-bg);
+      overflow: hidden;
+      box-shadow: 0 24px 70px rgba(0,0,0,0.28);
+    }
+
+    .code-head {
+      height: 42px;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      padding: 0 14px;
+      border-bottom: 1px solid var(--line);
+      color: var(--muted-2);
+      font-family: var(--mono);
+      font-size: 0.78rem;
+      letter-spacing: 0.05em;
+    }
+
+    .code-label {
+      display: flex;
+      align-items: center;
+      gap: 9px;
+    }
+
+    .code-label::before {
+      content: "";
+      width: 8px;
+      height: 8px;
+      border-radius: 50%;
+      background: var(--copper);
+    }
+
+    .python .code-label::before { background: var(--blue); }
+
+    .copy-btn {
+      border: 1px solid rgba(238,232,221,0.12);
+      background: transparent;
+      color: var(--muted-2);
+      border-radius: 999px;
+      padding: 5px 10px;
+      font-family: var(--mono);
+      font-size: 0.68rem;
+      cursor: pointer;
+    }
+
+    .copy-btn:hover { color: var(--paper); border-color: rgba(238,232,221,0.28); }
+
+    pre {
+      margin: 0;
+      padding: 26px;
+      white-space: pre-wrap;
+      font-family: var(--mono);
+      font-size: clamp(0.9rem, 1.25vw, 1.08rem);
+      line-height: 1.7;
+      color: #e6edf3;
+      tab-size: 4;
+    }
+
+    .kw { color: #caa7ff; }
+    .fn { color: #91d7ff; }
+    .str { color: #a9d7a0; }
+    .numlit { color: #f4b780; }
+    .comment { color: #6d6a66; }
+
+.deck {
+      height: 100vh;
+      width: 100vw;
+      position: relative;
+    }
+
+    .slide {
+      position: absolute;
+      inset: 0;
+      display: none;
+      opacity: 0;
+      padding: clamp(48px, 7vw, 112px) clamp(38px, 9vw, 180px);
+      overflow: hidden;
+      transform: translateY(8px);
+      transition: opacity 180ms ease, transform 180ms ease;
+    }
+
+    .slide.active {
+      display: grid;
+      opacity: 1;
+      transform: translateY(0);
+    }
+
+    .slide.center { place-items: center; }
+    .slide.standard { align-content: center; }
+    .slide.two { grid-template-columns: 0.95fr 1.05fr; gap: clamp(36px, 5vw, 86px); align-items: center; }
+    .slide.wide { align-content: center; }
+
+    .frame {
+      position: fixed;
+      inset: 18px;
+      border: 1px solid rgba(238,232,221,0.18);
+      border-radius: 14px;
+      pointer-events: none;
+      z-index: 10;
+    }
+
+    .top-progress {
+      position: fixed;
+      top: 18px;
+      left: 18px;
+      right: 18px;
+      height: 2px;
+      border-top-left-radius: 14px;
+      border-top-right-radius: 14px;
+      background: rgba(238,232,221,0.06);
+      overflow: hidden;
+      z-index: 30;
+    }
+
+    .top-progress-bar {
+      height: 100%;
+      width: 0%;
+      background: linear-gradient(90deg, var(--copper), var(--amber));
+      transition: width 180ms ease;
+    }
+
+    .footer {
+      position: fixed;
+      left: clamp(34px, 5vw, 64px);
+      right: clamp(34px, 5vw, 64px);
+      bottom: 32px;
+      z-index: 20;
+      display: grid;
+      grid-template-columns: 1fr auto 1fr;
+      align-items: center;
+      color: var(--muted-2);
+      font-family: var(--mono);
+      font-size: 0.78rem;
+      letter-spacing: 0.05em;
+      pointer-events: none;
+    }
+
+    .footer-left {
+      display: flex;
+      align-items: center;
+      gap: 10px;
+    }
+
+    .footer-left::before {
+      content: "";
+      width: 6px;
+      height: 6px;
+      background: var(--copper);
+      border-radius: 50%;
+    }
+
+    .dots {
+      display: flex;
+      gap: 8px;
+      justify-content: center;
+    }
+
+    .dots button {
+      width: 7px;
+      height: 7px;
+      border-radius: 50%;
+      padding: 0;
+      border: 0;
+      background: rgba(238,232,221,0.18);
+      pointer-events: auto;
+      cursor: pointer;
+    }
+
+    .dots button.active {
+      background: var(--copper);
+      transform: scale(1.25);
+    }
+
+    .slide-no {
+      justify-self: end;
+      color: var(--paper);
+    }
+
+    .slide-no span {
+      color: var(--muted-2);
+      margin-left: 6px;
+    }
+
+    .controls {
+      position: fixed;
+      right: 42px;
+      top: 36px;
+      z-index: 40;
+      display: flex;
+      gap: 8px;
+    }
+
+    .nav-btn {
+      appearance: none;
+      border: 1px solid rgba(238,232,221,0.16);
+      background: rgba(15,14,12,0.62);
+      color: rgba(238,232,221,0.76);
+      border-radius: 9px;
+      padding: 8px 11px;
+      cursor: pointer;
+      font-family: var(--mono);
+      font-size: 0.78rem;
+      backdrop-filter: blur(10px);
+    }
+
+    .nav-btn:hover { border-color: rgba(238,232,221,0.34); color: var(--paper); }
+    .nav-btn:disabled { opacity: 0.32; cursor: not-allowed; }
+
+
+    /* About SPAI visual */
+    .orbital {
+      position: relative;
+      min-height: 500px;
+    }
+
+    .orbital::before,
+    .orbital::after {
+      content: "";
+      position: absolute;
+      border: 1px solid rgba(238,232,221,0.10);
+      border-radius: 50%;
+      inset: 14%;
+    }
+
+    .orbital::after {
+      inset: 26%;
+      border-color: rgba(223,132,104,0.22);
+    }
+
+    .orbit-core {
+      position: absolute;
+      inset: 50% auto auto 50%;
+      transform: translate(-50%, -50%);
+      width: 160px;
+      height: 160px;
+      border-radius: 50%;
+      background:
+        radial-gradient(circle at 36% 32%, rgba(238,232,221,0.42), transparent 20%),
+        radial-gradient(circle, rgba(223,132,104,0.34), rgba(223,132,104,0.06) 54%, transparent 70%);
+      border: 1px solid rgba(223,132,104,0.32);
+      display: grid;
+      place-items: center;
+      box-shadow: 0 0 60px rgba(223,132,104,0.12);
+      overflow: hidden;
+      padding: 24px;
+    }
+
+    .orbit-core img {
+      width: 100%;
+      height: 100%;
+      object-fit: contain;
+      display: block;
+    }
+
+    .orbit-label {
+      position: absolute;
+      padding: 10px 12px;
+      border-top: 1px solid rgba(238,232,221,0.18);
+      color: var(--muted);
+      font-size: 0.95rem;
+    }
+
+    .orbit-label b {
+      display: block;
+      color: var(--paper);
+      font-family: var(--serif);
+      font-size: 1.42rem;
+      letter-spacing: -0.03em;
+      margin-bottom: 4px;
+    }
+
+    .ol-1 { left: 4%; top: 15%; }
+    .ol-2 { right: 2%; top: 18%; }
+    .ol-3 { left: 9%; bottom: 12%; }
+    .ol-4 { right: 8%; bottom: 14%; }
+
+    /* Who We Are — specific layout tweaks */
+    .slide.two[data-title="Who We Are"] .stage {
+      grid-template-columns: 1.16fr 0.84fr;
+      gap: clamp(36px, 4vw, 64px);
+    }
+
+    .slide.two[data-title="Who We Are"] h2 {
+      font-size: clamp(2.35rem, 3.35vw, 3.65rem);
+      max-width: 720px;
+    }
+
+    .slide.two[data-title="Who We Are"] .lead {
+      margin-top: 16px;
+    }
+
+    .slide.two[data-title="Who We Are"] ul {
+      margin-top: 18px;
+    }
+
+    .slide.two[data-title="Who We Are"] .orbital {
+      align-self: center;
+      min-height: 460px;
+    }
+
+    /* Events */
+    .event-list {
+      margin-top: 36px;
+      width: min(1000px, 100%);
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 20px;
+    }
+
+    .event-card {
+      border: 1px solid var(--line);
+      border-radius: 12px;
+      overflow: hidden;
+      display: flex;
+      flex-direction: column;
+    }
+
+    .event-card .event-image {
+      width: 100%;
+      aspect-ratio: 5 / 3;
+      object-fit: cover;
+      display: block;
+    }
+
+    .event-card .event-index {
+      font-family: var(--mono);
+      color: var(--copper);
+      letter-spacing: 0.18em;
+      font-size: 0.75rem;
+      padding: 14px 16px 0;
+    }
+
+    .event-card .event-name {
+      font-family: var(--serif);
+      font-size: clamp(1.1rem, 1.5vw, 1.4rem);
+      letter-spacing: -0.04em;
+      color: var(--paper);
+      line-height: 1.15;
+      padding: 4px 16px 0;
+    }
+
+    .event-card .event-desc {
+      padding: 8px 16px 18px;
+      font-size: clamp(0.78rem, 0.95vw, 0.85rem);
+      color: var(--muted);
+      line-height: 1.45;
+      margin: 0;
+    }
+
+    /* Series outline */
+    .outline-table {
+      width: min(1120px, 100%);
+      margin-top: 38px;
+      border-top: 1px solid var(--line);
+    }
+
+    .outline-row {
+      display: grid;
+      grid-template-columns: 120px 1fr 1.4fr;
+      gap: 26px;
+      align-items: baseline;
+      padding: 28px 0;
+      border-bottom: 1px solid var(--line);
+    }
+
+    .date {
+      font-family: var(--mono);
+      color: var(--copper);
+      font-size: 0.9rem;
+      letter-spacing: 0.12em;
+      line-height: 1.6;
+    }
+
+    .outline-title {
+      font-family: var(--serif);
+      font-size: clamp(1.55rem, 2.3vw, 2.45rem);
+      letter-spacing: -0.045em;
+      color: var(--paper);
+      line-height: 1;
+    }
+
+    .outline-desc {
+      color: var(--muted);
+      font-size: clamp(0.92rem, 1.1vw, 1.08rem);
+      line-height: 1.55;
+    }
+
+    /* Takeaways */
+    .takeaway {
+      display: grid;
+      grid-template-columns: 0.76fr 1.24fr;
+      gap: clamp(44px, 5vw, 72px);
+      align-items: center;
+      width: min(1240px, 100%);
+    }
+
+    .takeaway h2 {
+      font-size: clamp(2.25rem, 3.1vw, 3.3rem);
+      max-width: 440px;
+    }
+
+    .takeaway p.lead {
+      max-width: 430px;
+      font-size: clamp(1rem, 1.15vw, 1.15rem);
+      line-height: 1.5;
+    }
+
+    .takeaway-list {
+      border-top: 1px solid var(--line);
+    }
+
+    .takeaway-row {
+      display: grid;
+      grid-template-columns: 86px 1fr;
+      gap: 22px;
+      padding: 24px 0;
+      border-bottom: 1px solid var(--line);
+      align-items: baseline;
+    }
+
+    .takeaway-row .label {
+      font-family: var(--mono);
+      color: var(--copper);
+      letter-spacing: 0.12em;
+      font-size: 0.9rem;
+    }
+
+    .takeaway-row p {
+      font-size: clamp(0.95rem, 1.15vw, 1.1rem);
+    }
+
+    /* Flow */
+    .flow-line {
+      width: min(1120px, 100%);
+      margin-top: 44px;
+    }
+
+    .flow-title {
+      font-family: var(--serif);
+      font-size: clamp(2rem, 3.3vw, 3.55rem);
+      letter-spacing: -0.055em;
+      color: var(--paper);
+      line-height: 1.05;
+      text-wrap: balance;
+    }
+
+    .flow-title span {
+      color: var(--copper);
+    }
+
+    .flow-steps {
+      display: grid;
+      grid-template-columns: repeat(5, 1fr);
+      gap: 0;
+      margin-top: 36px;
+      border-top: 1px solid var(--line);
+      border-bottom: 1px solid var(--line);
+    }
+
+    .flow-step {
+      min-height: 150px;
+      padding: 28px 24px 26px;
+      border-right: 1px solid var(--line);
+    }
+
+    .flow-step:last-child { border-right: 0; }
+    .flow-step .num { font-family: var(--mono); color: var(--copper); margin-bottom: 18px; }
+    .flow-step b { display: block; font-family: var(--serif); font-size: 1.8rem; letter-spacing: -0.04em; color: var(--paper); margin-bottom: 10px; }
+    .flow-step p { font-size: 0.98rem; }
+
+
+
+
+    .note {
+      width: min(1120px, 100%);
+      margin-top: 28px;
+      border-left: 3px solid var(--copper);
+      padding: 14px 0 14px 22px;
+      color: var(--muted);
+      font-size: clamp(0.95rem, 1.15vw, 1.08rem);
+    }
+
+    .pill-row {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 10px;
+      margin-top: 32px;
+      max-width: 780px;
+    }
+
+    .pill {
+      border: 1px solid var(--line-2);
+      border-radius: 999px;
+      padding: 9px 13px;
+      color: var(--paper);
+      font-family: var(--mono);
+      font-size: 0.78rem;
+      letter-spacing: 0.04em;
+      background: rgba(238,232,221,0.035);
+    }
+
+    .summary-table {
+      width: min(1080px, 100%);
+      margin-top: 38px;
+      border-top: 1px solid var(--line);
+    }
+
+    .summary-row {
+      display: grid;
+      grid-template-columns: 0.8fr 1.3fr;
+      gap: 34px;
+      padding: 20px 0;
+      border-bottom: 1px solid var(--line);
+      align-items: baseline;
+    }
+
+    .summary-row b {
+      font-family: var(--serif);
+      font-size: clamp(1.3rem, 1.85vw, 1.9rem);
+      letter-spacing: -0.04em;
+      color: var(--paper);
+      font-weight: 600;
+    }
+
+    .summary-row p { font-size: 1.05rem; }
+
+    .data-table {
+      width: 100%;
+      border-collapse: collapse;
+      border-top: 1px solid var(--line-2);
+      color: var(--paper);
+      font-size: clamp(0.9rem, 1.08vw, 1.05rem);
+    }
+
+    .data-table th,
+    .data-table td {
+      padding: 14px 16px;
+      border-bottom: 1px solid var(--line);
+      text-align: left;
+      white-space: nowrap;
+    }
+
+    .data-table th {
+      color: var(--copper);
+      font-family: var(--mono);
+      font-size: 0.76rem;
+      letter-spacing: 0.08em;
+      text-transform: uppercase;
+    }
+
+    .data-table th:not(:first-child),
+    .data-table td:not(:first-child) {
+      text-align: right;
+    }
+
+    .data-table tbody tr:hover,
+    .data-table .highlight-row,
+    .data-table .highlight-col {
+      background: rgba(223,132,104,0.07);
+    }
+
+    .chart-figure {
+      width: min(620px, 100%);
+      margin: 0;
+      border: 1px solid var(--line-2);
+      border-radius: 16px;
+      overflow: hidden;
+      background: rgba(238,232,221,0.96);
+      box-shadow: 0 24px 70px rgba(0,0,0,0.24);
+    }
+
+    .chart-figure img {
+      display: block;
+      width: 100%;
+      max-height: 430px;
+      object-fit: contain;
+    }
+
+    .chart-figure figcaption {
+      padding: 11px 14px;
+      border-top: 1px solid rgba(17,16,13,0.13);
+      color: #4c4640;
+      font-size: 0.82rem;
+      line-height: 1.4;
+    }
+
+    .activity-meta {
+      display: flex;
+      flex-wrap: wrap;
+      align-items: center;
+      gap: 12px 18px;
+      margin: 24px 0 8px;
+      color: var(--muted);
+      font-family: var(--mono);
+      font-size: 0.8rem;
+      letter-spacing: 0.04em;
+    }
+
+    .timer-badge {
+      display: inline-flex;
+      align-items: center;
+      min-height: 34px;
+      padding: 7px 13px;
+      border: 1px solid rgba(230,173,98,0.56);
+      border-radius: 999px;
+      color: var(--paper);
+      background: rgba(230,173,98,0.08);
+    }
+
+    .closing-logo {
+      display: block;
+      width: clamp(108px, 10vw, 148px);
+      height: clamp(64px, 6vw, 88px);
+      object-fit: contain;
+      margin-bottom: 24px;
+      padding: 10px 12px;
+      border: 1px solid var(--line-2);
+      border-radius: 12px;
+      background: rgba(238,232,221,0.92);
+    }
+
+    .reveal {
+      width: min(1120px, 100%);
+      margin-top: 22px;
+      border-top: 1px solid var(--line);
+      border-bottom: 1px solid var(--line);
+      padding: 18px 0;
+    }
+
+    .reveal summary {
+      cursor: pointer;
+      color: var(--copper);
+      font-family: var(--mono);
+      font-weight: 800;
+      letter-spacing: 0.08em;
+      text-transform: uppercase;
+      font-size: 0.82rem;
+    }
+
+    .reveal p { margin-top: 14px; }
+
+    @media (max-width: 980px) {
+      html, body { overflow: auto; }
+      .slide, .slide.two {
+        padding: 82px 28px 94px;
+        overflow: auto;
+        grid-template-columns: 1fr;
+      }
+      .footer { display: none; }
+      .frame { inset: 10px; }
+      .controls { right: 22px; top: 24px; }
+      .compare, .takeaway, .flow-steps, .outline-row {
+        grid-template-columns: 1fr;
+      }
+      .flow-steps { border-top: 1px solid var(--line); }
+      .flow-step { border-right: 0; border-bottom: 1px solid var(--line); }
+      .flow-step:last-child { border-bottom: 0; }
+      .outline-row { gap: 12px; }
+      .orbital { min-height: 420px; }
+      .orbit-label { font-size: 0.8rem; }
+      .orbit-label b { font-size: 1.15rem; }
+      .data-table {
+        display: block;
+        overflow-x: auto;
+      }
+      .chart-figure {
+        margin-top: 26px;
+      }
+    }
+
+    /* Viewport fitting + presentation transitions */
+    .slide {
+      padding: clamp(34px, 5.4vw, 86px) clamp(34px, 8vw, 146px) !important;
+      overflow: hidden !important;
+      place-items: center;
+      align-content: center;
+    }
+
+    .slide.two {
+      grid-template-columns: 1fr !important;
+    }
+
+    .stage {
+      width: min(1240px, 100%);
+      max-width: 100%;
+      transform: scale(var(--fit-scale, 1));
+      transform-origin: center center;
+      will-change: transform, opacity, filter;
+    }
+
+    .slide.two .stage {
+      width: min(1240px, 100%);
+      display: grid;
+      grid-template-columns: 0.95fr 1.05fr;
+      gap: clamp(30px, 4.4vw, 72px);
+      align-items: center;
+    }
+
+    .slide.center .stage {
+      text-align: inherit;
+    }
+
+    .slide.active .stage {
+      animation: slideEnter 440ms cubic-bezier(0.2, 0.75, 0.2, 1) both;
+    }
+
+    @keyframes slideEnter {
+      from {
+        opacity: 0;
+        transform: translateY(18px) scale(calc(var(--fit-scale, 1) * 0.985));
+        filter: blur(3px);
+      }
+      to {
+        opacity: 1;
+        transform: translateY(0) scale(var(--fit-scale, 1));
+        filter: blur(0);
+      }
+    }
+
+    .slide.is-leaving .stage {
+      animation: slideLeave 180ms ease both;
+    }
+
+    @keyframes slideLeave {
+      from {
+        opacity: 1;
+        transform: translateY(0) scale(var(--fit-scale, 1));
+      }
+      to {
+        opacity: 0;
+        transform: translateY(-8px) scale(calc(var(--fit-scale, 1) * 0.992));
+      }
+    }
+
+    @media (max-height: 760px) {
+      h1 { font-size: clamp(3.8rem, 7.2vw, 7.4rem); }
+      h2 { font-size: clamp(2.7rem, 4.6vw, 4.8rem); }
+      h3 { font-size: clamp(1.5rem, 2.2vw, 2.2rem); }
+      p.lead { font-size: clamp(1.05rem, 1.35vw, 1.3rem); }
+      p, li { font-size: clamp(0.92rem, 1.1vw, 1.02rem); }
+      .event-row { min-height: 92px; }
+      .flow-step { min-height: 126px; padding: 20px 18px; }
+      .summary-row { padding: 14px 0; }
+      pre { padding: 20px; font-size: clamp(0.78rem, 1.05vw, 0.94rem); }
+      .slide { padding-top: 54px !important; padding-bottom: 72px !important; }
+    }
+
+    @media (max-width: 980px) {
+      .slide.two .stage {
+        display: block;
+      }
+
+      .slide {
+        overflow: auto !important;
+      }
+
+      .stage {
+        transform: none !important;
+      }
+
+      .slide.active .stage {
+        animation: mobileSlideEnter 320ms ease both;
+      }
+
+      @keyframes mobileSlideEnter {
+        from { opacity: 0; transform: translateY(10px); }
+        to { opacity: 1; transform: translateY(0); }
+      }
+    }
+
+    @media (prefers-reduced-motion: reduce) {
+      .slide,
+      .slide.active .stage,
+      .slide.is-leaving .stage,
+      .top-progress-bar,
+      .dots button {
+        animation: none !important;
+        transition: none !important;
+        filter: none !important;
+      }
+    }
+
+  </style>
+</head>
+<body>
+  <div class="grain"></div>
+  <div class="frame"></div>
+  <div class="top-progress"><div class="top-progress-bar" id="topProgress"></div></div>
+
+  <main class="deck">
+    <section class="slide center active" data-footer="Opening · Alson" data-title="AI Don't Know: Workshop 2">
+      <div class="title-stack">
+        <div class="kicker">SPAI Workshop Series</div>
+        <h1>AI Don’t Know</h1>
+        <p class="title-sub">Workshop 2 · Data Analytics &amp; Visualisation</p>
+        <div class="hairline"></div>
+        <p class="follow-link">22 July · 3:00–5:00 PM · Alson &amp; Murugan</p>
+      </div>
+    </section>
+
+    <section class="slide standard" data-footer="Opening · Alson" data-title="From Python basics to data questions">
+      <div class="takeaway">
+        <div>
+          <div class="kicker">Workshop 1 recap</div>
+          <h2>From Python basics to data questions</h2>
+          <p class="lead">What can those basics tell us about a table of scores?</p>
+        </div>
+        <div class="takeaway-list">
+          <div class="takeaway-row"><span class="label">Values</span><p>Variables store values.</p></div>
+          <div class="takeaway-row"><span class="label">Structure</span><p>Lists and dictionaries organise values.</p></div>
+          <div class="takeaway-row"><span class="label">Inspect</span><p><strong>print()</strong> lets us inspect results.</p></div>
+        </div>
+      </div>
+    </section>
+
+    <section class="slide standard" data-footer="Opening · Alson" data-title="Today: find patterns. Next: make predictions.">
+      <div>
+        <div class="kicker">Workshop roadmap</div>
+        <h2>Today: find patterns. Next: make predictions.</h2>
+        <div class="outline-table">
+          <div class="outline-row"><span class="date">W1</span><span class="outline-title">Python foundations</span><span class="outline-desc">Store, organise, and inspect values.</span></div>
+          <div class="outline-row current"><span class="date">W2 · Today</span><span class="outline-title">Answer data questions</span><span class="outline-desc">Create tables, calculate summaries, make three chart types, and explain an insight.</span></div>
+          <div class="outline-row"><span class="date">W3 · Next</span><span class="outline-title">Make predictions</span><span class="outline-desc">Use patterns to introduce machine learning.</span></div>
+        </div>
+      </div>
+    </section>
+
+    <section class="slide two" data-footer="Data Analytics · Alson" data-title="What does data analytics mean?">
+      <div>
+        <div class="kicker">Question first</div>
+        <h2>What does data analytics mean?</h2>
+        <p class="lead"><strong>Question:</strong> Who seems to be improving?</p>
+        <ul>
+          <li>Start with a question.</li>
+          <li>Use data as evidence.</li>
+          <li>Explain the answer in plain English.</li>
+        </ul>
+        <div class="note">We need the full table before deciding.</div>
+      </div>
+      <div class="table-wrap">
+        <table class="data-table">
+          <thead><tr><th scope="col">Name</th><th scope="col">Quiz 1</th><th scope="col">Quiz 2</th></tr></thead>
+          <tbody><tr><td>Alex</td><td>72</td><td>78</td></tr><tr><td>Bella</td><td>85</td><td>88</td></tr><tr><td>Chen</td><td>60</td><td>70</td></tr></tbody>
+        </table>
+      </div>
+    </section>
+
+    <section class="slide standard" data-footer="Data Analytics · Alson" data-title="One question. Five steps.">
+      <div class="flow-line">
+        <div class="kicker">How data analytics works</div>
+        <div class="flow-title">One question. <span>Five steps.</span></div>
+        <div class="flow-steps">
+          <div class="flow-step"><div class="num">01</div><b>Question</b><p>What do we want to know?</p></div>
+          <div class="flow-step"><div class="num">02</div><b>Data</b><p>Which values help?</p></div>
+          <div class="flow-step"><div class="num">03</div><b>Code</b><p>Ask Python.</p></div>
+          <div class="flow-step"><div class="num">04</div><b>Output / Chart</b><p>See the result.</p></div>
+          <div class="flow-step"><div class="num">05</div><b>Insight</b><p>Say what it means.</p></div>
+        </div>
+      </div>
+    </section>
+
+    <section class="slide standard" data-footer="Data Analytics · Alson" data-title="Start with the question, not the library">
+      <div>
+        <div class="kicker">Choose the evidence</div>
+        <h2>Start with the question, not the library</h2>
+        <div class="summary-table">
+          <div class="summary-row"><b>Who improved the most?</b><p>Student scores</p></div>
+          <div class="summary-row"><b>Which food item sold the most?</b><p>Food orders</p></div>
+          <div class="summary-row"><b>Does studying more seem linked to higher scores?</b><p>Study hours + quiz scores</p></div>
+        </div>
+        <div class="note">The question chooses the data and chart—not the other way around.</div>
+      </div>
+    </section>
+
+    <section class="slide two" data-footer="pandas · Alson" data-title="pandas turns labelled data into a table">
+      <div>
+        <div class="kicker">pandas · Student scores</div>
+        <h2>pandas turns labelled data into a table</h2>
+        <p class="lead"><strong>Question:</strong> What information do we have?</p>
+        <ul><li>pandas is our main tool for tables.</li><li>A DataFrame is a table with labelled rows and columns.</li></ul>
+      </div>
+      <div class="table-wrap">
+        <table class="data-table">
+          <thead><tr><th scope="col">Name</th><th scope="col">Class</th><th scope="col">Quiz1</th><th scope="col">Quiz2</th></tr></thead>
+          <tbody><tr><td>Alex</td><td>A</td><td>72</td><td>78</td></tr><tr><td>Bella</td><td>A</td><td>85</td><td>88</td></tr><tr><td>Chen</td><td>B</td><td>60</td><td>70</td></tr><tr><td>Deepa</td><td>B</td><td>90</td><td>92</td></tr><tr><td>Ethan</td><td>A</td><td>55</td><td>65</td></tr></tbody>
+        </table>
+      </div>
+    </section>
+
+    <section class="slide standard" data-footer="pandas · Alson" data-title="How do we create this table?" data-notebook-cell="6" data-notebook-source="attendee">
+      <div>
+        <div class="kicker">Live demo · Cell 6</div>
+        <h2>How do we create this table?</h2>
+        <p class="lead">How do we turn labelled lists into a table?</p>
+        <div class="compare one-column"><div class="code-window python"><div class="code-head"><span class="code-label">AIDK_W2_Workshop.ipynb</span><button class="copy-btn" type="button">Copy</button></div><pre><code>student_data = {
+    "Name": ["Alex", "Bella", "Chen", "Deepa", "Ethan"],
+    "Class": ["A", "A", "B", "B", "A"],
+    "Quiz1": [72, 85, 60, 90, 55],
+    "Quiz2": [78, 88, 70, 92, 65]
+}
+students = pd.DataFrame(student_data)
+students</code></pre></div></div>
+        <div class="note"><strong>Output:</strong> A five-row DataFrame containing Name, Class, Quiz1, and Quiz2.</div>
+      </div>
+    </section>
+
+    <section class="slide two" data-footer="pandas · Alson" data-title="Rows are records. Columns are questions." data-notebook-cell="8" data-notebook-source="attendee">
+      <div class="table-wrap">
+        <table class="data-table"><thead><tr><th scope="col">Name</th><th class="highlight-col" scope="col">Quiz1</th><th scope="col">Quiz2</th></tr></thead><tbody><tr class="highlight-row"><td>Alex</td><td>72</td><td>78</td></tr><tr><td>Bella</td><td>85</td><td>88</td></tr><tr><td>Chen</td><td>60</td><td>70</td></tr><tr><td>Deepa</td><td>90</td><td>92</td></tr><tr><td>Ethan</td><td>55</td><td>65</td></tr></tbody></table>
+      </div>
+      <div>
+        <div class="kicker">Rows and columns</div>
+        <h2>Rows are records. Columns are questions.</h2>
+        <p class="lead">One row represents one student. One column stores one type of information.</p>
+        <div class="code-window python"><div class="code-head"><span class="code-label">Cell 8</span><button class="copy-btn" type="button">Copy</button></div><pre><code>students.head()</code></pre></div>
+        <div class="note"><strong>Output:</strong> The first five rows. Here, that is the full table.</div>
+      </div>
+    </section>
+
+    <section class="slide standard" data-footer="pandas · Alson" data-title="Select a column. Filter matching rows." data-notebook-cell="10" data-notebook-source="attendee">
+      <div>
+        <div class="kicker">Two table questions · Cell 10</div>
+        <h2>Select a column. Filter matching rows.</h2>
+        <div class="compare">
+          <div class="code-window python"><div class="code-head"><span class="code-label">Which Quiz 1 values?</span><button class="copy-btn" type="button">Copy</button></div><pre><code>quiz1_scores = students["Quiz1"]
+class_b_students = students[students["Class"] == "B"]
+
+print(quiz1_scores)
+print(class_b_students)</code></pre></div>
+          <div class="note compact"><strong>Output:</strong> Quiz 1 values are 72, 85, 60, 90, 55.<br><br><strong>Filtered rows:</strong> Chen and Deepa are in Class B.</div>
+        </div>
+      </div>
+    </section>
+
+    <section class="slide two" data-footer="pandas · Alson" data-title="What is the average Quiz 2 score?" data-notebook-cell="12" data-notebook-source="attendee">
+      <div>
+        <div class="kicker">Summary · Cell 12</div>
+        <h2>What is the average Quiz 2 score?</h2>
+        <p class="lead">Use <strong>.mean()</strong> to summarise this small group.</p>
+      </div>
+      <div><div class="code-window python"><div class="code-head"><span class="code-label">Cell 12</span><button class="copy-btn" type="button">Copy</button></div><pre><code>average_quiz2 = students["Quiz2"].mean()
+print(average_quiz2)</code></pre></div><div class="note"><strong>Output:</strong> 78.6<br>Average describes this group; it does not explain why scores differ.</div></div>
+    </section>
+
+    <section class="slide two" data-footer="pandas · Alson" data-title="Can we create a new answer column?" data-notebook-cell="14" data-notebook-source="attendee">
+      <div>
+        <div class="kicker">Calculated column · Cell 14</div>
+        <h2>Can we create a new answer column?</h2>
+        <p class="lead"><strong>Question:</strong> What is each student’s combined quiz total?</p>
+        <div class="code-window python"><div class="code-head"><span class="code-label">Cell 14</span><button class="copy-btn" type="button">Copy</button></div><pre><code>students["Total"] = students["Quiz1"] + students["Quiz2"]
+students[["Name", "Quiz1", "Quiz2", "Total"]]</code></pre></div>
+      </div>
+      <div class="table-wrap"><table class="data-table"><thead><tr><th scope="col">Name</th><th scope="col">Quiz1</th><th scope="col">Quiz2</th><th scope="col">Total</th></tr></thead><tbody><tr><td>Alex</td><td>72</td><td>78</td><td>150</td></tr><tr><td>Bella</td><td>85</td><td>88</td><td>173</td></tr><tr><td>Chen</td><td>60</td><td>70</td><td>130</td></tr><tr><td>Deepa</td><td>90</td><td>92</td><td>182</td></tr><tr><td>Ethan</td><td>55</td><td>65</td><td>120</td></tr></tbody></table></div>
+    </section>
+
+    <section class="slide standard" data-footer="Activity 1 · Alson lead" data-title="Activity 1: Who improved the most?">
+      <div>
+        <div class="kicker">Hands-on Activity 1</div>
+        <h2>Activity 1: Who improved the most?</h2>
+        <div class="activity-meta"><span class="timer-badge">Attempt · 10 minutes</span><span>Notebook · Activity 1 · Cells 17–29</span></div>
+        <div class="takeaway-list activity-list">
+          <div class="takeaway-row"><span class="label">01</span><p>Calculate average Quiz 1.</p></div>
+          <div class="takeaway-row"><span class="label">02</span><p>Find Quiz 2 scores above 80.</p></div>
+          <div class="takeaway-row"><span class="label">03</span><p>Create <strong>Improvement = Quiz2 - Quiz1</strong>.</p></div>
+          <div class="takeaway-row"><span class="label">04</span><p>Sort highest first and write one insight.</p></div>
+        </div>
+        <div class="note">Alson calls “5 minutes left” and “2 minutes left”. Murugan facilitates without revealing the solution.</div>
+      </div>
+    </section>
+
+    <section class="slide standard" data-footer="Activity 1 · Alson lead" data-title="Progress check: use the column names">
+      <div>
+        <div class="kicker">Activity 1 · Progress check</div>
+        <h2>Progress check: use the column names</h2>
+        <div class="activity-meta"><span class="timer-badge">5 minutes left</span><span>No complete solution yet</span></div>
+        <div class="takeaway-list activity-list">
+          <div class="takeaway-row"><span class="label">Mean</span><p>Start from <strong>students["Quiz1"]</strong>.</p></div>
+          <div class="takeaway-row"><span class="label">Filter</span><p>Compare the <strong>Quiz2</strong> column with 80.</p></div>
+          <div class="takeaway-row"><span class="label">Change</span><p>Subtract Quiz1 from Quiz2.</p></div>
+          <div class="takeaway-row"><span class="label">Order</span><p>Highest first means descending order.</p></div>
+        </div>
+        <div class="note">Check spelling, brackets, and quotation marks.</div>
+      </div>
+    </section>
+
+    <section class="slide two" data-footer="Activity 1 · Alson lead" data-title="Possible solution: Chen and Ethan tie" data-notebook-cells="20,22,24,26" data-notebook-source="completed" data-code-mode="excerpt">
+      <div>
+        <div class="kicker">Possible solution · Excerpt</div>
+        <h2>Possible solution: Chen and Ethan tie</h2>
+        <div class="activity-meta"><span class="timer-badge">Walkthrough · 5 minutes</span><span>Full code · completed notebook</span></div>
+        <div class="code-window python"><div class="code-head"><span class="code-label">Excerpt · Cells 20, 22, 24, 26</span><button class="copy-btn" type="button">Copy</button></div><pre><code>average_quiz1 = students["Quiz1"].mean()
+above_80 = students[students["Quiz2"] &gt; 80]
+students["Improvement"] = students["Quiz2"] - students["Quiz1"]
+sorted_students = students.sort_values("Improvement", ascending=False)</code></pre></div>
+      </div>
+      <div class="summary-table compact-summary">
+        <div class="summary-row"><b>Average Quiz 1</b><p>72.4</p></div>
+        <div class="summary-row"><b>Quiz 2 above 80</b><p>Bella and Deepa</p></div>
+        <div class="summary-row"><b>Highest improvement</b><p>Chen +10 · Ethan +10</p></div>
+        <div class="note"><strong>Insight:</strong> Chen and Ethan tie for the highest improvement, with 10 points each.</div>
+      </div>
+    </section>
+
+    <section class="slide two" data-footer="NumPy · Murugan" data-title="NumPy helps with a list of numbers">
+      <div>
+        <div class="kicker">Light NumPy</div>
+        <h2>NumPy helps with a list of numbers</h2>
+        <p class="lead"><strong>Question:</strong> What happened across five CCA sessions?</p>
+        <p class="lead">NumPy stores numbers in an array and calculates across them quickly.</p>
+      </div>
+      <div class="table-wrap"><table class="data-table"><thead><tr><th scope="col">Session</th><th scope="col">Attendance</th></tr></thead><tbody><tr><td>S1</td><td>20</td></tr><tr><td>S2</td><td>25</td></tr><tr><td>S3</td><td>18</td></tr><tr><td>S4</td><td>30</td></tr><tr><td>S5</td><td>28</td></tr></tbody></table></div>
+    </section>
+
+    <section class="slide two" data-footer="NumPy · Murugan" data-title="Create one simple array" data-notebook-cell="32" data-notebook-source="attendee">
+      <div><div class="kicker">Live demo · Cell 32</div><h2>Create one simple array</h2><p class="lead">How do we give NumPy the attendance numbers?</p></div>
+      <div><div class="code-window python"><div class="code-head"><span class="code-label">Cell 32</span><button class="copy-btn" type="button">Copy</button></div><pre><code>attendance = np.array([20, 25, 18, 30, 28])
+attendance</code></pre></div><div class="note"><strong>Output:</strong> array([20, 25, 18, 30, 28])</div></div>
+    </section>
+
+    <section class="slide two" data-footer="NumPy · Murugan" data-title="What are the typical, highest, and lowest attendances?" data-notebook-cell="34" data-notebook-source="attendee">
+      <div>
+        <div class="kicker">Three calculations · Cell 34</div>
+        <h2>What are the typical, highest, and lowest attendances?</h2>
+        <div class="code-window python"><div class="code-head"><span class="code-label">Cell 34</span><button class="copy-btn" type="button">Copy</button></div><pre><code>print("Mean:", np.mean(attendance))
+print("Maximum:", np.max(attendance))
+print("Minimum:", np.min(attendance))</code></pre></div>
+      </div>
+      <div class="summary-table compact-summary"><div class="summary-row"><b>Typical?</b><p>Mean: 24.2</p></div><div class="summary-row"><b>Highest?</b><p>Maximum: 30</p></div><div class="summary-row"><b>Lowest?</b><p>Minimum: 18</p></div><div class="note">Attendance averaged 24.2, peaked at 30, and was lowest at 18.</div></div>
+    </section>
+
+    <section class="slide standard" data-footer="matplotlib · Murugan" data-title="Which chart matches the question?">
+      <div>
+        <div class="kicker">Chart choice first</div>
+        <h2>Which chart matches the question?</h2>
+        <div class="summary-table">
+          <div class="summary-row"><b>Bar chart</b><p>Compare categories · food orders</p></div>
+          <div class="summary-row"><b>Line chart</b><p>Track change over time · CCA sessions</p></div>
+          <div class="summary-row"><b>Scatter plot</b><p>Compare two numbers · study hours and quiz score</p></div>
+        </div>
+      </div>
+    </section>
+
+    <section class="slide two" data-footer="matplotlib · Murugan" data-title="What food-order data do we have?" data-notebook-cell="37" data-notebook-source="attendee">
+      <div>
+        <div class="kicker">Food orders · Cell 37</div>
+        <h2>What food-order data do we have?</h2>
+        <p class="lead"><strong>Question:</strong> Which food item received the most orders?</p>
+        <div class="code-window python"><div class="code-head"><span class="code-label">Cell 37</span><button class="copy-btn" type="button">Copy</button></div><pre><code>food_data = {
+    "Food": ["Chicken Rice", "Nasi Lemak", "Pasta", "Burger", "Sandwich"],
+    "Orders": [35, 28, 18, 22, 15]
+}
+food = pd.DataFrame(food_data)
+food</code></pre></div>
+      </div>
+      <div class="table-wrap"><table class="data-table"><thead><tr><th scope="col">Food</th><th scope="col">Orders</th></tr></thead><tbody><tr><td>Chicken Rice</td><td>35</td></tr><tr><td>Nasi Lemak</td><td>28</td></tr><tr><td>Pasta</td><td>18</td></tr><tr><td>Burger</td><td>22</td></tr><tr><td>Sandwich</td><td>15</td></tr></tbody></table></div>
+    </section>
+
+    <section class="slide two" data-footer="matplotlib · Murugan" data-title="Bar chart: compare categories" data-notebook-cell="39" data-notebook-source="attendee">
+      <div>
+        <div class="kicker">Bar chart · Cell 39</div><h2>Bar chart: compare categories</h2><p class="lead"><strong>Question:</strong> Which food item received the most orders?</p>
+        <div class="code-window python"><div class="code-head"><span class="code-label">Cell 39</span><button class="copy-btn" type="button">Copy</button></div><pre><code>plt.bar(food["Food"], food["Orders"])
+plt.show()</code></pre></div>
+        <div class="note"><strong>Insight:</strong> Chicken Rice has the tallest bar: 35 orders. The pattern is visible, but the chart still needs context.</div>
+      </div>
+      <figure class="chart-figure"><img src="public/assets/images/food-orders-bar-basic.svg" alt="Basic bar chart of five food items and orders, with Chicken Rice highest at 35" /><figcaption>Output: Five category bars; no added title or axis labels yet.</figcaption></figure>
+    </section>
+
+    <section class="slide two" data-footer="matplotlib · Murugan" data-title="Line chart: track change over time" data-notebook-cell="41" data-notebook-source="attendee">
+      <div>
+        <div class="kicker">Line chart · Cell 41</div><h2>Line chart: track change over time</h2><p class="lead"><strong>Question:</strong> How did CCA attendance change?</p>
+        <div class="code-window python"><div class="code-head"><span class="code-label">Cell 41</span><button class="copy-btn" type="button">Copy</button></div><pre><code>sessions = ["S1", "S2", "S3", "S4", "S5"]
+plt.plot(sessions, attendance)
+plt.title("CCA Attendance by Session")
+plt.xlabel("Session")
+plt.ylabel("Attendance")
+plt.show()</code></pre></div>
+        <div class="note"><strong>Insight:</strong> Attendance dips at S3, peaks at S4, and ends above S1.</div>
+      </div>
+      <figure class="chart-figure"><img src="public/assets/images/cca-attendance-line.svg" alt="Line chart of CCA attendance over five sessions, dipping at S3 and peaking at S4" /><figcaption>Output: Attendance 20, 25, 18, 30, 28 across S1–S5.</figcaption></figure>
+    </section>
+
+    <section class="slide two" data-footer="matplotlib · Murugan" data-title="What could explain different quiz scores?" data-notebook-cell="43" data-notebook-source="attendee">
+      <div>
+        <div class="kicker">Study data · Cell 43</div><h2>What could explain different quiz scores?</h2><p class="lead"><strong>Question:</strong> Does studying more seem linked to higher scores?</p>
+        <div class="code-window python"><div class="code-head"><span class="code-label">Cell 43</span><button class="copy-btn" type="button">Copy</button></div><pre><code>study_data = {
+    "Student": ["Alex", "Bella", "Chen", "Deepa", "Ethan"],
+    "Hours Studied": [2, 4, 1, 5, 3],
+    "Quiz Score": [65, 82, 58, 90, 75]
+}
+study = pd.DataFrame(study_data)
+study</code></pre></div>
+      </div>
+      <div><div class="table-wrap"><table class="data-table"><thead><tr><th scope="col">Student</th><th scope="col">Hours Studied</th><th scope="col">Quiz Score</th></tr></thead><tbody><tr><td>Alex</td><td>2</td><td>65</td></tr><tr><td>Bella</td><td>4</td><td>82</td></tr><tr><td>Chen</td><td>1</td><td>58</td></tr><tr><td>Deepa</td><td>5</td><td>90</td></tr><tr><td>Ethan</td><td>3</td><td>75</td></tr></tbody></table></div><div class="note">We are looking for a relationship, not proving a cause.</div></div>
+    </section>
+
+    <section class="slide two" data-footer="matplotlib · Murugan" data-title="Scatter plot: compare two numbers" data-notebook-cell="45" data-notebook-source="attendee">
+      <div>
+        <div class="kicker">Scatter plot · Cell 45</div><h2>Scatter plot: compare two numbers</h2><p class="lead">Does studying more seem linked to higher scores?</p>
+        <div class="code-window python"><div class="code-head"><span class="code-label">Cell 45</span><button class="copy-btn" type="button">Copy</button></div><pre><code>plt.scatter(study["Hours Studied"], study["Quiz Score"])
+plt.title("Study Hours vs Quiz Score")
+plt.xlabel("Hours Studied")
+plt.ylabel("Quiz Score")
+plt.show()</code></pre></div>
+        <div class="note"><strong>Insight:</strong> In this five-student sample, higher study hours are associated with higher quiz scores.<br><strong>Caution:</strong> This does not prove studying more always causes a higher score.</div>
+      </div>
+      <figure class="chart-figure"><img src="public/assets/images/study-hours-quiz-score-scatter.svg" alt="Scatter plot with five points showing a positive association between study hours and quiz scores" /><figcaption>Output: Five points forming a positive upward pattern.</figcaption></figure>
+    </section>
+
+    <section class="slide standard" data-footer="matplotlib · Murugan" data-title="A chart needs context">
+      <div class="takeaway">
+        <div><div class="kicker">Interpret the chart</div><h2>A chart needs context</h2><p class="lead">A chart is useful when a viewer knows the question and can read the evidence.</p></div>
+        <div class="takeaway-list"><div class="takeaway-row"><span class="label">Title</span><p>What question is this chart about?</p></div><div class="takeaway-row"><span class="label">Axes</span><p>What does each direction measure?</p></div><div class="takeaway-row"><span class="label">Insight</span><p>What evidence-based pattern is visible?</p></div></div>
+      </div>
+    </section>
+
+    <section class="slide standard" data-footer="Activity 2 · Murugan lead" data-title="Activity 2: Which food item was most popular?">
+      <div>
+        <div class="kicker">Hands-on Activity 2</div><h2>Activity 2: Which food item was most popular?</h2>
+        <div class="activity-meta"><span class="timer-badge">Attempt · 6 minutes</span><span>Notebook · Activity 2 · Cells 48–51</span></div>
+        <div class="takeaway-list activity-list"><div class="takeaway-row"><span class="label">01</span><p>Create a bar chart.</p></div><div class="takeaway-row"><span class="label">02</span><p>Add title <strong>Food Orders</strong>.</p></div><div class="takeaway-row"><span class="label">03</span><p>Label <strong>Food</strong> and <strong>Number of Orders</strong>.</p></div><div class="takeaway-row"><span class="label">04</span><p>Identify the tallest bar and write one insight.</p></div></div>
+        <div class="note"><strong>Hint:</strong> x-axis = Food · bar height = Orders. Murugan calls “2 minutes left”; Alson facilitates.</div>
+      </div>
+    </section>
+
+    <section class="slide two" data-footer="Activity 2 · Murugan lead" data-title="Possible solution: Chicken Rice leads" data-notebook-cell="49" data-notebook-source="completed">
+      <div>
+        <div class="kicker">Possible solution</div><h2>Possible solution: Chicken Rice leads</h2>
+        <div class="activity-meta"><span class="timer-badge">Walkthrough · 4 minutes</span><span>Completed notebook · Cell 49</span></div>
+        <div class="code-window python"><div class="code-head"><span class="code-label">Cell 49 · completed</span><button class="copy-btn" type="button">Copy</button></div><pre><code>plt.bar(food["Food"], food["Orders"])
+plt.title("Food Orders")
+plt.xlabel("Food")
+plt.ylabel("Number of Orders")
+plt.show()</code></pre></div>
+        <div class="note"><strong>Insight:</strong> Chicken Rice received the most orders, with 35.</div>
+      </div>
+      <figure class="chart-figure"><img src="public/assets/images/food-orders-bar.svg" alt="Labelled food orders bar chart with Chicken Rice highest at 35" /><figcaption>Output: A labelled five-bar chart answering the activity question.</figcaption></figure>
+    </section>
+
+    <section class="slide standard" data-footer="seaborn · Murugan" data-title="seaborn: cleaner defaults, same question" data-notebook-cells="39,53" data-notebook-source="attendee" data-code-mode="excerpt">
+      <div>
+        <div class="kicker">Cleaner plotting alternative · Excerpt</div><h2>seaborn: cleaner defaults, same question</h2>
+        <div class="compare">
+          <div class="code-window python"><div class="code-head"><span class="code-label">matplotlib · Excerpt</span></div><pre><code>plt.bar(food["Food"], food["Orders"])</code></pre></div>
+          <div class="code-window python"><div class="code-head"><span class="code-label">seaborn · Excerpt</span></div><pre><code>sns.barplot(data=food, x="Food", y="Orders")</code></pre></div>
+        </div>
+        <div class="note">Same data. Same question. Use the same title and axis labels.</div>
+      </div>
+    </section>
+
+    <section class="slide two" data-footer="seaborn · Murugan" data-title="Same answer, cleaner default" data-notebook-cell="53" data-notebook-source="attendee">
+      <div>
+        <div class="kicker">seaborn · Cell 53</div><h2>Same answer, cleaner default</h2>
+        <div class="code-window python"><div class="code-head"><span class="code-label">Cell 53</span><button class="copy-btn" type="button">Copy</button></div><pre><code>sns.barplot(data=food, x="Food", y="Orders")
+plt.title("Food Orders")
+plt.xlabel("Food")
+plt.ylabel("Number of Orders")
+plt.show()</code></pre></div>
+        <div class="note"><strong>Insight:</strong> Chicken Rice still has the highest orders, 35. We changed the plotting tool—not the data question.</div>
+      </div>
+      <figure class="chart-figure"><img src="public/assets/images/food-orders-seaborn-bar.svg" alt="Seaborn food orders bar chart with Chicken Rice highest at 35" /><figcaption>Output: The same values with seaborn’s cleaner default styling.</figcaption></figure>
+    </section>
+
+    <section class="slide standard" data-footer="Wrap-up · Alson & Murugan" data-title="From question to insight">
+      <div>
+        <div class="kicker">Workshop 2 recap</div><h2>From question to insight</h2>
+        <div class="summary-table"><div class="summary-row"><b>Question → Data</b><p>Choose evidence before choosing a library.</p></div><div class="summary-row"><b>pandas</b><p>Create, select, filter, summarise, and calculate table columns.</p></div><div class="summary-row"><b>NumPy</b><p>Support simple numerical calculations.</p></div><div class="summary-row"><b>matplotlib</b><p>Make bar, line, and scatter charts.</p></div><div class="summary-row"><b>seaborn</b><p>Recreate the same chart with cleaner defaults.</p></div><div class="summary-row"><b>Insight</b><p>Explain what the output or chart means in plain English.</p></div></div>
+      </div>
+    </section>
+
+    <section class="slide center" data-footer="Q&A · Alson & Murugan" data-title="Questions?">
+      <div class="section-title closing">
+        <img class="closing-logo" src="public/assets/logos/spai-logo.png" alt="SPAI" />
+        <div class="kicker">Q&amp;A · Workshop 3 preview</div>
+        <h2>Questions?</h2>
+        <p class="lead">Today we looked for patterns.</p>
+        <p class="lead accent">Next week, machine learning uses patterns to make predictions.</p>
+      </div>
+    </section>
+  </main>
+
+  <div class="footer">
+    <div class="footer-left" id="footerLabel">AI Don’t Know · SPAI</div>
+    <div class="dots" id="dots"></div>
+    <div class="slide-no" id="slideNo">1 <span>/ 31</span></div>
+  </div>
+
+  <div class="controls">
+    <button class="nav-btn" id="prevBtn" type="button" aria-label="Previous slide">←</button>
+    <button class="nav-btn" id="nextBtn" type="button" aria-label="Next slide">→</button>
+  </div>
+  <script>
+const slides = Array.from(document.querySelectorAll(".slide"));
+
+slides.forEach((slide) => {
+  const existingStage = Array.from(slide.children).find(
+    (child) => child.classList && child.classList.contains("stage"),
+  );
+  if (existingStage) return;
+
+  const stage = document.createElement("div");
+  stage.className = "stage";
+
+  while (slide.firstChild) {
+    stage.appendChild(slide.firstChild);
+  }
+
+  slide.appendChild(stage);
+});
+
+function fitSlide(index = window.deckNavigation?.current ?? 0) {
+  const slide = slides[index];
+  if (!slide) return;
+
+  const stage = slide.querySelector(".stage");
+  if (!stage) return;
+
+  if (window.innerWidth <= 980) {
+    stage.style.setProperty("--fit-scale", "1");
+    return;
+  }
+
+  stage.style.setProperty("--fit-scale", "1");
+
+  requestAnimationFrame(() => {
+    const style = window.getComputedStyle(slide);
+    const paddingX = parseFloat(style.paddingLeft) + parseFloat(style.paddingRight);
+    const paddingY = parseFloat(style.paddingTop) + parseFloat(style.paddingBottom);
+
+    const availableWidth = Math.max(320, slide.clientWidth - paddingX);
+    const availableHeight = Math.max(320, slide.clientHeight - paddingY);
+
+    const neededWidth = Math.max(stage.scrollWidth, stage.getBoundingClientRect().width);
+    const neededHeight = Math.max(stage.scrollHeight, stage.getBoundingClientRect().height);
+
+    const scale = Math.min(1, availableWidth / neededWidth, availableHeight / neededHeight);
+    stage.style.setProperty("--fit-scale", String(Math.max(0.68, scale)));
+  });
+}
+
+window.deckSlides = slides;
+window.fitSlide = fitSlide;
+
+const dots = document.getElementById("dots");
+const footerLabel = document.getElementById("footerLabel");
+const slideNo = document.getElementById("slideNo");
+const topProgress = document.getElementById("topProgress");
+const prevBtn = document.getElementById("prevBtn");
+const nextBtn = document.getElementById("nextBtn");
+const deckNavigation = { current: 0 };
+
+window.deckNavigation = deckNavigation;
+
+window.deckSlides.forEach((slide, index) => {
+  const dot = document.createElement("button");
+  dot.setAttribute("aria-label", `Go to slide ${index + 1}`);
+  dot.addEventListener("click", () => goTo(index));
+  dots.appendChild(dot);
+});
+
+const dotButtons = Array.from(dots.querySelectorAll("button"));
+
+function goTo(index) {
+  const nextIndex = Math.max(0, Math.min(index, window.deckSlides.length - 1));
+  if (
+    nextIndex === deckNavigation.current &&
+    window.deckSlides[deckNavigation.current].classList.contains("active")
+  ) {
+    window.fitSlide(deckNavigation.current);
+    return;
+  }
+
+  const previous = window.deckSlides[deckNavigation.current];
+  if (previous) {
+    previous.classList.add("is-leaving");
+    setTimeout(() => previous.classList.remove("is-leaving"), 190);
+  }
+
+  deckNavigation.current = nextIndex;
+  window.deckSlides.forEach((slide, i) =>
+    slide.classList.toggle("active", i === deckNavigation.current),
+  );
+  dotButtons.forEach((dot, i) => dot.classList.toggle("active", i === deckNavigation.current));
+
+  const slide = window.deckSlides[deckNavigation.current];
+  footerLabel.textContent = slide.dataset.footer || "AI Don’t Know · SPAI";
+  slideNo.innerHTML = `${deckNavigation.current + 1} <span>/ ${window.deckSlides.length}</span>`;
+  topProgress.style.width = `${((deckNavigation.current + 1) / window.deckSlides.length) * 100}%`;
+  prevBtn.disabled = deckNavigation.current === 0;
+  nextBtn.disabled = deckNavigation.current === window.deckSlides.length - 1;
+  history.replaceState(null, "", `#${deckNavigation.current + 1}`);
+
+  window.fitSlide(deckNavigation.current);
+}
+
+window.addEventListener("resize", () => window.fitSlide(deckNavigation.current));
+
+prevBtn.addEventListener("click", () => goTo(deckNavigation.current - 1));
+nextBtn.addEventListener("click", () => goTo(deckNavigation.current + 1));
+
+document.addEventListener("keydown", (event) => {
+  const tag = document.activeElement.tagName.toLowerCase();
+  if (tag === "input" || tag === "textarea") return;
+
+  if (event.key === "ArrowRight" || event.key === "PageDown" || event.key === " ") {
+    event.preventDefault();
+    goTo(deckNavigation.current + 1);
+  }
+
+  if (event.key === "ArrowLeft" || event.key === "PageUp") {
+    event.preventDefault();
+    goTo(deckNavigation.current - 1);
+  }
+
+  if (event.key === "Home") goTo(0);
+  if (event.key === "End") goTo(window.deckSlides.length - 1);
+});
+
+const initial = Number(location.hash.replace("#", "")) - 1;
+goTo(Number.isFinite(initial) && initial >= 0 ? initial : 0);
+
+async function copyText(value) {
+  if (navigator.clipboard?.writeText) {
+    try {
+      await navigator.clipboard.writeText(value);
+      return;
+    } catch {
+      // Fall back for local browsers that block the async clipboard API.
+    }
+  }
+
+  const textArea = document.createElement("textarea");
+  textArea.value = value;
+  textArea.setAttribute("readonly", "");
+  textArea.style.position = "fixed";
+  textArea.style.opacity = "0";
+  document.body.appendChild(textArea);
+  textArea.select();
+
+  const copied = document.execCommand("copy");
+  textArea.remove();
+  if (!copied) throw new Error("Copy command was rejected");
+}
+
+document.querySelectorAll(".copy-btn").forEach((button) => {
+  button.addEventListener("click", async () => {
+    const rawCode = button.closest(".code-window").querySelector("code").innerText;
+    try {
+      await copyText(rawCode);
+      const original = button.textContent;
+      button.textContent = "Copied";
+      setTimeout(() => (button.textContent = original), 900);
+    } catch {
+      button.textContent = "Failed";
+      setTimeout(() => (button.textContent = "Copy"), 900);
+    }
+  });
+});
+
+  </script>
+</body>
+</html>

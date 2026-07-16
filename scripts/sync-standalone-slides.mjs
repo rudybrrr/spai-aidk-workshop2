@@ -1,7 +1,7 @@
 import { readFileSync, writeFileSync } from "node:fs";
 
 const sourcePath = "index.html";
-const standalonePath = "ai_dont_know_workshop_1.html";
+const standalonePath = "ai_dont_know_workshop_2.html";
 const deckPattern = /  <main class="deck">[\s\S]*?  <\/main>/;
 
 const source = readFileSync(sourcePath, "utf8");
