@@ -1,0 +1,242 @@
+:root {
+      --bg: #11100d;
+      --bg-2: #1a1612;
+      --paper: #eee8dd;
+      --muted: #a39b91;
+      --muted-2: #6f6861;
+      --line: rgba(238, 232, 221, 0.13);
+      --line-2: rgba(238, 232, 221, 0.22);
+      --copper: #df8468;
+      --copper-2: #f0a083;
+      --amber: #e6ad62;
+      --green: #9fcb8f;
+      --blue: #89b7d8;
+      --violet: #b7a0e8;
+      --code-bg: rgba(9, 9, 10, 0.72);
+      --sans: Inter, ui-sans-serif, system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
+      --serif: Georgia, "Times New Roman", Times, serif;
+      --mono: "SFMono-Regular", Consolas, "Liberation Mono", Menlo, monospace;
+    }
+
+    * { box-sizing: border-box; }
+
+    html, body {
+      height: 100%;
+      margin: 0;
+      background: #141311;
+      color: var(--paper);
+      font-family: var(--sans);
+      overflow: hidden;
+    }
+
+    body::before {
+      content: "";
+      position: fixed;
+      inset: 0;
+      pointer-events: none;
+      background:
+        radial-gradient(circle at 28% 18%, rgba(223,132,104,0.14), transparent 34%),
+        radial-gradient(circle at 88% 18%, rgba(230,173,98,0.09), transparent 30%),
+        radial-gradient(circle at 65% 82%, rgba(183,160,232,0.08), transparent 30%),
+        linear-gradient(135deg, #15130f 0%, #0e0e0d 55%, #19120e 100%);
+      z-index: -3;
+    }
+
+    body::after {
+      content: "";
+      position: fixed;
+      inset: 0;
+      background-image:
+        linear-gradient(rgba(238,232,221,0.018) 1px, transparent 1px),
+        linear-gradient(90deg, rgba(238,232,221,0.018) 1px, transparent 1px);
+      background-size: 38px 38px;
+      mask-image: radial-gradient(circle at 42% 42%, black, transparent 75%);
+      opacity: 0.9;
+      pointer-events: none;
+      z-index: -2;
+    }
+
+    .grain {
+      position: fixed;
+      inset: 0;
+      pointer-events: none;
+      opacity: 0.18;
+      background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 220 220' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.85' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)' opacity='0.38'/%3E%3C/svg%3E");
+      z-index: -1;
+    }
+
+
+    .kicker {
+      color: var(--copper);
+      font-family: var(--mono);
+      font-size: clamp(0.72rem, 1.05vw, 0.92rem);
+      font-weight: 800;
+      letter-spacing: 0.33em;
+      text-transform: uppercase;
+      margin-bottom: clamp(20px, 3vw, 34px);
+    }
+
+    h1, h2, h3 {
+      font-family: var(--serif);
+      font-weight: 600;
+      line-height: 0.98;
+      letter-spacing: -0.055em;
+      margin: 0;
+    }
+
+    h1 { font-size: clamp(4.5rem, 8.6vw, 8.8rem); max-width: 1180px; }
+    h2 { font-size: clamp(3rem, 4.6vw, 4.8rem); max-width: 1120px; }
+    h3 { font-size: clamp(1.6rem, 2.6vw, 2.5rem); letter-spacing: -0.045em; }
+
+    /* Content slides use a calmer scale than titles and section dividers. */
+    .slide.standard h2,
+    .slide.two h2 {
+      max-width: none;
+      font-size: clamp(2.35rem, 3.6vw, 3.8rem);
+      line-height: 1.02;
+      letter-spacing: -0.045em;
+      text-wrap: balance;
+    }
+
+    .accent { color: var(--copper); }
+    .dim { color: rgba(238,232,221,0.28); }
+
+    p, li {
+      color: var(--muted);
+      font-size: clamp(1rem, 1.3vw, 1.18rem);
+      line-height: 1.55;
+      margin: 0;
+    }
+
+    p.lead {
+      margin-top: 28px;
+      max-width: 760px;
+      font-size: clamp(1.15rem, 1.55vw, 1.6rem);
+      line-height: 1.44;
+    }
+
+    .slide.standard p.lead,
+    .slide.two p.lead {
+      margin-top: 22px;
+      max-width: 720px;
+      font-size: clamp(1.05rem, 1.35vw, 1.35rem);
+      line-height: 1.5;
+    }
+
+    ul { margin: 30px 0 0; padding-left: 1.2em; max-width: 760px; }
+    li + li { margin-top: 14px; }
+    strong, b {
+      color: var(--paper);
+      font-weight: 600;
+    }
+
+    .title-stack {
+      width: min(1160px, 100%);
+      transform: translateY(-10px);
+    }
+
+    .title-sub {
+      margin-top: 26px;
+      max-width: 900px;
+      color: var(--muted);
+      font-size: clamp(1.1rem, 1.45vw, 1.45rem);
+      line-height: 1.45;
+    }
+
+    .hairline {
+      height: 1px;
+      width: min(880px, 100%);
+      background: linear-gradient(90deg, rgba(238,232,221,0.16), transparent);
+      margin: 38px 0 0;
+    }
+
+    .follow-link {
+      margin: 18px 0 0;
+      color: var(--muted);
+      font-size: clamp(0.9rem, 1.05vw, 1.05rem);
+      line-height: 1.45;
+    }
+
+    .follow-link a {
+      color: var(--paper);
+      text-decoration-color: rgba(238,232,221,0.35);
+      text-underline-offset: 0.18em;
+    }
+
+    .follow-link a:hover,
+    .follow-link a:focus-visible {
+      color: var(--copper-2);
+    }
+
+    .section-title {
+      width: min(1060px, 100%);
+    }
+
+    .section-title h2 {
+      max-width: 1050px;
+    }
+
+    .section-title .lead {
+      max-width: 760px;
+    }
+
+    .qr-block {
+      margin-top: 40px;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      gap: 12px;
+    }
+
+    .qr-code {
+      width: clamp(260px, 26vw, 380px);
+      height: clamp(260px, 26vw, 380px);
+      border-radius: 16px;
+      background: #fff;
+      padding: 16px;
+      box-shadow: 0 8px 30px rgba(0,0,0,0.35);
+    }
+
+    .qr-caption {
+      font-family: var(--mono);
+      font-size: 0.85rem;
+      letter-spacing: 0.14em;
+      text-transform: uppercase;
+      color: rgba(238,232,221,0.6);
+    }
+
+    .form-link {
+      margin-top: 28px;
+      font-family: var(--mono);
+      font-size: 0.65rem;
+      letter-spacing: 0.04em;
+      color: rgba(238,232,221,0.35);
+    }
+
+    .download-link {
+      display: block;
+      margin-top: 34px;
+      max-width: 850px;
+      color: var(--paper);
+      font-family: var(--mono);
+      font-size: clamp(1.15rem, 1.7vw, 1.8rem);
+      font-weight: 600;
+      line-height: 1.3;
+      overflow-wrap: anywhere;
+      text-decoration-color: var(--copper);
+      text-decoration-thickness: 2px;
+      text-underline-offset: 0.2em;
+    }
+
+    .download-link:hover,
+    .download-link:focus-visible {
+      color: var(--copper-2);
+    }
+
+    .big-number {
+      font-family: var(--mono);
+      color: rgba(223,132,104,0.72);
+      font-size: clamp(0.9rem, 1.4vw, 1.3rem);
+      letter-spacing: 0.18em;
+      margin-bottom: 24px;
+    }

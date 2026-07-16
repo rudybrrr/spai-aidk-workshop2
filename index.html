@@ -1,0 +1,823 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>AI Don’t Know Workshop 2</title>
+  <link rel="stylesheet" href="./src/styles/globals.css" />
+  <link rel="stylesheet" href="./src/styles/code.css" />
+  <link rel="stylesheet" href="./src/styles/slides.css" />
+</head>
+<body>
+  <div class="grain"></div>
+  <div class="frame"></div>
+  <div class="top-progress"><div class="top-progress-bar" id="topProgress"></div></div>
+
+  <main class="deck">
+    <section class="slide center active" data-footer="AI Don’t Know · SPAI" data-title="Title">
+      <div class="title-stack">
+        <div class="kicker">SPAI Workshop Series</div>
+        <h1>AI Don’t Know</h1>
+        <p class="title-sub">Workshop 1 · Python Foundations<br/>From JavaScript basics to Python for AI, data, and machine learning.</p>
+        <div class="hairline"></div>
+        <p class="follow-link">Follow along on your own screen: <a href="https://spai-aidk-workshop1.vercel.app/" target="_blank" rel="noopener noreferrer">https://spai-aidk-workshop1.vercel.app/</a></p>
+      </div>
+    </section>
+
+    <section class="slide center" data-footer="About SPAI · SPAI" data-title="About SPAI">
+      <div class="section-title">
+        <div class="big-number">01</div>
+        <div class="kicker">About SPAI</div>
+        <h2>Who we are, and what we’ve been building.</h2>
+        <p class="lead">A quick intro before we get into Python.</p>
+      </div>
+    </section>
+
+    <section class="slide two" data-footer="About SPAI · Who We Are" data-title="Who We Are">
+      <div>
+        <div class="kicker">Who we are</div>
+        <h2>SPAI makes <span class="accent">AI more accessible</span> to SP students.</h2>
+        <p class="lead">We run beginner-friendly workshops, events, and learning experiences for students across courses and schools.</p>
+        <ul>
+          <li>Open to students regardless of course or school.</li>
+          <li>Built by students, for students.</li>
+          <li>Focused on practical first exposure, not gatekeeping.</li>
+        </ul>
+      </div>
+      <div class="orbital" aria-label="SPAI community visual">
+        <div class="orbit-core"><img src="public/images/logos/SPAI Logo.png" alt="SPAI" /></div>
+        <div class="orbit-label ol-1"><b>Workshops</b>Hands-on learning</div>
+        <div class="orbit-label ol-2"><b>Events</b>Explore AI topics</div>
+        <div class="orbit-label ol-3"><b>Community</b>Learn with peers</div>
+        <div class="orbit-label ol-4"><b>Projects</b>Build useful things</div>
+      </div>
+    </section>
+
+    <section class="slide standard" data-footer="About SPAI · Previous Events" data-title="Previous Events">
+      <div>
+        <div class="kicker">Previous events</div>
+        <h2>Learning through hands-on sessions.</h2>
+        <div class="event-list">
+          <div class="event-card">
+            <img class="event-image" src="public/images/events/pixels_to_perception.png" alt="Pixels to Perception" />
+            <div class="event-index">01</div>
+            <div class="event-name">Pixels to Perception</div>
+            <p class="event-desc">Beginner-friendly exposure to AI tools and technical learning.</p>
+          </div>
+          <div class="event-card">
+            <img class="event-image" src="public/images/events/graphing_impact.png" alt="Graphing Impact" />
+            <div class="event-index">02</div>
+            <div class="event-name">Graphing Impact</div>
+            <p class="event-desc">Using data and visualisation to communicate insights.</p>
+          </div>
+          <div class="event-card">
+            <img class="event-image" src="public/images/events/n8n.png" alt="n8n" />
+            <div class="event-index">03</div>
+            <div class="event-name">n8n</div>
+            <p class="event-desc">A workshop series built around accessible AI learning.</p>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <section class="slide center" data-footer="Workshop Series · SPAI" data-title="Workshop Series">
+      <div class="section-title">
+        <div class="big-number">02</div>
+        <div class="kicker">Workshop Series</div>
+        <h2>Code <span class="accent">→</span> data <span class="accent">→</span> learning from data.</h2>
+        <p class="lead">Three sessions, one beginner-friendly path from Python to machine learning.</p>
+      </div>
+    </section>
+
+    <section class="slide standard" data-footer="Workshop Series · Outline" data-title="Series Outline">
+      <div>
+        <div class="kicker">Series outline</div>
+        <h2>The full path, in one view.</h2>
+        <div class="outline-table">
+          <div class="outline-row">
+            <div class="date">15 JUL<br/>3–5PM</div>
+            <div class="outline-title">Python Foundations</div>
+            <div class="outline-desc">JavaScript vs Python, syntax, variables, conditionals, loops, lists, dictionaries, functions, and simple practice.</div>
+          </div>
+          <div class="outline-row">
+            <div class="date">22 JUL<br/>3–5PM</div>
+            <div class="outline-title">Data Analytics & Visualisation</div>
+            <div class="outline-desc">pandas, NumPy, matplotlib, and seaborn as a cleaner plotting option, using small sample data.</div>
+          </div>
+          <div class="outline-row">
+            <div class="date">29 JUL<br/>3–5PM</div>
+            <div class="outline-title">Guided ML Demo</div>
+            <div class="outline-desc">A DataCamp-style template where you fill in key blanks and run a basic machine learning workflow.</div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <section class="slide standard" data-footer="Workshop Series · Takeaways" data-title="Takeaways">
+      <div class="takeaway">
+        <div>
+          <div class="kicker">Takeaways</div>
+          <h2>What you should leave with.</h2>
+          <p class="lead">You don't need to master AI in these sessions. By the end, Python, data, and ML should feel a little less confusing, and a whole lot more approachable.</p>
+        </div>
+        <div class="takeaway-list">
+          <div class="takeaway-row">
+            <div class="label">W1</div>
+            <p><strong>Python confidence:</strong> read and edit basic Python code without freezing.</p>
+          </div>
+          <div class="takeaway-row">
+            <div class="label">W2</div>
+            <p><strong>Data thinking:</strong> ask simple questions from data and visualise answers.</p>
+          </div>
+          <div class="takeaway-row">
+            <div class="label">W3</div>
+            <p><strong>ML intuition:</strong> understand the basic shape of training and testing a model.</p>
+          </div>
+          <div class="takeaway-row">
+            <div class="label">ALL</div>
+            <p><strong>Big picture:</strong> see how Python, data, and ML connect.</p>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <section class="slide standard" data-footer="Setup - Before Workshop" data-title="Python Setup Checklist">
+      <div class="takeaway">
+        <div>
+          <div class="kicker">Setup</div>
+          <h2>Make sure your notebook can run.</h2>
+          <p class="lead">We will send a full install guide, but these are the pieces you need before the workshop starts.</p>
+        </div>
+        <div class="takeaway-list">
+          <div class="takeaway-row">
+            <div class="label">01</div>
+            <p><strong>Install Python.</strong> If the installer asks, enable <strong>Add Python to PATH</strong>.</p>
+          </div>
+          <div class="takeaway-row">
+            <div class="label">02</div>
+            <p><strong>Install the Python and Jupyter extensions in VS Code.</strong></p>
+          </div>
+          <div class="takeaway-row">
+            <div class="label">03</div>
+            <p><strong>Open the workshop notebook.</strong> Open the folder, then open <strong>01_AIDK_W1_Starter.ipynb</strong>.</p>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <section class="slide standard" data-footer="Setup - Notebook Tools" data-title="Notebook Tools" data-notebook-cell="2">
+      <div>
+        <div class="kicker">Setup</div>
+        <h2>Install the notebook tools once.</h2>
+        <p class="lead">These packages let VS Code run notebooks and prepare you for the data and ML workshops.</p>
+        <div class="compare">
+          <div class="code-window">
+            <div class="code-head"><span class="code-label">Terminal</span><button class="copy-btn">Copy</button></div>
+            <pre><code>python -m pip install ipykernel numpy pandas matplotlib seaborn scikit-learn</code></pre>
+          </div>
+          <div class="code-window python">
+            <div class="code-head"><span class="code-label">Quick check</span><button class="copy-btn">Copy</button></div>
+            <pre><code>python --version
+# or
+py --version
+
+print("Python is working!")</code></pre>
+          </div>
+        </div>
+        <div class="note">If <strong>python</strong> does not work on Windows, try <strong>py</strong> instead. If any command fails, use the full install guide for OS-specific steps or ask a facilitator at the start.</div>
+      </div>
+    </section>
+
+    <section class="slide standard download-notebook-slide" data-footer="Setup · Download Notebook" data-title="Download Notebook">
+      <div>
+        <div class="kicker">Workshop file</div>
+        <h2>Download the Python notebook.</h2>
+        <p class="lead">Open this link, then download the workshop notebook from Google Drive before we begin.</p>
+        <a class="download-link" href="https://drive.google.com/file/d/145cV-S3FoM9snWuZYPXGdX6dlu4wIJ8I/view?usp=sharing" target="_blank" rel="noopener noreferrer">https://drive.google.com/file/d/145cV-S3FoM9snWuZYPXGdX6dlu4wIJ8I/view?usp=sharing</a>
+      </div>
+    </section>
+
+    <section class="slide center" data-footer="Workshop 1 Flow · SPAI" data-title="Workshop 1 Flow Section">
+      <div class="section-title">
+        <div class="big-number">03</div>
+        <div class="kicker">Workshop 1 Flow</div>
+        <h2>Today is about getting comfortable with Python fundamentals.</h2>
+      </div>
+    </section>
+
+    <section class="slide standard" data-footer="Workshop 1 Flow · Today" data-title="Workshop 1 Flow">
+      <div class="flow-line">
+        <div class="kicker">Today’s flow</div>
+        <div class="flow-title">Understand <span>→</span> Translate <span>→</span> Code <span>→</span> Practice <span>→</span> Carry forward</div>
+        <div class="flow-steps">
+          <div class="flow-step"><div class="num">01</div><b>About Python</b><p>Why Python matters for AI and data.</p></div>
+          <div class="flow-step"><div class="num">02</div><b>JS vs Python</b><p>Translate familiar programming ideas.</p></div>
+          <div class="flow-step"><div class="num">03</div><b>Python Basics</b><p>Types, functions, input, logic, loops, lists, and dictionaries.</p></div>
+          <div class="flow-step"><div class="num">04</div><b>Practice</b><p>Complete each notebook prompt, then combine the skills.</p></div>
+          <div class="flow-step"><div class="num">05</div><b>Wrap-up</b><p>What carries into Workshop 2.</p></div>
+        </div>
+      </div>
+    </section>
+
+    <section class="slide center" data-footer="Python + JavaScript · SPAI" data-title="About Python Section">
+      <div class="section-title">
+        <div class="big-number">04</div>
+        <div class="kicker">About Python + JS vs Python</div>
+        <h2>You already know programming ideas. Python writes them differently.</h2>
+      </div>
+    </section>
+
+    <section class="slide two" data-footer="About Python · Why Python" data-title="Why Python" data-notebook-cell="4">
+      <div>
+        <div class="kicker">About Python</div>
+        <h2>Python is the default language for a lot of AI work.</h2>
+        <p class="lead">It is readable and widely used for data, AI, and machine learning.</p>
+      </div>
+      <div>
+        <div class="code-window python">
+          <div class="code-head"><span class="code-label">Python</span><button class="copy-btn">Copy</button></div>
+          <pre><code>topic = <span class="str">"Python Foundations"</span>
+<span class="fn">print</span>(<span class="str">"Today we are learning:"</span>, topic)</code></pre>
+        </div>
+        <div class="note">Today is not about mastering Python. It is about becoming comfortable enough to continue.</div>
+      </div>
+    </section>
+
+    <section class="slide standard" data-footer="JS vs Python · Code Blocks" data-title="Code Blocks" data-notebook-cell="6">
+      <div>
+        <div class="kicker">JS vs Python</div>
+        <h2>Code blocks</h2>
+        <p class="lead">JavaScript uses curly braces. Python uses colons and indentation.</p>
+        <div class="compare">
+          <div class="code-window javascript">
+            <div class="code-head"><span class="code-label">JavaScript</span></div>
+            <pre><code><span class="kw">if</span> (score >= <span class="numlit">60</span>) {
+  console.log(<span class="str">"Pass"</span>);
+}</code></pre>
+          </div>
+          <div class="code-window python">
+            <div class="code-head"><span class="code-label">Python</span><button class="copy-btn">Copy</button></div>
+            <pre><code>score = <span class="numlit">72</span>
+
+<span class="kw">if</span> score >= <span class="numlit">60</span>:
+    <span class="fn">print</span>(<span class="str">"Pass"</span>)</code></pre>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <section class="slide standard" data-footer="JS vs Python · Variables" data-title="Variables" data-notebook-cell="8">
+      <div>
+        <div class="kicker">JS vs Python</div>
+        <h2>Variable declaration</h2>
+        <p class="lead">Python does not use <strong>let</strong>, <strong>const</strong>, or <strong>var</strong>.</p>
+        <div class="compare">
+          <div class="code-window javascript">
+            <div class="code-head"><span class="code-label">JavaScript</span></div>
+            <pre><code><span class="kw">let</span> name = <span class="str">"Ravi"</span>;
+<span class="kw">const</span> score = <span class="numlit">82</span>;
+<span class="kw">var</span> passed = true;</code></pre>
+          </div>
+          <div class="code-window python">
+            <div class="code-head"><span class="code-label">Python</span><button class="copy-btn">Copy</button></div>
+            <pre><code>name = <span class="str">"Ravi"</span>
+score = <span class="numlit">82</span>
+passed = <span class="kw">True</span>
+
+<span class="fn">print</span>(name, score, passed)</code></pre>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <section class="slide standard" data-footer="JS vs Python · Variables" data-title="Variables · Your Turn" data-notebook-cell="9">
+      <div>
+        <div class="kicker">Optional notebook prompt</div>
+        <h2>Create and print a course variable.</h2>
+        <p class="lead">Complete this code in the next notebook cell.</p>
+        <div class="compare" style="grid-template-columns: 1fr;">
+          <div class="code-window python">
+            <div class="code-head"><span class="code-label">Your turn</span><button class="copy-btn">Copy</button></div>
+            <pre><code><span class="comment"># Try it out!</span>
+
+<span class="comment"># TODO: Create a variable called course and store your course name inside it</span>
+<span class="comment"># Hint: variable_name = value</span>
+
+<span class="comment"># TODO: Print the course variable</span></code></pre>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <section class="slide standard" data-footer="JS vs Python · Output" data-title="Printing Output" data-notebook-cell="11">
+      <div>
+        <div class="kicker">JS vs Python</div>
+        <h2>Printing output</h2>
+        <p class="lead"><strong>print()</strong> is Python’s version of <strong>console.log()</strong>.</p>
+        <div class="compare">
+          <div class="code-window javascript">
+            <div class="code-head"><span class="code-label">JavaScript</span></div>
+            <pre><code>console.log(<span class="str">"Hello SPAI!"</span>);</code></pre>
+          </div>
+          <div class="code-window python">
+            <div class="code-head"><span class="code-label">Python</span><button class="copy-btn">Copy</button></div>
+            <pre><code><span class="fn">print</span>(<span class="str">"Hello SPAI!"</span>)
+
+student_name = <span class="str">"Aisha"</span>
+<span class="fn">print</span>(<span class="str">"Student:"</span>, student_name)</code></pre>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <section class="slide standard" data-footer="JS vs Python · Output" data-title="Printing Output · Your Turn" data-notebook-cell="12">
+      <div>
+        <div class="kicker">Notebook prompt</div>
+        <h2>Fill in the value to print.</h2>
+        <p class="lead">Replace the blank so the cell prints <strong>Moiz</strong>.</p>
+        <div class="compare" style="grid-template-columns: 1fr;">
+          <div class="code-window python">
+            <div class="code-head"><span class="code-label">Your turn</span><button class="copy-btn">Copy</button></div>
+            <pre><code>name = <span class="str">"Moiz"</span>
+<span class="fn">print</span>(_____)</code></pre>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <section class="slide standard" data-footer="JS vs Python · Booleans" data-title="Booleans and None" data-notebook-cell="14">
+      <div>
+        <div class="kicker">JS vs Python</div>
+        <h2>Booleans and missing values</h2>
+        <p class="lead">Python capitalises boolean values and uses <strong>None</strong> for empty or missing values.</p>
+        <div class="compare">
+          <div class="code-window javascript">
+            <div class="code-head"><span class="code-label">JavaScript</span></div>
+            <pre><code><span class="kw">let</span> passed = true;
+<span class="kw">let</span> remarks = null;</code></pre>
+          </div>
+          <div class="code-window python">
+            <div class="code-head"><span class="code-label">Python</span><button class="copy-btn">Copy</button></div>
+            <pre><code>passed = <span class="kw">True</span>
+remarks = <span class="kw">None</span>
+
+<span class="fn">print</span>(passed)
+<span class="fn">print</span>(remarks)</code></pre>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <section class="slide center" data-footer="Python Basics · SPAI" data-title="Python Basics Section">
+      <div class="section-title">
+        <div class="big-number">05</div>
+        <div class="kicker">Python Basics</div>
+        <h2>The small pieces we need before data and ML.</h2>
+      </div>
+    </section>
+
+    <section class="slide two" data-footer="Python Basics · Data Types" data-title="Data Types" data-notebook-cell="16">
+      <div>
+        <div class="kicker">Python Basics</div>
+        <h2>Data types</h2>
+        <p class="lead">Python values can be text, numbers, booleans, or empty values.</p>
+      </div>
+      <div class="code-window python">
+        <div class="code-head"><span class="code-label">Python</span><button class="copy-btn">Copy</button></div>
+        <pre><code>name = <span class="str">"Aisha"</span>      <span class="comment"># string</span>
+score = <span class="numlit">88</span>          <span class="comment"># integer</span>
+price = <span class="numlit">2.50</span>        <span class="comment"># float</span>
+passed = <span class="kw">True</span>       <span class="comment"># boolean</span>
+remarks = <span class="kw">None</span>      <span class="comment"># no value yet</span>
+
+<span class="fn">print</span>(name, score, passed)
+<span class="fn">print</span>(<span class="fn">type</span>(name))
+<span class="fn">print</span>(<span class="fn">type</span>(score))
+<span class="fn">print</span>(<span class="fn">type</span>(price))
+<span class="fn">print</span>(<span class="fn">type</span>(passed))
+<span class="fn">print</span>(<span class="fn">type</span>(remarks))</code></pre>
+      </div>
+    </section>
+
+    <section class="slide standard" data-footer="Python Basics · Data Types" data-title="Data Types · Your Turn" data-notebook-cell="17">
+      <div>
+        <div class="kicker">Notebook prompt</div>
+        <h2>Check the variable’s data type.</h2>
+        <p class="lead">Fill in the blank with the variable whose type you want to inspect.</p>
+        <div class="compare" style="grid-template-columns: 1fr;">
+          <div class="code-window python">
+            <div class="code-head"><span class="code-label">Your turn</span><button class="copy-btn">Copy</button></div>
+            <pre><code>student_score = <span class="numlit">95</span>
+<span class="fn">print</span>(<span class="fn">type</span>(_____))</code></pre>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <section class="slide standard" data-footer="Python Basics · Built-in Functions" data-title="Built-in Functions" data-notebook-cell="19">
+      <div>
+        <div class="kicker">Python Basics</div>
+        <h2>Python already gives you useful functions.</h2>
+        <p class="lead"><strong>len()</strong> and <strong>sum()</strong> are built-in tools Python already gives you.</p>
+        <div class="compare" style="grid-template-columns: 1fr;">
+          <div class="code-window python">
+            <div class="code-head"><span class="code-label">Python</span><button class="copy-btn">Copy</button></div>
+            <pre><code>scores = [<span class="numlit">72</span>, <span class="numlit">85</span>, <span class="numlit">60</span>, <span class="numlit">91</span>]
+average = <span class="fn">sum</span>(scores) / <span class="fn">len</span>(scores)
+
+<span class="fn">print</span>(<span class="str">"Number of scores:"</span>, <span class="fn">len</span>(scores))
+<span class="fn">print</span>(<span class="str">"Class average:"</span>, average)</code></pre>
+          </div>
+        </div>
+        <div class="note">Built-in means Python provides these functions for you. You can use them right away.</div>
+      </div>
+    </section>
+
+    <section class="slide standard" data-footer="Python Basics · Built-in Functions" data-title="Built-in Functions · Your Turn" data-notebook-cell="20">
+      <div>
+        <div class="kicker">Notebook prompt</div>
+        <h2>Choose the correct built-in functions.</h2>
+        <p class="lead">Fill both blanks, then run the cell to calculate the average.</p>
+        <div class="compare" style="grid-template-columns: 1fr;">
+          <div class="code-window python">
+            <div class="code-head"><span class="code-label">Your turn</span><button class="copy-btn">Copy</button></div>
+            <pre><code>scores = [<span class="numlit">70</span>, <span class="numlit">80</span>, <span class="numlit">90</span>]
+total = _____(scores)
+count = _____(scores)
+<span class="fn">print</span>(total / count)</code></pre>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <section class="slide two" data-footer="Python Basics · Input" data-title="Input and Conversion" data-notebook-cell="22">
+      <div>
+        <div class="kicker">Python Basics</div>
+        <h2>Input is text by default</h2>
+        <p class="lead">Because <strong>input()</strong> gives back text, use <strong>int()</strong> before doing maths with it.</p>
+      </div>
+      <div class="code-window python">
+        <div class="code-head"><span class="code-label">Python</span><button class="copy-btn">Copy</button></div>
+        <pre><code>score_text = <span class="str">"75"</span>
+score = <span class="fn">int</span>(score_text)
+
+<span class="fn">print</span>(score + <span class="numlit">5</span>)</code></pre>
+      </div>
+    </section>
+
+    <section class="slide standard" data-footer="Python Basics · Input" data-title="Input and Conversion · Your Turn" data-notebook-cell="23">
+      <div>
+        <div class="kicker">Notebook prompt</div>
+        <h2>Ask for input, convert it, and use it.</h2>
+        <p class="lead">Write all three lines described in the notebook cell.</p>
+        <div class="compare" style="grid-template-columns: 1fr;">
+          <div class="code-window python">
+            <div class="code-head"><span class="code-label">Your turn</span><button class="copy-btn">Copy</button></div>
+            <pre><code><span class="comment"># TODO: Ask the user for their score using input()</span>
+<span class="comment"># TODO: Convert the answer into an integer</span>
+<span class="comment"># TODO: Print the score plus 10</span>
+<span class="comment"># Hint: int(...) converts text to a whole number</span></code></pre>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <section class="slide standard" data-footer="Python Basics · Conditionals" data-title="Conditionals" data-notebook-cell="25">
+      <div>
+        <div class="kicker">Python Logic</div>
+        <h2>Conditionals</h2>
+        <p class="lead">Conditionals let your program make decisions.</p>
+        <div class="compare" style="grid-template-columns: 1fr;">
+          <div class="code-window python">
+            <div class="code-head"><span class="code-label">Python</span><button class="copy-btn">Copy</button></div>
+            <pre><code>score = <span class="numlit">72</span>
+
+<span class="kw">if</span> score >= <span class="numlit">80</span>:
+    <span class="fn">print</span>(<span class="str">"Excellent"</span>)
+<span class="kw">elif</span> score >= <span class="numlit">60</span>:
+    <span class="fn">print</span>(<span class="str">"Pass"</span>)
+<span class="kw">else</span>:
+    <span class="fn">print</span>(<span class="str">"Try again"</span>)</code></pre>
+          </div>
+        </div>
+        <div class="note">Try it: change the score. Predict the output before running.</div>
+      </div>
+    </section>
+
+    <section class="slide standard" data-footer="Python Basics · Conditionals" data-title="Conditionals · Your Turn" data-notebook-cell="26">
+      <div>
+        <div class="kicker">Notebook prompt</div>
+        <h2>Complete the conditional.</h2>
+        <p class="lead">Fill the comparison operator and the missing branch keyword.</p>
+        <div class="compare" style="grid-template-columns: 1fr;">
+          <div class="code-window python">
+            <div class="code-head"><span class="code-label">Your turn</span><button class="copy-btn">Copy</button></div>
+            <pre><code>score = <span class="numlit">58</span>
+
+<span class="kw">if</span> score _____ <span class="numlit">60</span>:
+    <span class="fn">print</span>(<span class="str">"Pass"</span>)
+_____:
+    <span class="fn">print</span>(<span class="str">"Try again"</span>)</code></pre>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <section class="slide standard" data-footer="Python Basics · Loops" data-title="For Loops" data-notebook-cell="28">
+      <div>
+        <div class="kicker">Python Logic</div>
+        <h2>For loops</h2>
+        <p class="lead">Use loops when you want to repeat code.</p>
+        <div class="compare">
+          <div class="code-window javascript">
+            <div class="code-head"><span class="code-label">JavaScript</span></div>
+            <pre><code><span class="kw">for</span> (<span class="kw">let</span> i = <span class="numlit">0</span>; i &lt; <span class="numlit">5</span>; i++) {
+  console.log(i);
+}</code></pre>
+          </div>
+          <div class="code-window python">
+            <div class="code-head"><span class="code-label">Python</span><button class="copy-btn">Copy</button></div>
+            <pre><code><span class="kw">for</span> i <span class="kw">in</span> <span class="fn">range</span>(<span class="numlit">5</span>):
+    <span class="fn">print</span>(i)
+
+names = [<span class="str">"Aisha"</span>, <span class="str">"Ben"</span>, <span class="str">"Chloe"</span>]
+<span class="kw">for</span> name <span class="kw">in</span> names:
+    <span class="fn">print</span>(<span class="str">"Hello"</span>, name)</code></pre>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <section class="slide standard" data-footer="Python Basics · Loops" data-title="For Loops · Your Turn" data-notebook-cell="29">
+      <div>
+        <div class="kicker">Notebook prompt</div>
+        <h2>Print every student name.</h2>
+        <p class="lead">Write the loop requested underneath the list.</p>
+        <div class="compare" style="grid-template-columns: 1fr;">
+          <div class="code-window python">
+            <div class="code-head"><span class="code-label">Your turn</span><button class="copy-btn">Copy</button></div>
+            <pre><code>students = [<span class="str">"Aisha"</span>, <span class="str">"Ben"</span>, <span class="str">"Chloe"</span>]
+
+<span class="comment"># TODO: Use a for loop to print each student name</span>
+<span class="comment"># Hint: for one_student in students:</span></code></pre>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <section class="slide standard" data-footer="Python Basics · Lists" data-title="Lists" data-notebook-cell="31">
+      <div>
+        <div class="kicker">Python Data Structures</div>
+        <h2>Lists</h2>
+        <p class="lead">Lists store multiple values in order. This matters because data often comes in groups.</p>
+        <div class="compare" style="grid-template-columns: 1fr;">
+          <div class="code-window python">
+            <div class="code-head"><span class="code-label">Python</span><button class="copy-btn">Copy</button></div>
+            <pre><code>scores = [<span class="numlit">72</span>, <span class="numlit">85</span>, <span class="numlit">60</span>, <span class="numlit">91</span>]
+
+<span class="fn">print</span>(scores[<span class="numlit">0</span>])
+<span class="fn">print</span>(<span class="fn">len</span>(scores))
+
+scores.append(<span class="numlit">78</span>)
+<span class="fn">print</span>(scores)
+
+<span class="kw">for</span> score <span class="kw">in</span> scores:
+    <span class="fn">print</span>(score)</code></pre>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <section class="slide standard" data-footer="Python Basics · Lists" data-title="Lists · Your Turn" data-notebook-cell="32">
+      <div>
+        <div class="kicker">Notebook prompt</div>
+        <h2>Add, access, and print list values.</h2>
+        <p class="lead">Complete all three TODO instructions in the notebook.</p>
+        <div class="compare" style="grid-template-columns: 1fr;">
+          <div class="code-window python">
+            <div class="code-head"><span class="code-label">Your turn</span><button class="copy-btn">Copy</button></div>
+            <pre><code>student_names = [<span class="str">"Aisha"</span>, <span class="str">"Ben"</span>]
+
+<span class="comment"># TODO: Add one more student name to the list</span>
+<span class="comment"># TODO: Print the first student name</span>
+<span class="comment"># TODO: Print the full list</span></code></pre>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <section class="slide standard" data-footer="Python Basics · Dictionaries" data-title="Dictionaries" data-notebook-cell="34">
+      <div>
+        <div class="kicker">Python Data Structures</div>
+        <h2>Dictionaries</h2>
+        <p class="lead">Dictionaries store labelled information using key-value pairs.</p>
+        <div class="compare" style="grid-template-columns: 1fr;">
+          <div class="code-window python">
+            <div class="code-head"><span class="code-label">Python</span><button class="copy-btn">Copy</button></div>
+            <pre><code>student = {
+    <span class="str">"name"</span>: <span class="str">"Aisha"</span>,
+    <span class="str">"course"</span>: <span class="str">"DAAA"</span>,
+    <span class="str">"score"</span>: <span class="numlit">88</span>
+}
+
+<span class="fn">print</span>(student[<span class="str">"name"</span>])
+<span class="fn">print</span>(student[<span class="str">"score"</span>])</code></pre>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <section class="slide standard" data-footer="Python Basics · Dictionaries" data-title="Dictionaries · Your Turn" data-notebook-cell="35">
+      <div>
+        <div class="kicker">Notebook prompt</div>
+        <h2>Choose the dictionary key to print.</h2>
+        <p class="lead">Fill the blank so the cell prints Ben’s course.</p>
+        <div class="compare" style="grid-template-columns: 1fr;">
+          <div class="code-window python">
+            <div class="code-head"><span class="code-label">Your turn</span><button class="copy-btn">Copy</button></div>
+            <pre><code>student = {
+    <span class="str">"name"</span>: <span class="str">"Ben"</span>,
+    <span class="str">"course"</span>: <span class="str">"DISM"</span>,
+    <span class="str">"score"</span>: <span class="numlit">76</span>
+}
+
+<span class="fn">print</span>(student[_____])</code></pre>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <section class="slide standard" data-footer="Python Basics · Functions" data-title="Functions" data-notebook-cell="37">
+      <div>
+        <div class="kicker">Python Organisation</div>
+        <h2>Writing your own functions</h2>
+        <p class="lead">Built-in functions are ready-made. <strong>def</strong> lets you create your own reusable tool.</p>
+        <div class="compare" style="grid-template-columns: 1fr;">
+          <div class="code-window python">
+            <div class="code-head"><span class="code-label">Python</span><button class="copy-btn">Copy</button></div>
+            <pre><code><span class="kw">def</span> <span class="fn">calculate_average</span>(numbers):
+    total = <span class="fn">sum</span>(numbers)
+    average = total / <span class="fn">len</span>(numbers)
+    <span class="kw">return</span> average
+
+scores = [<span class="numlit">72</span>, <span class="numlit">85</span>, <span class="numlit">60</span>, <span class="numlit">91</span>]
+<span class="fn">print</span>(calculate_average(scores))</code></pre>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <section class="slide standard" data-footer="Python Basics · Functions" data-title="Functions · Your Turn" data-notebook-cell="38">
+      <div>
+        <div class="kicker">Notebook prompt</div>
+        <h2>Fill in the passing score.</h2>
+        <p class="lead">Complete the comparison inside the function, then run it.</p>
+        <div class="compare" style="grid-template-columns: 1fr;">
+          <div class="code-window python">
+            <div class="code-head"><span class="code-label">Your turn</span><button class="copy-btn">Copy</button></div>
+            <pre><code><span class="kw">def</span> <span class="fn">check_pass</span>(score):
+    <span class="kw">if</span> score >= _____:
+        <span class="kw">return</span> <span class="str">"Pass"</span>
+    <span class="kw">else</span>:
+        <span class="kw">return</span> <span class="str">"Try again"</span>
+
+<span class="fn">print</span>(check_pass(<span class="numlit">72</span>))</code></pre>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <section class="slide center" data-footer="Practice · SPAI" data-title="Practice Section">
+      <div class="section-title">
+        <div class="big-number">06</div>
+        <div class="kicker">Practice</div>
+        <h2>Fill it in. Write it. Build it.</h2>
+        <p class="lead">Work through all three questions in <strong>01_AIDK_W1_Starter.ipynb</strong>.</p>
+      </div>
+    </section>
+
+    <section class="slide standard" data-footer="Practice · Question 1" data-title="Practice Question 1" data-notebook-cell="40">
+      <div>
+        <div class="kicker">Practice 1</div>
+        <h2>Complete a class score summary</h2>
+        <p class="lead">Fill every blank to calculate the class average and assign the correct status.</p>
+        <div class="compare" style="grid-template-columns: 1fr;">
+          <div class="code-window python">
+            <div class="code-head"><span class="code-label">starter.py</span><button class="copy-btn">Copy</button></div>
+            <pre><code>scores = [<span class="numlit">72</span>, <span class="numlit">85</span>, <span class="numlit">60</span>, <span class="numlit">91</span>, <span class="numlit">45</span>]
+
+total_score = ____(scores)
+number_of_scores = ____(scores)
+average_score = ____ / ____
+
+<span class="kw">if</span> average_score ____ <span class="numlit">80</span>:
+    status = <span class="str">"Excellent"</span>
+____ average_score ____ <span class="numlit">60</span>:
+    status = <span class="str">"Pass"</span>
+____:
+    status = <span class="str">"Needs support"</span>
+
+<span class="fn">print</span>(<span class="str">"Average:"</span>, average_score)
+<span class="fn">print</span>(<span class="str">"Status:"</span>, status)</code></pre>
+          </div>
+        </div>
+        <div class="note"><strong>Expected output:</strong> Average: 70.6 &nbsp;·&nbsp; Status: Pass</div>
+      </div>
+    </section>
+
+    <section class="slide standard" data-footer="Practice · Question 2" data-title="Practice Question 2" data-notebook-cell="42">
+      <div>
+        <div class="kicker">Practice 2</div>
+        <h2>Write a result loop</h2>
+        <p class="lead">Loop through every score and print <strong>Excellent</strong>, <strong>Pass</strong>, or <strong>Needs support</strong> beside it.</p>
+        <div class="compare" style="grid-template-columns: 1fr;">
+          <div class="code-window python">
+            <div class="code-head"><span class="code-label">starter.py</span><button class="copy-btn">Copy</button></div>
+            <pre><code>scores = [<span class="numlit">72</span>, <span class="numlit">85</span>, <span class="numlit">60</span>, <span class="numlit">91</span>, <span class="numlit">45</span>]
+
+<span class="comment"># Write your loop and conditionals below.</span></code></pre>
+          </div>
+        </div>
+        <div class="note"><strong>Rules:</strong> Excellent ≥ 80 &nbsp;·&nbsp; Pass ≥ 60 &nbsp;·&nbsp; Otherwise Needs support<br/><strong>Expected:</strong> 72 Pass &nbsp;·&nbsp; 85 Excellent &nbsp;·&nbsp; 60 Pass &nbsp;·&nbsp; 91 Excellent &nbsp;·&nbsp; 45 Needs support</div>
+      </div>
+    </section>
+
+    <section class="slide standard" data-footer="Practice · Question 3" data-title="Practice Question 3" data-notebook-cell="44">
+      <div>
+        <div class="kicker">Practice 3</div>
+        <h2>Build a student summary</h2>
+        <p class="lead">Write <strong>summarise_student(student)</strong> to calculate the average, classify the result, and print the name, average, and status.</p>
+        <div class="compare" style="grid-template-columns: 1fr;">
+          <div class="code-window python">
+            <div class="code-head"><span class="code-label">starter.py</span><button class="copy-btn">Copy</button></div>
+            <pre><code>student = {
+    <span class="str">"name"</span>: <span class="str">"Aisha"</span>,
+    <span class="str">"scores"</span>: [<span class="numlit">88</span>, <span class="numlit">73</span>, <span class="numlit">91</span>]
+}
+
+<span class="comment"># Write summarise_student(student) and call it below.</span></code></pre>
+          </div>
+        </div>
+        <div class="note"><strong>Rules:</strong> Excellent ≥ 80 &nbsp;·&nbsp; Pass ≥ 60 &nbsp;·&nbsp; Otherwise Needs support<br/><strong>Expected:</strong> Name: Aisha &nbsp;·&nbsp; Average: 84.0 &nbsp;·&nbsp; Status: Excellent</div>
+      </div>
+    </section>
+
+    <section class="slide center" data-footer="Summary · SPAI" data-title="Summary Section">
+      <div class="section-title">
+        <div class="big-number">07</div>
+        <div class="kicker">Summary of Today</div>
+        <h2>What carries forward into data analytics and ML.</h2>
+      </div>
+    </section>
+
+    <section class="slide standard" data-footer="Summary · Today" data-title="Summary">
+      <div>
+        <div class="kicker">Summary</div>
+        <h2>What you learned today</h2>
+        <div class="summary-table">
+          <div class="summary-row"><b>Python syntax</b><p>Indentation matters. No curly braces needed.</p></div>
+          <div class="summary-row"><b>Values and input</b><p>Use variables, data types, built-in functions, and input conversion.</p></div>
+          <div class="summary-row"><b>Logic and repetition</b><p>Make decisions with conditionals and repeat work with loops.</p></div>
+          <div class="summary-row"><b>Data structures</b><p>Store ordered values in lists and labelled information in dictionaries.</p></div>
+          <div class="summary-row"><b>Functions</b><p>Use ready-made tools like <strong>len()</strong> and <strong>sum()</strong>, then write your own with <strong>def</strong>.</p></div>
+          <div class="summary-row"><b>Next workshop</b><p>Use pandas, NumPy, matplotlib, and seaborn to understand data.</p></div>
+        </div>
+      </div>
+    </section>
+
+    <section class="slide center" data-footer="AI Don’t Know · SPAI" data-title="Photo Taking">
+      <div class="section-title">
+        <div class="kicker">Photo Taking</div>
+        <h2><span aria-hidden="true">📷</span> Smile for the camera!</h2>
+      </div>
+    </section>
+
+    <section class="slide center" data-footer="AI Don’t Know · SPAI" data-title="Thank You">
+      <div class="section-title">
+        <div class="kicker">Thank you</div>
+        <h2>Python is the first step.</h2>
+        <p class="lead">Next: use Python to understand data with pandas, NumPy, matplotlib, and seaborn.</p>
+        <div class="qr-block">
+          <img class="qr-code" src="public/images/ats.png" alt="Attendance QR code" />
+          <p class="qr-caption">Scan for attendance</p>
+        </div>
+        <p class="form-link">https://forms.gle/AhQz1SWdcKJwfv8t7</p>
+      </div>
+    </section>
+  </main>
+
+  <div class="footer">
+    <div class="footer-left" id="footerLabel">AI Don’t Know · SPAI</div>
+    <div class="dots" id="dots"></div>
+    <div class="slide-no" id="slideNo">1 <span>/ 1</span></div>
+  </div>
+
+  <div class="controls">
+    <button class="nav-btn" id="prevBtn">←</button>
+    <button class="nav-btn" id="nextBtn">→</button>
+  </div>
+  <script src="./src/scripts/fitSlides.js" defer></script>
+  <script src="./src/scripts/navigation.js" defer></script>
+  <script src="./src/scripts/copyCode.js" defer></script>
+</body>
+</html>
