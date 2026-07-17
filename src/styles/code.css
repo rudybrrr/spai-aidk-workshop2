@@ -79,3 +79,35 @@
     .str { color: #a9d7a0; }
     .numlit { color: #f4b780; }
     .comment { color: #6d6a66; }
+
+    /* Projector readability scale */
+    .compare {
+      gap: 26px;
+      margin-top: 40px;
+      width: min(1200px, 100%);
+    }
+
+    .code-head {
+      height: 48px;
+      padding: 0 17px;
+      font-size: 0.92rem;
+    }
+
+    .code-label { gap: 11px; }
+
+    .code-label::before {
+      width: 10px;
+      height: 10px;
+    }
+
+    .copy-btn {
+      padding: 7px 12px;
+      font-size: 0.82rem;
+    }
+
+    pre {
+      padding: 30px;
+      font-size: clamp(1.06rem, 1.42vw, 1.3rem);
+      line-height: 1.62;
+    }
+    /* End projector readability scale */

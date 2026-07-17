@@ -6,7 +6,8 @@
   "scripts": {
     "check:alignment": "node scripts/check-notebook-slide-alignment.mjs",
     "check:standalone-visuals": "node scripts/check-standalone-visual-contract.mjs",
-    "build": "npm run check:alignment && npm run check:standalone-visuals",
+    "check:projector-readability": "node scripts/check-projector-readability.mjs",
+    "build": "npm run check:alignment && npm run check:standalone-visuals && npm run check:projector-readability",
     "sync:standalone": "node scripts/sync-standalone-slides.mjs",
     "dev": "npx --yes serve .",
     "start": "npx --yes serve ."

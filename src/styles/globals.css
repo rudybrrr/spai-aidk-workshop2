@@ -240,3 +240,76 @@
       letter-spacing: 0.18em;
       margin-bottom: 24px;
     }
+
+    /* Projector readability scale */
+    .kicker {
+      font-size: clamp(0.86rem, 1.2vw, 1.08rem);
+      margin-bottom: clamp(22px, 3vw, 36px);
+    }
+
+    h1 { font-size: clamp(5rem, 9.4vw, 9.8rem); }
+    h2 { font-size: clamp(3.35rem, 5.1vw, 5.35rem); }
+    h3 { font-size: clamp(1.85rem, 2.9vw, 2.85rem); }
+
+    .slide.standard h2,
+    .slide.two h2 {
+      font-size: clamp(2.65rem, 4vw, 4.25rem);
+    }
+
+    p,
+    li {
+      font-size: clamp(1.18rem, 1.48vw, 1.4rem);
+      line-height: 1.5;
+    }
+
+    p.lead {
+      margin-top: 30px;
+      font-size: clamp(1.35rem, 1.75vw, 1.85rem);
+    }
+
+    .slide.standard p.lead,
+    .slide.two p.lead {
+      margin-top: 24px;
+      font-size: clamp(1.24rem, 1.52vw, 1.58rem);
+      line-height: 1.46;
+    }
+
+    ul { margin-top: 32px; }
+    li + li { margin-top: 16px; }
+
+    .title-sub {
+      margin-top: 28px;
+      font-size: clamp(1.3rem, 1.65vw, 1.7rem);
+    }
+
+    .hairline { margin-top: 42px; }
+
+    .follow-link {
+      margin-top: 20px;
+      font-size: clamp(1.08rem, 1.22vw, 1.24rem);
+    }
+
+    .qr-block {
+      margin-top: 44px;
+      gap: 15px;
+    }
+
+    .qr-code {
+      width: clamp(300px, 29vw, 440px);
+      height: clamp(300px, 29vw, 440px);
+      padding: 18px;
+    }
+
+    .qr-caption { font-size: 1rem; }
+    .form-link { font-size: 0.8rem; }
+
+    .download-link {
+      margin-top: 38px;
+      font-size: clamp(1.35rem, 1.92vw, 2.05rem);
+    }
+
+    .big-number {
+      font-size: clamp(1.08rem, 1.58vw, 1.5rem);
+      margin-bottom: 27px;
+    }
+    /* End projector readability scale */
