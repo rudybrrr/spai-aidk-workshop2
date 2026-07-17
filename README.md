@@ -14,7 +14,7 @@ The workshop uses pandas as the main table tool, matplotlib as the main chart to
 
 ## Repository contents
 
-- `index.html`: canonical 31-slide web deck
+- `index.html`: canonical 32-slide web deck
 - `ai_dont_know_workshop_2.html`: standalone deck with inline CSS and JavaScript
 - `notebooks/AIDK_W2_Workshop.ipynb`: 57-cell attendee notebook with guided activity blanks
 - `notebooks/AIDK_W2_Workshop_Completed.ipynb`: 57-cell executed speaker and facilitator reference
@@ -82,7 +82,7 @@ npm run check:alignment
 npm run check:standalone-visuals
 ```
 
-`npm run build` does not create a compiled bundle. It verifies the two 57-cell notebooks, exact datasets and outputs, attendee activity blanks, slide-to-notebook code mappings, 31-slide standalone parity, required styles/assets, timings, shell controls, and stale active content.
+`npm run build` does not create a compiled bundle. It verifies the two 57-cell notebooks, exact datasets and outputs, attendee activity blanks, slide-to-notebook code mappings, 32-slide standalone parity, delivery timing and facilitator readiness, required styles/assets, shell controls, and stale active content.
 
 ## Editing contract
 

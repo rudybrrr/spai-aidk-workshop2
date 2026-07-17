@@ -80,10 +80,22 @@ pip install pandas numpy matplotlib seaborn
 ### Python imports
 
 ```python
+import sys
 import pandas as pd
 import numpy as np
 import matplotlib.pyplot as plt
 import seaborn as sns
+
+plt.rcParams.update({
+    "figure.figsize": (9, 5.5),
+    "font.size": 14,
+    "axes.titlesize": 18,
+    "axes.labelsize": 15,
+    "xtick.labelsize": 13,
+    "ytick.labelsize": 13,
+})
+
+print(f"Workshop setup ready — Python {sys.version_info.major}.{sys.version_info.minor}")
 ```
 
 ---
@@ -94,16 +106,17 @@ import seaborn as sns
 
 | Time | Section | Content | Materials | Speaker |
 |---|---|---|---|---|
-| 0-10 mins | Recap + Workshop Goal | Connect Workshop 1 Python basics to data work.<br><br>Set the goal: use Python to answer simple questions from data.<br><br>Preview the connection between Workshops 2 and 3. | Slides 1-3<br>`AIDK_W2_Workshop.ipynb` | Alson |
-| 10-20 mins | How Data Analytics Works | Introduce the loop: question, data, calculation, visualisation, insight.<br><br>Use simple examples such as scores, CCA attendance, food orders, and survey results.<br><br>Emphasise: start with the question, not the code. | Slides 4-6<br>Small example table | Alson |
-| 20-40 mins | pandas Tables | Create a small DataFrame.<br><br>Read rows and columns.<br><br>Select columns, filter rows, calculate a mean, and add a calculated column.<br><br>Dataset: student scores. | Slides 7-12<br>Live demo in attendee notebook | Alson |
-| 40-55 mins | Hands-on Activity 1: Student Scores | **Attempt time: 10 minutes**<br>**Possible solution walkthrough: 5 minutes**<br><br>Find the average Quiz 1 score.<br>Find students who scored above 80 in Quiz 2.<br>Add an `Improvement` column.<br>Identify who improved the most.<br>Write one plain-English insight. | Slides 13-15<br>`AIDK_W2_Workshop.ipynb`<br>`AIDK_W2_Workshop_Completed.ipynb` | Alson lead<br>Murugan facilitate |
-| 55-65 mins | Break / Buffer | Give attendees time to catch up.<br><br>Facilitators help anyone with errors.<br><br>Do not introduce new content here. | None | Both |
-| 65-80 mins | Simple Calculations + Light NumPy | Use CCA attendance numbers.<br><br>Show `np.array()`, `np.mean()`, `np.max()`, and `np.min()`.<br><br>Position NumPy as a helper for numerical calculations.<br><br>Avoid advanced arrays or matrix content. | Slides 16-18<br>Live demo in attendee notebook | Murugan |
-| 80-100 mins | matplotlib Visualisation | Teach chart choice first.<br><br>Bar chart: compare categories.<br>Line chart: show change over time.<br>Scatter plot: compare two numerical variables.<br><br>Datasets: food orders, CCA attendance, study hours vs quiz score. | Slides 19-25<br>Live demo in attendee notebook | Murugan |
-| 100-110 mins | Hands-on Activity 2: Food Orders Chart | **Attempt time: 6 minutes**<br>**Possible solution walkthrough: 4 minutes**<br><br>Create a bar chart.<br>Add a title and axis labels.<br>Identify the most popular food item.<br>Write one chart insight. | Slides 26-27<br>`AIDK_W2_Workshop.ipynb`<br>`AIDK_W2_Workshop_Completed.ipynb` | Murugan lead<br>Alson facilitate |
-| 110-116 mins | seaborn Cleaner Charts | Show seaborn as a cleaner plotting option.<br><br>Recreate one bar chart or scatter plot using seaborn.<br><br>Keep this short and avoid deep seaborn teaching. | Slides 28-29<br>Live demo in attendee notebook | Murugan |
-| 116-120 mins | Wrap-up + Link to Workshop 3 | Recap the data-question loop.<br><br>Today: find patterns from data.<br>Next week: machine learning uses patterns to make predictions.<br><br>Quick Q&A. | Slides 30-31 | Alson / Murugan |
+| 0-8 mins | Recap + Workshop Goal | Connect Workshop 1 Python basics to data work.<br><br>Set the goal: use Python to answer simple questions from data.<br><br>Preview the connection between Workshops 2 and 3. | Slides 1-3<br>`AIDK_W2_Workshop.ipynb` | Alson |
+| 8-18 mins | How Data Analytics Works | Introduce the loop: question, data, calculation, visualisation, insight.<br><br>Use simple examples such as scores, CCA attendance, food orders, and survey results.<br><br>Emphasise: start with the question, not the code. | Slides 4-6<br>Small example table | Alson |
+| 18-36 mins | pandas Tables | Create a small DataFrame.<br><br>Read rows and columns.<br><br>Select columns, filter rows, calculate a mean, and add a calculated column.<br><br>Dataset: student scores. | Slides 7-12<br>Live demo in attendee notebook | Alson |
+| 36-51 mins | Hands-on Activity 1: Student Scores | **Attempt time: 10 minutes**<br>**Possible solution walkthrough: 5 minutes**<br><br>Find the average Quiz 1 score.<br>Find students who scored above 80 in Quiz 2.<br>Add an `Improvement` column.<br>Identify who improved the most.<br>Write one plain-English insight. | Slides 13-15<br>`AIDK_W2_Workshop.ipynb`<br>`AIDK_W2_Workshop_Completed.ipynb` | Alson lead<br>Murugan facilitate |
+| 51-61 mins | Break / Buffer | Give attendees time to catch up.<br><br>Facilitators help anyone with errors.<br><br>Do not introduce new content here. | Slide 16 | Both |
+| 61-71 mins | Simple Calculations + Light NumPy | Use CCA attendance numbers.<br><br>Show `np.array()`, `np.mean()`, `np.max()`, and `np.min()`.<br><br>Position NumPy as a helper for numerical calculations.<br><br>Avoid advanced arrays or matrix content. | Slides 17-19<br>Live demo in attendee notebook | Murugan |
+| 71-91 mins | matplotlib Visualisation | Teach chart choice first.<br><br>Bar chart: compare categories.<br>Line chart: show change over time.<br>Scatter plot: compare two numerical variables.<br><br>Datasets: food orders, CCA attendance, study hours vs quiz score. | Slides 20-26<br>Live demo in attendee notebook | Murugan |
+| 91-101 mins | Hands-on Activity 2: Food Orders Chart | **Attempt time: 6 minutes**<br>**Possible solution walkthrough: 4 minutes**<br><br>Create a bar chart.<br>Add a title and axis labels.<br>Identify the most popular food item.<br>Write one chart insight. | Slides 27-28<br>`AIDK_W2_Workshop.ipynb`<br>`AIDK_W2_Workshop_Completed.ipynb` | Murugan lead<br>Alson facilitate |
+| 101-106 mins | seaborn Cleaner Charts | Show seaborn as a cleaner plotting option.<br><br>Recreate one bar chart or scatter plot using seaborn.<br><br>Keep this short and avoid deep seaborn teaching. | Slides 29-30<br>Live demo in attendee notebook | Murugan |
+| 106-112 mins | Wrap-up + Link to Workshop 3 | Recap the data-question loop.<br><br>Today: find patterns from data.<br>Next week: machine learning uses patterns to make predictions. | Slides 31-32 | Alson / Murugan |
+| 112-120 mins | Q&A | Answer attendee questions and reinforce the question-to-insight loop. | Slide 32 | Alson / Murugan |
 
 ---
 
@@ -563,12 +576,13 @@ For Activity 2, the hint may be given verbally because only two slides are alloc
 | 13 | Activity 1 question, tasks, and 10-minute attempt time |
 | 14 | Activity 1 hints or progress check |
 | 15 | Activity 1 possible solution, outputs, and final insight |
-| 16-18 | Light NumPy calculations |
-| 19-25 | matplotlib chart types and demonstrations |
-| 26 | Activity 2 question, tasks, and 6-minute attempt time |
-| 27 | Activity 2 possible solution, completed chart, and final insight |
-| 28-29 | seaborn cleaner-chart example |
-| 30-31 | Wrap-up and Workshop 3 preview |
+| 16 | Ten-minute break and exact resume time |
+| 17-19 | Light NumPy calculations |
+| 20-26 | matplotlib chart types and demonstrations |
+| 27 | Activity 2 question, tasks, and 6-minute attempt time |
+| 28 | Activity 2 possible solution, completed chart, and final insight |
+| 29-30 | seaborn cleaner-chart example |
+| 31-32 | Wrap-up, Workshop 3 preview, and Q&A |
 
 ---
 
