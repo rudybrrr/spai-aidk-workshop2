@@ -9,12 +9,12 @@ const requirements = readFileSync("requirements.txt", "utf8");
 const source = (cell) => Array.isArray(cell.source) ? cell.source.join("") : cell.source;
 const notebookText = (notebook) => notebook.cells.map(source).join("\n");
 
-for (const timing of ["0-8 mins", "8-18 mins", "18-36 mins", "36-51 mins", "51-61 mins", "61-71 mins", "71-91 mins", "91-101 mins", "101-106 mins", "106-112 mins", "112-120 mins"]) {
+for (const timing of ["0-8 mins", "8-18 mins", "18-36 mins", "36-51 mins", "51-61 mins", "61-71 mins", "71-91 mins", "91-101 mins", "101-106 mins", "106-112 mins", "112-118 mins", "118-120 mins"]) {
   assert.ok(content.includes(timing), `content document is missing ${timing}`);
 }
 
 const sections = deck.match(/<section\b[\s\S]*?<\/section>/g) ?? [];
-assert.equal(sections.length, 32, "canonical deck must contain 32 slides");
+assert.equal(sections.length, 37, "canonical deck must contain 37 slides");
 assert.ok(sections[15].includes('data-title="10-minute break"'), "Slide 16 must be the dedicated break slide");
 assert.ok(sections[15].includes("We resume at 4:01 PM"), "break slide must show the exact resume time");
 assert.ok(!deck.includes("Alson calls"), "audience deck must not contain facilitator-only Alson instructions");
@@ -26,7 +26,7 @@ for (const notebook of [attendee, completed]) {
   assert.ok(setup.includes('"figure.figsize": (9, 5.5)'), "setup cell must set a projector-sized figure");
   assert.ok(setup.includes('"axes.titlesize": 18'), "setup cell must enlarge chart titles");
   const text = notebookText(notebook);
-  for (const range of ["Slides 17–19", "Slides 20–26", "Slides 27–28", "Slides 29–30", "Slides 31–32"]) {
+  for (const range of ["Slides 17–20", "Slides 21–28", "Slides 29–30", "Slides 31–32", "Slides 33–37"]) {
     assert.ok(text.includes(range), `notebook is missing ${range}`);
   }
 }
@@ -40,5 +40,8 @@ const runSheet = readFileSync("materials/facilitator-run-sheet.md", "utf8");
 for (const heading of ["## Before attendees arrive", "## Live run of show", "## Common-error triage", "## Hard-cut plan"]) {
   assert.ok(runSheet.includes(heading), `run sheet is missing ${heading}`);
 }
+for (const cue of ["low-volume music", "group photo", "feedback form", "17–20", "21–28", "36–37"]) {
+  assert.ok(runSheet.includes(cue), `run sheet is missing delivery cue: ${cue}`);
+}
 
-console.log("Workshop 2 delivery readiness passed: agenda, break, notebooks, dependencies, and facilitator guidance are synchronized.");
+console.log("Workshop 2 delivery readiness passed: 120-minute agenda, break, notebooks, timers, music cues, photo, resources, and feedback are synchronized.");

@@ -9,6 +9,10 @@
 
 ---
 
+## Revision Authority
+
+This feedback revision is the authoritative Workshop 2 delivery scope. It supersedes earlier implementation-plan exclusions that prohibited an interactive countdown, notebook download, group-photo prompt, recap quiz, or feedback-form slide. The workshop remains a two-hour beginner session and retains the Workshop 1 visual system.
+
 ## 1. Workshop Overview
 
 Workshop 2 teaches attendees how to use Python to explore small datasets, calculate simple summaries, create basic charts, and explain insights in plain English.
@@ -41,9 +45,10 @@ Mostly Year 1 beginners who attended Workshop 1 or have very basic Python exposu
 By the end of the workshop, attendees should be able to:
 
 - Create and read a simple pandas DataFrame.
-- Select columns and filter rows.
+- Select rows and columns with `.iloc[]`, `.loc[]`, and bracket notation, then filter rows with a Boolean condition.
 - Calculate simple summaries such as average, minimum, maximum, and total.
 - Create a new calculated column.
+- Create regular numerical coordinates with `np.arange()` and `np.linspace()` for plotting.
 - Choose a suitable chart for a simple question.
 - Create basic bar, line, and scatter plots using matplotlib.
 - Use seaborn to make a cleaner version of a simple chart.
@@ -106,17 +111,18 @@ print(f"Workshop setup ready — Python {sys.version_info.major}.{sys.version_in
 
 | Time | Section | Content | Materials | Speaker |
 |---|---|---|---|---|
-| 0-8 mins | Recap + Workshop Goal | Connect Workshop 1 Python basics to data work.<br><br>Set the goal: use Python to answer simple questions from data.<br><br>Preview the connection between Workshops 2 and 3. | Slides 1-3<br>`AIDK_W2_Workshop.ipynb` | Alson |
+| 0-8 mins | Recap Quiz + Workshop Goal | Use three click-to-reveal Workshop 1 questions on variables, dictionaries, and `print()`.<br><br>Set the goal: use Python to answer simple questions from data.<br><br>Preview the connection between Workshops 2 and 3. | Slides 1-3<br>`AIDK_W2_Workshop.ipynb` | Alson |
 | 8-18 mins | How Data Analytics Works | Introduce the loop: question, data, calculation, visualisation, insight.<br><br>Use simple examples such as scores, CCA attendance, food orders, and survey results.<br><br>Emphasise: start with the question, not the code. | Slides 4-6<br>Small example table | Alson |
-| 18-36 mins | pandas Tables | Create a small DataFrame.<br><br>Read rows and columns.<br><br>Select columns, filter rows, calculate a mean, and add a calculated column.<br><br>Dataset: student scores. | Slides 7-12<br>Live demo in attendee notebook | Alson |
+| 18-36 mins | pandas Tables | Create a small DataFrame and connect the code to its visible output.<br><br>Read rows and columns.<br><br>Teach `.iloc[]` and `.loc[]` before bracket selection and Boolean filtering.<br><br>Calculate mean, minimum, maximum, and sum; add a calculated column.<br><br>Dataset: student scores. | Slides 7-12<br>Live demo in attendee notebook | Alson |
 | 36-51 mins | Hands-on Activity 1: Student Scores | **Attempt time: 10 minutes**<br>**Possible solution walkthrough: 5 minutes**<br><br>Find the average Quiz 1 score.<br>Find students who scored above 80 in Quiz 2.<br>Add an `Improvement` column.<br>Identify who improved the most.<br>Write one plain-English insight. | Slides 13-15<br>`AIDK_W2_Workshop.ipynb`<br>`AIDK_W2_Workshop_Completed.ipynb` | Alson lead<br>Murugan facilitate |
 | 51-61 mins | Break / Buffer | Give attendees time to catch up.<br><br>Facilitators help anyone with errors.<br><br>Do not introduce new content here. | Slide 16 | Both |
-| 61-71 mins | Simple Calculations + Light NumPy | Use CCA attendance numbers.<br><br>Show `np.array()`, `np.mean()`, `np.max()`, and `np.min()`.<br><br>Position NumPy as a helper for numerical calculations.<br><br>Avoid advanced arrays or matrix content. | Slides 17-19<br>Live demo in attendee notebook | Murugan |
-| 71-91 mins | matplotlib Visualisation | Teach chart choice first.<br><br>Bar chart: compare categories.<br>Line chart: show change over time.<br>Scatter plot: compare two numerical variables.<br><br>Datasets: food orders, CCA attendance, study hours vs quiz score. | Slides 20-26<br>Live demo in attendee notebook | Murugan |
-| 91-101 mins | Hands-on Activity 2: Food Orders Chart | **Attempt time: 6 minutes**<br>**Possible solution walkthrough: 4 minutes**<br><br>Create a bar chart.<br>Add a title and axis labels.<br>Identify the most popular food item.<br>Write one chart insight. | Slides 27-28<br>`AIDK_W2_Workshop.ipynb`<br>`AIDK_W2_Workshop_Completed.ipynb` | Murugan lead<br>Alson facilitate |
-| 101-106 mins | seaborn Cleaner Charts | Show seaborn as a cleaner plotting option.<br><br>Recreate one bar chart or scatter plot using seaborn.<br><br>Keep this short and avoid deep seaborn teaching. | Slides 29-30<br>Live demo in attendee notebook | Murugan |
-| 106-112 mins | Wrap-up + Link to Workshop 3 | Recap the data-question loop.<br><br>Today: find patterns from data.<br>Next week: machine learning uses patterns to make predictions. | Slides 31-32 | Alson / Murugan |
-| 112-120 mins | Q&A | Answer attendee questions and reinforce the question-to-insight loop. | Slide 32 | Alson / Murugan |
+| 61-71 mins | Simple Calculations + Light NumPy | Use CCA attendance numbers.<br><br>Show `np.array()`, `np.mean()`, `np.max()`, and `np.min()`.<br><br>Briefly compare `np.arange()` and `np.linspace()` as ways to create regular x-axis values.<br><br>Avoid advanced arrays or matrix content. | Slides 17-20<br>Live demo in attendee notebook | Murugan |
+| 71-91 mins | matplotlib Visualisation | Open with a dedicated graphing divider, then teach chart choice.<br><br>Bar chart: compare categories.<br>Line chart: show change over time using `np.arange()` session positions.<br>Scatter plot: compare two numerical variables.<br><br>Datasets: food orders, CCA attendance, study hours vs quiz score. | Slides 21-28<br>Live demo in attendee notebook | Murugan |
+| 91-101 mins | Hands-on Activity 2: Food Orders Chart | **Attempt time: 6 minutes**<br>**Possible solution walkthrough: 4 minutes**<br><br>Create a bar chart.<br>Add a title and axis labels.<br>Identify the most popular food item.<br>Write one chart insight. | Slides 29-30<br>`AIDK_W2_Workshop.ipynb`<br>`AIDK_W2_Workshop_Completed.ipynb` | Murugan lead<br>Alson facilitate |
+| 101-106 mins | seaborn Cleaner Charts | Show seaborn as a cleaner plotting option.<br><br>Recreate one bar chart using seaborn.<br><br>Keep this short and avoid deep seaborn teaching. | Slides 31-32<br>Live demo in attendee notebook | Murugan |
+| 106-112 mins | Recap + Group Photo | Recap the data-question loop, preview Workshop 3, and display a branded live group-photo prompt. | Slides 33-34 | Alson / Murugan |
+| 112-118 mins | Q&A | Answer attendee questions and reinforce the question-to-insight loop. | Slide 35 | Alson / Murugan |
+| 118-120 mins | Take-home Materials + Feedback | Display the attendee notebook download, then leave the exact Workshop 2 feedback form projected as the final slide. | Slides 36-37 | Both |
 
 ---
 
@@ -124,7 +130,7 @@ print(f"Workshop setup ready — Python {sys.version_info.major}.{sys.version_in
 
 ### Section 1: Recap + Workshop Goal
 
-- Remind attendees that Workshop 1 covered Python foundations.
+- Use three click-to-reveal questions: a variable stores a value; a dictionary stores key-value pairs; `print()` displays a value for inspection.
 - Frame today as using Python to answer questions from data, not memorising libraries.
 - Show beginner-friendly questions:
   - Which student improved the most?
@@ -138,7 +144,8 @@ print(f"Workshop setup ready — Python {sys.version_info.major}.{sys.version_in
 ### Section 2: How Data Analytics Works
 
 - Teach the loop: question, data, calculation, visualisation, insight.
-- Use one simple example before any library code.
+- Use one running example before any tool-specific code: ask for the average Quiz 2 score, pick the `Quiz2` column/feature, use Python and `.mean()` to process it, see `78.6`, and state the result in plain English.
+- Say “Use Python to process and calculate,” not the vague phrase “Ask Python.”
 - Make clear that charts are not just decoration. They help us see answers faster.
 
 **Slide-maker note:** Use one slide with the five-step loop and one small example table.
@@ -152,9 +159,12 @@ print(f"Workshop setup ready — Python {sys.version_info.major}.{sys.version_in
 - Teach:
   - `pd.DataFrame()`
   - `df.head()`
+  - `.iloc[]` for positions
+  - `.loc[]` for labels
   - selecting a column
   - filtering rows
   - `.mean()`
+  - `.min()`, `.max()`, and `.sum()` alongside `.mean()`
   - creating a new column
   - optionally, `.sort_values()`
 - Do not teach too many pandas functions. The goal is basic table reading and simple analysis.
@@ -179,6 +189,8 @@ Attendees answer questions from the student scores dataset.
 
 During the attempt:
 
+- Start the shared on-slide 10-minute countdown and low-volume club-approved instrumental background music.
+- Pause or stop the music before the possible-solution walkthrough.
 - Display the tasks and the 10-minute attempt time clearly.
 - Attendees complete the TODO or fill-in-the-blank cells in the workshop notebook.
 - Give a verbal reminder when 5 minutes remain and again when 2 minutes remain.
@@ -209,6 +221,8 @@ Walkthrough order:
   - `np.mean()`
   - `np.max()`
   - `np.min()`
+  - `np.arange()` for a fixed step
+  - `np.linspace()` for a fixed number of evenly spaced values
 - Avoid dimensions, broadcasting, matrix operations, and advanced indexing.
 
 **Speaker note:** Keep NumPy short. It is a supporting tool, not a full topic for this workshop.
@@ -250,6 +264,8 @@ Attendees create a food-orders bar chart.
 During the attempt:
 
 - Display the question and attempt time clearly.
+- Start the on-slide 6-minute countdown and low-volume club-approved instrumental background music.
+- Pause or stop the music before the possible-solution walkthrough.
 - Attendees complete the chart code in the workshop notebook.
 - Give a verbal reminder when 2 minutes remain.
 - Facilitators mainly help with column names, brackets, and plotting syntax.
@@ -290,7 +306,8 @@ Walkthrough order:
 - Connect to Workshop 3:
   - Today, we looked for patterns.
   - Next week, machine learning uses patterns to make predictions.
-- End with Q&A.
+- Display a live group-photo prompt before Q&A.
+- End with a downloadable attendee notebook and the Workshop 2 feedback form: `https://docs.google.com/forms/d/e/1FAIpQLSecVnlz3VnEevhEoFqhn9Winy6Ps21FKaSebncdf3-031GnjA/viewform?usp=preview`.
 - Remind attendees that they do not need to memorise every function.
 
 **Speaker note:** Keep the ending simple. The aim is readiness for Workshop 3, not mastery of every library.
@@ -564,6 +581,8 @@ Each hands-on activity should contain:
    - Expected output or chart
    - Plain-English insight
 
+The challenge and progress slides for Activity 1 share one 10-minute Start/Pause/Reset countdown. Activity 2 has one 6-minute Start/Pause/Reset countdown. The break slide has a separate 10-minute countdown. Timers never autoplay, never play a sound, stop at zero with `Time's up`, retain state while navigating between linked slides, and reset when the page reloads.
+
 For Activity 2, the hint may be given verbally because only two slides are allocated.
 
 ### Suggested slide structure
@@ -577,12 +596,12 @@ For Activity 2, the hint may be given verbally because only two slides are alloc
 | 14 | Activity 1 hints or progress check |
 | 15 | Activity 1 possible solution, outputs, and final insight |
 | 16 | Ten-minute break and exact resume time |
-| 17-19 | Light NumPy calculations |
-| 20-26 | matplotlib chart types and demonstrations |
-| 27 | Activity 2 question, tasks, and 6-minute attempt time |
-| 28 | Activity 2 possible solution, completed chart, and final insight |
-| 29-30 | seaborn cleaner-chart example |
-| 31-32 | Wrap-up, Workshop 3 preview, and Q&A |
+| 17-20 | Light NumPy calculations and regular x-axis values |
+| 21-28 | Graphing divider plus matplotlib chart types and demonstrations |
+| 29 | Activity 2 question, tasks, timer, and 6-minute attempt time |
+| 30 | Activity 2 possible solution, completed chart, and final insight |
+| 31-32 | seaborn cleaner-chart example |
+| 33-37 | Wrap-up, group photo, Q&A, notebook download, and feedback form |
 
 ---
 

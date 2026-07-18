@@ -14,12 +14,12 @@ assert.equal(standaloneDeck, canonicalDeck, "standalone deck block must exactly 
 
 const canonicalSections = canonicalDeck.match(sectionPattern) ?? [];
 const standaloneSections = standaloneDeck.match(sectionPattern) ?? [];
-assert.equal(canonicalSections.length, 32, "canonical deck must contain 32 slides");
-assert.equal(standaloneSections.length, 32, "standalone deck must contain 32 slides");
+assert.equal(canonicalSections.length, 37, "canonical deck must contain 37 slides");
+assert.equal(standaloneSections.length, 37, "standalone deck must contain 37 slides");
 
 const titles = canonicalSections.map((section) => section.match(/data-title="([^"]+)"/)?.[1]);
 assert.ok(titles.every(Boolean), "every slide must have a data-title");
-assert.equal(new Set(titles).size, 32, "slide data-title values must be unique");
+assert.equal(new Set(titles).size, 37, "slide data-title values must be unique");
 assert.ok(canonicalSections[0].includes("slide center active"), "only the first slide starts active");
 assert.equal(
   canonicalSections.slice(1).filter((section) => /class="[^"]*\bactive\b/.test(section)).length,
@@ -32,6 +32,8 @@ const requiredStandaloneRules = [
   ["chart figure", /\.chart-figure\s*\{/],
   ["activity metadata", /\.activity-meta\s*\{/],
   ["timer badge", /\.timer-badge\s*\{/],
+  ["interactive timer", /\.activity-timer\s*\{/],
+  ["quiz rows", /\.quiz-row\s*\{/],
   ["one-column comparison", /\.compare\.one-column\s*\{/],
   ["reduced motion", /@media\s*\(prefers-reduced-motion:\s*reduce\)/],
   ["chart image containment", /\.chart-figure img\s*\{[^}]*object-fit:\s*contain;/s],
@@ -45,7 +47,7 @@ for (const id of ["dots", "footerLabel", "slideNo", "topProgress", "prevBtn", "n
   assert.match(canonical, new RegExp(`id="${id}"`), `index.html is missing #${id}`);
   assert.match(standalone, new RegExp(`id="${id}"`), `standalone is missing #${id}`);
 }
-for (const behaviour of ["window.deckSlides", "history.replaceState", "navigator.clipboard.writeText", "--fit-scale"]) {
+for (const behaviour of ["window.deckSlides", "history.replaceState", "navigator.clipboard.writeText", "--fit-scale", "ActivityTimerTestApi", "data-timer-action"]) {
   assert.ok(standalone.includes(behaviour), `standalone is missing inline behaviour: ${behaviour}`);
 }
 assert.ok(!standalone.includes('href="./src/styles/'), "standalone must inline its CSS");
@@ -57,6 +59,8 @@ const assets = [
   "public/assets/images/cca-attendance-line.svg",
   "public/assets/images/study-hours-quiz-score-scatter.svg",
   "public/assets/images/food-orders-seaborn-bar.svg",
+  "public/assets/images/notebook-download-qr.svg",
+  "public/assets/images/workshop-2-feedback-qr.svg",
   "public/assets/logos/spai-logo.png",
 ];
 for (const asset of assets) {
@@ -97,8 +101,6 @@ const forbiddenActiveTokens = [
   ["spai-aidk", "workshop1"].join("-"),
   `${["forms", "gle"].join(".")}/`,
   `${["public", "images"].join("/")}/`,
-  ["notebook", "download"].join(""),
-  ["Photo", "Taking"].join(" "),
   ["Attendance", "QR"].join(" "),
 ];
 for (const token of forbiddenActiveTokens) {
@@ -106,4 +108,4 @@ for (const token of forbiddenActiveTokens) {
   assert.ok(!standalone.includes(token), `standalone contains stale active token: ${token}`);
 }
 
-console.log("Workshop 2 standalone visual contract passed: 32 synced slides, required styles/assets/shell behaviours, timings, and stale-content checks are present.");
+console.log("Workshop 2 standalone visual contract passed: 37 synced slides, required styles/assets/timers/shell behaviours, timings, and stale-content checks are present.");

@@ -1,5 +1,7 @@
 # AIDK Workshop 2 Slide and Notebook Plan
 
+> **Superseded where conflicting:** The approved feedback revision in `AIDK_W2_Content_Document_Updated.md` now controls the 37-slide/61-cell structure, method additions, interactive timers, group-photo prompt, notebook download, and feedback form. This document remains historical implementation context only where it does not conflict with that authoritative revision.
+
 > **For the future implementation session:** execute this specification stage by stage and keep the slide deck, attendee notebook, completed notebook, generated chart assets, and validation contract in one reviewable change set. This document approves planning decisions only; it does not authorise deployment.
 
 | Item | Locked value |

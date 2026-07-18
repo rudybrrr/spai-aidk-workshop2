@@ -14,20 +14,20 @@ The workshop uses pandas as the main table tool, matplotlib as the main chart to
 
 ## Repository contents
 
-- `index.html`: canonical 32-slide web deck
+- `index.html`: canonical 37-slide web deck with recap reveals and activity/break countdowns
 - `ai_dont_know_workshop_2.html`: standalone deck with inline CSS and JavaScript
-- `notebooks/AIDK_W2_Workshop.ipynb`: 57-cell attendee notebook with guided activity blanks
-- `notebooks/AIDK_W2_Workshop_Completed.ipynb`: 57-cell executed speaker and facilitator reference
+- `notebooks/AIDK_W2_Workshop.ipynb`: 61-cell attendee notebook with larger guided activity blanks
+- `notebooks/AIDK_W2_Workshop_Completed.ipynb`: 61-cell executed speaker and facilitator reference
 - `public/assets/images/`: SVG charts generated from the workshop datasets
 - `public/assets/logos/spai-logo.png`: SPAI logo used on the closing slide
 - `scripts/`: deck synchronisation and validation checks
 
 ## Source-of-truth hierarchy
 
-1. `docs/AIDK_W2_Slide_and_Notebook_Plan.md` is the approved implementation specification.
-2. `AIDK_W2_Content_Document_Updated.md` controls workshop content, sequence, timing, activities, and learning outcomes.
-3. `slides.md` controls the slide design language and technical implementation.
-4. The attendee notebook is authoritative for exact live-demo code, datasets, variable names, activity blanks, and cell order.
+1. `AIDK_W2_Content_Document_Updated.md` controls workshop content, sequence, timing, activities, learning outcomes, and the approved feedback revision; its Revision Authority section supersedes conflicting exclusions in the earlier plan.
+2. `slides.md` controls the slide design language and technical implementation.
+3. The attendee notebook is authoritative for exact live-demo code, datasets, variable names, activity blanks, and cell order.
+4. `docs/AIDK_W2_Slide_and_Notebook_Plan.md` remains historical implementation context where it does not conflict with the revised content document.
 
 ## View the slides
 
@@ -59,7 +59,7 @@ Windows activation:
 
 Then open either notebook in VS Code, Jupyter, Google Colab, or another compatible notebook editor.
 
-During delivery, use the attendee notebook for demonstrations. Keep the completed notebook open as the speaker/facilitator backup. The completed notebook stores fresh top-to-bottom outputs; the attendee notebook intentionally leaves Cells 20, 22, 24, 26, 28, 49, and 51 incomplete.
+During delivery, use the attendee notebook for demonstrations. Keep the completed notebook open as the speaker/facilitator backup. The completed notebook stores fresh top-to-bottom outputs; the attendee notebook intentionally leaves Cells 23, 25, 27, 29, 31, 54, and 56 incomplete.
 
 ## Synchronisation and validation
 
@@ -82,7 +82,13 @@ npm run check:alignment
 npm run check:standalone-visuals
 ```
 
-`npm run build` does not create a compiled bundle. It verifies the two 57-cell notebooks, exact datasets and outputs, attendee activity blanks, slide-to-notebook code mappings, 32-slide standalone parity, delivery timing and facilitator readiness, required styles/assets, shell controls, and stale active content.
+`npm run build` does not create a compiled bundle. It verifies the timer state machine, two 61-cell notebooks, exact datasets and outputs, attendee activity blanks, slide-to-notebook mappings, 37-slide standalone parity, the two-hour delivery plan, local QR assets, required styles, controls, and stale active content.
+
+Regenerate the two committed offline QR assets after changing either destination:
+
+```bash
+npm run generate:qr
+```
 
 ## Editing contract
 

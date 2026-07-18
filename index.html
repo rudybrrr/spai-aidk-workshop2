@@ -25,17 +25,15 @@
       </div>
     </section>
 
-    <section class="slide standard" data-footer="Opening · Alson" data-title="From Python basics to data questions">
-      <div class="takeaway">
-        <div>
-          <div class="kicker">Workshop 1 recap</div>
-          <h2>From Python basics to data questions</h2>
-          <p class="lead">What can those basics tell us about a table of scores?</p>
-        </div>
-        <div class="takeaway-list">
-          <div class="takeaway-row"><span class="label">Values</span><p>Variables store values.</p></div>
-          <div class="takeaway-row"><span class="label">Structure</span><p>Lists and dictionaries organise values.</p></div>
-          <div class="takeaway-row"><span class="label">Inspect</span><p><strong>print()</strong> lets us inspect results.</p></div>
+    <section class="slide standard" data-footer="Opening · Alson" data-title="Three quick questions from Workshop 1">
+      <div>
+        <div class="kicker">Workshop 1 recap · Click to reveal</div>
+        <h2>Three quick questions</h2>
+        <p class="lead">Predict each answer, then open the row to check.</p>
+        <div class="quiz-list">
+          <details class="quiz-row"><summary><span>01</span>What stores a value under a name?</summary><p><strong>A variable.</strong> Example: <code>score = 85</code>.</p></details>
+          <details class="quiz-row"><summary><span>02</span>Which structure stores key–value pairs?</summary><p><strong>A dictionary.</strong> Example: <code>{"Name": "Alex"}</code>.</p></details>
+          <details class="quiz-row"><summary><span>03</span>What does <code>print()</code> help us do?</summary><p><strong>Display and inspect a result.</strong></p></details>
         </div>
       </div>
     </section>
@@ -77,34 +75,41 @@
         <div class="kicker">How data analytics works</div>
         <div class="flow-title">One question. <span>Five steps.</span></div>
         <div class="flow-steps">
-          <div class="flow-step"><div class="num">01</div><b>Question</b><p>What do we want to know?</p></div>
-          <div class="flow-step"><div class="num">02</div><b>Data</b><p>Which values help?</p></div>
-          <div class="flow-step"><div class="num">03</div><b>Code</b><p>Ask Python.</p></div>
-          <div class="flow-step"><div class="num">04</div><b>Output / Chart</b><p>See the result.</p></div>
-          <div class="flow-step"><div class="num">05</div><b>Insight</b><p>Say what it means.</p></div>
+          <div class="flow-step"><div class="num">01</div><b>Question</b><p>Average Quiz 2 score?</p></div>
+          <div class="flow-step"><div class="num">02</div><b>Data</b><p>Pick the Quiz2 column (feature).</p></div>
+          <div class="flow-step"><div class="num">03</div><b>Code</b><p>Use Python to process and calculate with <strong>.mean()</strong>.</p></div>
+          <div class="flow-step"><div class="num">04</div><b>Output</b><p>See 78.6.</p></div>
+          <div class="flow-step"><div class="num">05</div><b>Insight</b><p>The average is 78.6.</p></div>
         </div>
       </div>
     </section>
 
-    <section class="slide standard" data-footer="Data Analytics · Alson" data-title="Start with the question, not the library">
+    <section class="slide standard" data-footer="Data Analytics · Alson" data-title="Start with the question, then choose the columns">
       <div>
-        <div class="kicker">Choose the evidence</div>
-        <h2>Start with the question, not the library</h2>
+        <div class="kicker">Question → useful columns</div>
+        <h2>Start with the question, then choose the columns</h2>
         <div class="summary-table">
-          <div class="summary-row"><b>Who improved the most?</b><p>Student scores</p></div>
-          <div class="summary-row"><b>Which food item sold the most?</b><p>Food orders</p></div>
-          <div class="summary-row"><b>Does studying more seem linked to higher scores?</b><p>Study hours + quiz scores</p></div>
+          <div class="summary-row"><b>Who improved the most?</b><p>Name · Quiz1 · Quiz2</p></div>
+          <div class="summary-row"><b>Which food item sold the most?</b><p>Food · Orders</p></div>
+          <div class="summary-row"><b>Does studying more seem linked to higher scores?</b><p>Hours Studied · Quiz Score</p></div>
         </div>
-        <div class="note">The question chooses the data and chart—not the other way around.</div>
+        <div class="note">The question tells us which columns can act as evidence.</div>
       </div>
     </section>
 
-    <section class="slide two" data-footer="pandas · Alson" data-title="pandas turns labelled data into a table">
+    <section class="slide two" data-footer="pandas · Alson" data-title="pd.DataFrame()" data-notebook-cell="7" data-notebook-source="attendee">
       <div>
-        <div class="kicker">pandas · Student scores</div>
-        <h2>pandas turns labelled data into a table</h2>
-        <p class="lead"><strong>Question:</strong> What information do we have?</p>
-        <ul><li>pandas is our main tool for tables.</li><li>A DataFrame is a table with labelled rows and columns.</li></ul>
+        <div class="kicker">pandas · Cell 7</div>
+        <h2><code>pd.DataFrame()</code></h2>
+        <p class="lead">Turn labelled lists into a table we can inspect and process.</p>
+        <div class="code-window python compact-code"><div class="code-head"><span class="code-label">Cell 7</span><button class="copy-btn" type="button">Copy</button></div><pre><code>student_data = {
+  "Name": ["Alex", "Bella", "Chen", "Deepa", "Ethan"],
+  "Class": ["A", "A", "B", "B", "A"],
+  "Quiz1": [72, 85, 60, 90, 55],
+  "Quiz2": [78, 88, 70, 92, 65]
+}
+students = pd.DataFrame(student_data)
+students</code></pre></div>
       </div>
       <div class="table-wrap">
         <table class="data-table">
@@ -114,40 +119,39 @@
       </div>
     </section>
 
-    <section class="slide standard" data-footer="pandas · Alson" data-title="How do we create this table?" data-notebook-cell="6" data-notebook-source="attendee">
-      <div>
-        <div class="kicker">Live demo · Cell 6</div>
-        <h2>How do we create this table?</h2>
-        <p class="lead">How do we turn labelled lists into a table?</p>
-        <div class="compare one-column"><div class="code-window python"><div class="code-head"><span class="code-label">AIDK_W2_Workshop.ipynb</span><button class="copy-btn" type="button">Copy</button></div><pre><code>student_data = {
-    "Name": ["Alex", "Bella", "Chen", "Deepa", "Ethan"],
-    "Class": ["A", "A", "B", "B", "A"],
-    "Quiz1": [72, 85, 60, 90, 55],
-    "Quiz2": [78, 88, 70, 92, 65]
-}
-students = pd.DataFrame(student_data)
-students</code></pre></div></div>
-        <div class="note"><strong>Output:</strong> A five-row DataFrame containing Name, Class, Quiz1, and Quiz2.</div>
-      </div>
-    </section>
-
-    <section class="slide two" data-footer="pandas · Alson" data-title="Rows are records. Columns are questions." data-notebook-cell="8" data-notebook-source="attendee">
+    <section class="slide two" data-footer="pandas · Alson" data-title=".head()" data-notebook-cell="9" data-notebook-source="attendee">
       <div class="table-wrap">
         <table class="data-table"><thead><tr><th scope="col">Name</th><th class="highlight-col" scope="col">Quiz1</th><th scope="col">Quiz2</th></tr></thead><tbody><tr class="highlight-row"><td>Alex</td><td>72</td><td>78</td></tr><tr><td>Bella</td><td>85</td><td>88</td></tr><tr><td>Chen</td><td>60</td><td>70</td></tr><tr><td>Deepa</td><td>90</td><td>92</td></tr><tr><td>Ethan</td><td>55</td><td>65</td></tr></tbody></table>
       </div>
       <div>
-        <div class="kicker">Rows and columns</div>
-        <h2>Rows are records. Columns are questions.</h2>
+        <div class="kicker">Inspect the table · Cell 9</div>
+        <h2><code>.head()</code></h2>
+        <p class="lead"><strong>Rows are records. Columns are information.</strong></p>
         <p class="lead">One row represents one student. One column stores one type of information.</p>
-        <div class="code-window python"><div class="code-head"><span class="code-label">Cell 8</span><button class="copy-btn" type="button">Copy</button></div><pre><code>students.head()</code></pre></div>
+        <div class="code-window python"><div class="code-head"><span class="code-label">Cell 9</span><button class="copy-btn" type="button">Copy</button></div><pre><code>students.head()</code></pre></div>
         <div class="note"><strong>Output:</strong> The first five rows. Here, that is the full table.</div>
       </div>
     </section>
 
-    <section class="slide standard" data-footer="pandas · Alson" data-title="Select a column. Filter matching rows." data-notebook-cell="10" data-notebook-source="attendee">
+    <section class="slide standard" data-footer="pandas · Alson" data-title=".iloc[] and .loc[]" data-notebook-cell="11" data-notebook-source="attendee" data-code-mode="excerpt">
       <div>
-        <div class="kicker">Two table questions · Cell 10</div>
-        <h2>Select a column. Filter matching rows.</h2>
+        <div class="kicker">Select before filtering · Cell 11</div>
+        <h2><code>.iloc[]</code> and <code>.loc[]</code></h2>
+        <p class="lead">How can we pick the first two rows and three columns?</p>
+        <div class="compare">
+          <div class="code-window python"><div class="code-head"><span class="code-label">By numbered position</span><button class="copy-btn" type="button">Copy</button></div><pre><code>students.iloc[0:2, 0:3]</code></pre><div class="code-caption"><strong>.iloc[]</strong> uses positions.</div></div>
+          <div class="code-window python"><div class="code-head"><span class="code-label">By row and column labels</span><button class="copy-btn" type="button">Copy</button></div><pre><code>students.loc[0:1,
+  ["Name", "Class", "Quiz1"]]</code></pre><div class="code-caption"><strong>.loc[]</strong> uses labels.</div></div>
+        </div>
+        <div class="note"><strong>Output:</strong> Both selections show Alex and Bella with Name, Class, and Quiz1.</div>
+      </div>
+    </section>
+
+    <section class="slide standard" data-footer="pandas · Alson" data-title="students[...]" data-notebook-cell="13" data-notebook-source="attendee">
+      <div>
+        <div class="kicker">Bracket selection and Boolean filtering · Cell 13</div>
+        <h2><code>students[...]</code></h2>
+        <p class="lead">Select a column. Filter matching rows.</p>
         <div class="compare">
           <div class="code-window python"><div class="code-head"><span class="code-label">Which Quiz 1 values?</span><button class="copy-btn" type="button">Copy</button></div><pre><code>quiz1_scores = students["Quiz1"]
 class_b_students = students[students["Class"] == "B"]
@@ -159,22 +163,25 @@ print(class_b_students)</code></pre></div>
       </div>
     </section>
 
-    <section class="slide two" data-footer="pandas · Alson" data-title="What is the average Quiz 2 score?" data-notebook-cell="12" data-notebook-source="attendee">
+    <section class="slide two" data-footer="pandas · Alson" data-title=".mean() / .min() / .max() / .sum()" data-notebook-cell="15" data-notebook-source="attendee">
       <div>
-        <div class="kicker">Summary · Cell 12</div>
-        <h2>What is the average Quiz 2 score?</h2>
-        <p class="lead">Use <strong>.mean()</strong> to summarise this small group.</p>
+        <div class="kicker">Aggregate one column · Cell 15</div>
+        <h2><code>.mean()</code> · <code>.min()</code> · <code>.max()</code> · <code>.sum()</code></h2>
+        <p class="lead">What can the Quiz 2 column tell us?</p>
       </div>
-      <div><div class="code-window python"><div class="code-head"><span class="code-label">Cell 12</span><button class="copy-btn" type="button">Copy</button></div><pre><code>average_quiz2 = students["Quiz2"].mean()
-print(average_quiz2)</code></pre></div><div class="note"><strong>Output:</strong> 78.6<br>Average describes this group; it does not explain why scores differ.</div></div>
+      <div><div class="code-window python"><div class="code-head"><span class="code-label">Cell 15</span><button class="copy-btn" type="button">Copy</button></div><pre><code>quiz2_scores = students["Quiz2"]
+print("Mean:", quiz2_scores.mean())
+print("Minimum:", quiz2_scores.min())
+print("Maximum:", quiz2_scores.max())
+print("Sum:", quiz2_scores.sum())</code></pre></div><div class="note"><strong>Output:</strong> Mean: 78.6 · Minimum: 65 · Maximum: 92 · Sum: 393</div></div>
     </section>
 
-    <section class="slide two" data-footer="pandas · Alson" data-title="Can we create a new answer column?" data-notebook-cell="14" data-notebook-source="attendee">
+    <section class="slide two" data-footer="pandas · Alson" data-title="students[&quot;Total&quot;] = ..." data-notebook-cell="17" data-notebook-source="attendee">
       <div>
-        <div class="kicker">Calculated column · Cell 14</div>
-        <h2>Can we create a new answer column?</h2>
+        <div class="kicker">Calculated column · Cell 17</div>
+        <h2><code>students["Total"] = ...</code></h2>
         <p class="lead"><strong>Question:</strong> What is each student’s combined quiz total?</p>
-        <div class="code-window python"><div class="code-head"><span class="code-label">Cell 14</span><button class="copy-btn" type="button">Copy</button></div><pre><code>students["Total"] = students["Quiz1"] + students["Quiz2"]
+        <div class="code-window python"><div class="code-head"><span class="code-label">Cell 17</span><button class="copy-btn" type="button">Copy</button></div><pre><code>students["Total"] = students["Quiz1"] + students["Quiz2"]
 students[["Name", "Quiz1", "Quiz2", "Total"]]</code></pre></div>
       </div>
       <div class="table-wrap"><table class="data-table"><thead><tr><th scope="col">Name</th><th scope="col">Quiz1</th><th scope="col">Quiz2</th><th scope="col">Total</th></tr></thead><tbody><tr><td>Alex</td><td>72</td><td>78</td><td>150</td></tr><tr><td>Bella</td><td>85</td><td>88</td><td>173</td></tr><tr><td>Chen</td><td>60</td><td>70</td><td>130</td></tr><tr><td>Deepa</td><td>90</td><td>92</td><td>182</td></tr><tr><td>Ethan</td><td>55</td><td>65</td><td>120</td></tr></tbody></table></div>
@@ -184,7 +191,11 @@ students[["Name", "Quiz1", "Quiz2", "Total"]]</code></pre></div>
       <div>
         <div class="kicker">Hands-on Activity 1</div>
         <h2>Activity 1: Who improved the most?</h2>
-        <div class="activity-meta"><span class="timer-badge">Attempt · 10 minutes</span><span>Notebook · Activity 1 · Cells 17–29</span></div>
+        <div class="activity-meta"><span class="timer-badge">Attempt · 10 minutes</span><span>Notebook · Activity 1 · Cells 20–32</span></div>
+        <div class="activity-timer" data-timer-id="activity-1" data-duration-seconds="600" aria-label="Activity 1 countdown timer">
+          <div class="timer-readout"><time data-timer-display datetime="PT10M">10:00</time><span data-timer-status aria-live="polite">Ready<span class="sr-only"> · Time’s up</span></span></div>
+          <div class="timer-controls"><button type="button" data-timer-action="start">Start</button><button type="button" data-timer-action="pause">Pause</button><button type="button" data-timer-action="reset">Reset</button></div>
+        </div>
         <div class="takeaway-list activity-list">
           <div class="takeaway-row"><span class="label">01</span><p>Calculate average Quiz 1.</p></div>
           <div class="takeaway-row"><span class="label">02</span><p>Find Quiz 2 scores above 80.</p></div>
@@ -200,6 +211,10 @@ students[["Name", "Quiz1", "Quiz2", "Total"]]</code></pre></div>
         <div class="kicker">Activity 1 · Progress check</div>
         <h2>Progress check: use the column names</h2>
         <div class="activity-meta"><span class="timer-badge">5 minutes left</span><span>No complete solution yet</span></div>
+        <div class="activity-timer compact-timer" data-timer-id="activity-1" data-duration-seconds="600" aria-label="Shared Activity 1 countdown timer">
+          <div class="timer-readout"><time data-timer-display datetime="PT10M">10:00</time><span data-timer-status aria-live="polite">Ready<span class="sr-only"> · Time’s up</span></span></div>
+          <div class="timer-controls"><button type="button" data-timer-action="start">Start</button><button type="button" data-timer-action="pause">Pause</button><button type="button" data-timer-action="reset">Reset</button></div>
+        </div>
         <div class="takeaway-list activity-list">
           <div class="takeaway-row"><span class="label">Mean</span><p>Start from <strong>students["Quiz1"]</strong>.</p></div>
           <div class="takeaway-row"><span class="label">Filter</span><p>Compare the <strong>Quiz2</strong> column with 80.</p></div>
@@ -210,12 +225,12 @@ students[["Name", "Quiz1", "Quiz2", "Total"]]</code></pre></div>
       </div>
     </section>
 
-    <section class="slide two" data-footer="Activity 1 · Alson lead" data-title="Possible solution: Chen and Ethan tie" data-notebook-cells="20,22,24,26" data-notebook-source="completed" data-code-mode="excerpt">
+    <section class="slide two" data-footer="Activity 1 · Alson lead" data-title="Possible solution: Chen and Ethan tie" data-notebook-cells="23,25,27,29" data-notebook-source="completed" data-code-mode="excerpt">
       <div>
         <div class="kicker">Possible solution · Excerpt</div>
         <h2>Possible solution: Chen and Ethan tie</h2>
         <div class="activity-meta"><span class="timer-badge">Walkthrough · 5 minutes</span><span>Full code · completed notebook</span></div>
-        <div class="code-window python"><div class="code-head"><span class="code-label">Excerpt · Cells 20, 22, 24, 26</span><button class="copy-btn" type="button">Copy</button></div><pre><code>average_quiz1 = students["Quiz1"].mean()
+        <div class="code-window python"><div class="code-head"><span class="code-label">Excerpt · Cells 23, 25, 27, 29</span><button class="copy-btn" type="button">Copy</button></div><pre><code>average_quiz1 = students["Quiz1"].mean()
 above_80 = students[students["Quiz2"] &gt; 80]
 students["Improvement"] = students["Quiz2"] - students["Quiz1"]
 sorted_students = students.sort_values("Improvement", ascending=False)</code></pre></div>
@@ -234,34 +249,64 @@ sorted_students = students.sort_values("Improvement", ascending=False)</code></p
         <h2>Take a short break</h2>
         <p class="lead accent">We resume at 4:01 PM.</p>
         <p class="lead">Next: use NumPy to summarise attendance.</p>
+        <div class="activity-timer break-timer" data-timer-id="break" data-duration-seconds="600" aria-label="Break countdown timer">
+          <div class="timer-readout"><time data-timer-display datetime="PT10M">10:00</time><span data-timer-status aria-live="polite">Ready<span class="sr-only"> · Time’s up</span></span></div>
+          <div class="timer-controls"><button type="button" data-timer-action="start">Start</button><button type="button" data-timer-action="pause">Pause</button><button type="button" data-timer-action="reset">Reset</button></div>
+        </div>
       </div>
     </section>
 
-    <section class="slide two" data-footer="NumPy · Murugan" data-title="NumPy helps with a list of numbers">
+    <section class="slide two" data-footer="NumPy · Murugan" data-title="NumPy powers numerical work">
       <div>
         <div class="kicker">Light NumPy</div>
-        <h2>NumPy helps with a list of numbers</h2>
+        <h2>NumPy powers numerical work</h2>
         <p class="lead"><strong>Question:</strong> What happened across five CCA sessions?</p>
-        <p class="lead">NumPy stores numbers in an array and calculates across them quickly.</p>
+        <p class="lead">NumPy stores many numbers in an array, calculates across them, and creates regular coordinates for charts. pandas, matplotlib, and many data-science tools build on this numerical foundation.</p>
       </div>
       <div class="table-wrap"><table class="data-table"><thead><tr><th scope="col">Session</th><th scope="col">Attendance</th></tr></thead><tbody><tr><td>S1</td><td>20</td></tr><tr><td>S2</td><td>25</td></tr><tr><td>S3</td><td>18</td></tr><tr><td>S4</td><td>30</td></tr><tr><td>S5</td><td>28</td></tr></tbody></table></div>
     </section>
 
-    <section class="slide two" data-footer="NumPy · Murugan" data-title="Create one simple array" data-notebook-cell="32" data-notebook-source="attendee">
-      <div><div class="kicker">Live demo · Cell 32</div><h2>Create one simple array</h2><p class="lead">How do we give NumPy the attendance numbers?</p></div>
-      <div><div class="code-window python"><div class="code-head"><span class="code-label">Cell 32</span><button class="copy-btn" type="button">Copy</button></div><pre><code>attendance = np.array([20, 25, 18, 30, 28])
+    <section class="slide two" data-footer="NumPy · Murugan" data-title="np.array()" data-notebook-cell="35" data-notebook-source="attendee">
+      <div><div class="kicker">Live demo · Cell 35</div><h2><code>np.array()</code></h2><p class="lead">How do we give NumPy the attendance numbers?</p></div>
+      <div><div class="code-window python"><div class="code-head"><span class="code-label">Cell 35</span><button class="copy-btn" type="button">Copy</button></div><pre><code>attendance = np.array([20, 25, 18, 30, 28])
 attendance</code></pre></div><div class="note"><strong>Output:</strong> array([20, 25, 18, 30, 28])</div></div>
     </section>
 
-    <section class="slide two" data-footer="NumPy · Murugan" data-title="What are the typical, highest, and lowest attendances?" data-notebook-cell="34" data-notebook-source="attendee">
+    <section class="slide two" data-footer="NumPy · Murugan" data-title="np.mean() / np.max() / np.min()" data-notebook-cell="37" data-notebook-source="attendee">
       <div>
-        <div class="kicker">Three calculations · Cell 34</div>
-        <h2>What are the typical, highest, and lowest attendances?</h2>
-        <div class="code-window python"><div class="code-head"><span class="code-label">Cell 34</span><button class="copy-btn" type="button">Copy</button></div><pre><code>print("Mean:", np.mean(attendance))
+        <div class="kicker">Three calculations · Cell 37</div>
+        <h2><code>np.mean()</code> · <code>np.max()</code> · <code>np.min()</code></h2>
+        <p class="lead">What are the typical, highest, and lowest attendances?</p>
+        <div class="code-window python"><div class="code-head"><span class="code-label">Cell 37</span><button class="copy-btn" type="button">Copy</button></div><pre><code>print("Mean:", np.mean(attendance))
 print("Maximum:", np.max(attendance))
 print("Minimum:", np.min(attendance))</code></pre></div>
       </div>
       <div class="summary-table compact-summary"><div class="summary-row"><b>Typical?</b><p>Mean: 24.2</p></div><div class="summary-row"><b>Highest?</b><p>Maximum: 30</p></div><div class="summary-row"><b>Lowest?</b><p>Minimum: 18</p></div><div class="note">Attendance averaged 24.2, peaked at 30, and was lowest at 18.</div></div>
+    </section>
+
+    <section class="slide two" data-footer="NumPy · Murugan" data-title="np.arange() and np.linspace()" data-notebook-cell="39" data-notebook-source="attendee">
+      <div>
+        <div class="kicker">Regular x-axis values · Cell 39</div>
+        <h2><code>np.arange()</code> and <code>np.linspace()</code></h2>
+        <p class="lead">Create coordinates without typing each number.</p>
+      </div>
+      <div class="compare one-column">
+        <div class="code-window python"><div class="code-head"><span class="code-label">Cell 39</span><button class="copy-btn" type="button">Copy</button></div><pre><code>session_numbers = np.arange(1, 6)
+even_positions = np.linspace(0, 1, 5)
+
+print("arange:", session_numbers)
+print("linspace:", even_positions)</code></pre></div>
+        <div class="note"><strong>arange:</strong> fixed step → [1 2 3 4 5]<br><strong>linspace:</strong> fixed count → [0.00 0.25 0.50 0.75 1.00]</div>
+      </div>
+    </section>
+
+    <section class="slide center" data-footer="Graphing · Murugan" data-title="Turning data into graphs">
+      <div class="section-title">
+        <div class="big-number">02</div>
+        <div class="kicker">New section · matplotlib</div>
+        <h2>Turning data into graphs</h2>
+        <p class="lead">Choose a chart that makes the answer easier to see.</p>
+      </div>
     </section>
 
     <section class="slide standard" data-footer="matplotlib · Murugan" data-title="Which chart matches the question?">
@@ -276,12 +321,12 @@ print("Minimum:", np.min(attendance))</code></pre></div>
       </div>
     </section>
 
-    <section class="slide two" data-footer="matplotlib · Murugan" data-title="What food-order data do we have?" data-notebook-cell="37" data-notebook-source="attendee">
+    <section class="slide two" data-footer="matplotlib · Murugan" data-title="food = pd.DataFrame(food_data)" data-notebook-cell="42" data-notebook-source="attendee">
       <div>
-        <div class="kicker">Food orders · Cell 37</div>
-        <h2>What food-order data do we have?</h2>
+        <div class="kicker">Food orders · Cell 42</div>
+        <h2><code>food = pd.DataFrame(food_data)</code></h2>
         <p class="lead"><strong>Question:</strong> Which food item received the most orders?</p>
-        <div class="code-window python"><div class="code-head"><span class="code-label">Cell 37</span><button class="copy-btn" type="button">Copy</button></div><pre><code>food_data = {
+        <div class="code-window python"><div class="code-head"><span class="code-label">Cell 42</span><button class="copy-btn" type="button">Copy</button></div><pre><code>food_data = {
     "Food": ["Chicken Rice", "Nasi Lemak", "Pasta", "Burger", "Sandwich"],
     "Orders": [35, 28, 18, 22, 15]
 }
@@ -291,21 +336,22 @@ food</code></pre></div>
       <div class="table-wrap"><table class="data-table"><thead><tr><th scope="col">Food</th><th scope="col">Orders</th></tr></thead><tbody><tr><td>Chicken Rice</td><td>35</td></tr><tr><td>Nasi Lemak</td><td>28</td></tr><tr><td>Pasta</td><td>18</td></tr><tr><td>Burger</td><td>22</td></tr><tr><td>Sandwich</td><td>15</td></tr></tbody></table></div>
     </section>
 
-    <section class="slide two" data-footer="matplotlib · Murugan" data-title="Bar chart: compare categories" data-notebook-cell="39" data-notebook-source="attendee">
+    <section class="slide two" data-footer="matplotlib · Murugan" data-title="plt.bar()" data-notebook-cell="44" data-notebook-source="attendee">
       <div>
-        <div class="kicker">Bar chart · Cell 39</div><h2>Bar chart: compare categories</h2><p class="lead"><strong>Question:</strong> Which food item received the most orders?</p>
-        <div class="code-window python"><div class="code-head"><span class="code-label">Cell 39</span><button class="copy-btn" type="button">Copy</button></div><pre><code>plt.bar(food["Food"], food["Orders"])
+        <div class="kicker">Compare categories · Cell 44</div><h2><code>plt.bar()</code></h2><p class="lead"><strong>Question:</strong> Which food item received the most orders?</p>
+        <div class="code-window python"><div class="code-head"><span class="code-label">Cell 44</span><button class="copy-btn" type="button">Copy</button></div><pre><code>plt.bar(food["Food"], food["Orders"])
 plt.show()</code></pre></div>
         <div class="note"><strong>Insight:</strong> Chicken Rice has the tallest bar: 35 orders. The pattern is visible, but the chart still needs context.</div>
       </div>
       <figure class="chart-figure"><img src="public/assets/images/food-orders-bar-basic.svg" alt="Basic bar chart of five food items and orders, with Chicken Rice highest at 35" /><figcaption>Output: Five category bars; no added title or axis labels yet.</figcaption></figure>
     </section>
 
-    <section class="slide two" data-footer="matplotlib · Murugan" data-title="Line chart: track change over time" data-notebook-cell="41" data-notebook-source="attendee">
+    <section class="slide two" data-footer="matplotlib · Murugan" data-title="plt.plot()" data-notebook-cell="46" data-notebook-source="attendee">
       <div>
-        <div class="kicker">Line chart · Cell 41</div><h2>Line chart: track change over time</h2><p class="lead"><strong>Question:</strong> How did CCA attendance change?</p>
-        <div class="code-window python"><div class="code-head"><span class="code-label">Cell 41</span><button class="copy-btn" type="button">Copy</button></div><pre><code>sessions = ["S1", "S2", "S3", "S4", "S5"]
-plt.plot(sessions, attendance)
+        <div class="kicker">Track change over time · Cell 46</div><h2><code>plt.plot()</code></h2><p class="lead"><strong>Question:</strong> How did CCA attendance change?</p>
+        <div class="code-window python"><div class="code-head"><span class="code-label">Cell 46</span><button class="copy-btn" type="button">Copy</button></div><pre><code>session_labels = ["S1", "S2", "S3", "S4", "S5"]
+plt.plot(session_numbers, attendance)
+plt.xticks(session_numbers, session_labels)
 plt.title("CCA Attendance by Session")
 plt.xlabel("Session")
 plt.ylabel("Attendance")
@@ -315,10 +361,10 @@ plt.show()</code></pre></div>
       <figure class="chart-figure"><img src="public/assets/images/cca-attendance-line.svg" alt="Line chart of CCA attendance over five sessions, dipping at S3 and peaking at S4" /><figcaption>Output: Attendance 20, 25, 18, 30, 28 across S1–S5.</figcaption></figure>
     </section>
 
-    <section class="slide two" data-footer="matplotlib · Murugan" data-title="What could explain different quiz scores?" data-notebook-cell="43" data-notebook-source="attendee">
+    <section class="slide two" data-footer="matplotlib · Murugan" data-title="study = pd.DataFrame(study_data)" data-notebook-cell="48" data-notebook-source="attendee">
       <div>
-        <div class="kicker">Study data · Cell 43</div><h2>What could explain different quiz scores?</h2><p class="lead"><strong>Question:</strong> Does studying more seem linked to higher scores?</p>
-        <div class="code-window python"><div class="code-head"><span class="code-label">Cell 43</span><button class="copy-btn" type="button">Copy</button></div><pre><code>study_data = {
+        <div class="kicker">Study data · Cell 48</div><h2><code>study = pd.DataFrame(study_data)</code></h2><p class="lead"><strong>Question:</strong> What could explain different quiz scores?</p>
+        <div class="code-window python"><div class="code-head"><span class="code-label">Cell 48</span><button class="copy-btn" type="button">Copy</button></div><pre><code>study_data = {
     "Student": ["Alex", "Bella", "Chen", "Deepa", "Ethan"],
     "Hours Studied": [2, 4, 1, 5, 3],
     "Quiz Score": [65, 82, 58, 90, 75]
@@ -329,10 +375,10 @@ study</code></pre></div>
       <div><div class="table-wrap"><table class="data-table"><thead><tr><th scope="col">Student</th><th scope="col">Hours Studied</th><th scope="col">Quiz Score</th></tr></thead><tbody><tr><td>Alex</td><td>2</td><td>65</td></tr><tr><td>Bella</td><td>4</td><td>82</td></tr><tr><td>Chen</td><td>1</td><td>58</td></tr><tr><td>Deepa</td><td>5</td><td>90</td></tr><tr><td>Ethan</td><td>3</td><td>75</td></tr></tbody></table></div><div class="note">We are looking for a relationship, not proving a cause.</div></div>
     </section>
 
-    <section class="slide two" data-footer="matplotlib · Murugan" data-title="Scatter plot: compare two numbers" data-notebook-cell="45" data-notebook-source="attendee">
+    <section class="slide two" data-footer="matplotlib · Murugan" data-title="plt.scatter()" data-notebook-cell="50" data-notebook-source="attendee">
       <div>
-        <div class="kicker">Scatter plot · Cell 45</div><h2>Scatter plot: compare two numbers</h2><p class="lead">Does studying more seem linked to higher scores?</p>
-        <div class="code-window python"><div class="code-head"><span class="code-label">Cell 45</span><button class="copy-btn" type="button">Copy</button></div><pre><code>plt.scatter(study["Hours Studied"], study["Quiz Score"])
+        <div class="kicker">Compare two numbers · Cell 50</div><h2><code>plt.scatter()</code></h2><p class="lead">Does studying more seem linked to higher scores?</p>
+        <div class="code-window python"><div class="code-head"><span class="code-label">Cell 50</span><button class="copy-btn" type="button">Copy</button></div><pre><code>plt.scatter(study["Hours Studied"], study["Quiz Score"])
 plt.title("Study Hours vs Quiz Score")
 plt.xlabel("Hours Studied")
 plt.ylabel("Quiz Score")
@@ -352,17 +398,21 @@ plt.show()</code></pre></div>
     <section class="slide standard" data-footer="Activity 2 · Murugan lead" data-title="Activity 2: Which food item was most popular?">
       <div>
         <div class="kicker">Hands-on Activity 2</div><h2>Activity 2: Which food item was most popular?</h2>
-        <div class="activity-meta"><span class="timer-badge">Attempt · 6 minutes</span><span>Notebook · Activity 2 · Cells 48–51</span></div>
+        <div class="activity-meta"><span class="timer-badge">Attempt · 6 minutes</span><span>Notebook · Activity 2 · Cells 53–56</span></div>
+        <div class="activity-timer" data-timer-id="activity-2" data-duration-seconds="360" aria-label="Activity 2 countdown timer">
+          <div class="timer-readout"><time data-timer-display datetime="PT6M">6:00</time><span data-timer-status aria-live="polite">Ready<span class="sr-only"> · Time’s up</span></span></div>
+          <div class="timer-controls"><button type="button" data-timer-action="start">Start</button><button type="button" data-timer-action="pause">Pause</button><button type="button" data-timer-action="reset">Reset</button></div>
+        </div>
         <div class="takeaway-list activity-list"><div class="takeaway-row"><span class="label">01</span><p>Create a bar chart.</p></div><div class="takeaway-row"><span class="label">02</span><p>Add title <strong>Food Orders</strong>.</p></div><div class="takeaway-row"><span class="label">03</span><p>Label <strong>Food</strong> and <strong>Number of Orders</strong>.</p></div><div class="takeaway-row"><span class="label">04</span><p>Identify the tallest bar and write one insight.</p></div></div>
         <div class="note"><strong>Hint:</strong> x-axis = Food · bar height = Orders. Time check: 2 minutes left.</div>
       </div>
     </section>
 
-    <section class="slide two" data-footer="Activity 2 · Murugan lead" data-title="Possible solution: Chicken Rice leads" data-notebook-cell="49" data-notebook-source="completed">
+    <section class="slide two" data-footer="Activity 2 · Murugan lead" data-title="Possible solution: Chicken Rice leads" data-notebook-cell="54" data-notebook-source="completed">
       <div>
         <div class="kicker">Possible solution</div><h2>Possible solution: Chicken Rice leads</h2>
-        <div class="activity-meta"><span class="timer-badge">Walkthrough · 4 minutes</span><span>Completed notebook · Cell 49</span></div>
-        <div class="code-window python"><div class="code-head"><span class="code-label">Cell 49 · completed</span><button class="copy-btn" type="button">Copy</button></div><pre><code>plt.bar(food["Food"], food["Orders"])
+        <div class="activity-meta"><span class="timer-badge">Walkthrough · 4 minutes</span><span>Completed notebook · Cell 54</span></div>
+        <div class="code-window python"><div class="code-head"><span class="code-label">Cell 54 · completed</span><button class="copy-btn" type="button">Copy</button></div><pre><code>plt.bar(food["Food"], food["Orders"])
 plt.title("Food Orders")
 plt.xlabel("Food")
 plt.ylabel("Number of Orders")
@@ -372,7 +422,7 @@ plt.show()</code></pre></div>
       <figure class="chart-figure"><img src="public/assets/images/food-orders-bar.svg" alt="Labelled food orders bar chart with Chicken Rice highest at 35" /><figcaption>Output: A labelled five-bar chart answering the activity question.</figcaption></figure>
     </section>
 
-    <section class="slide standard" data-footer="seaborn · Murugan" data-title="seaborn: cleaner defaults, same question" data-notebook-cells="39,53" data-notebook-source="attendee" data-code-mode="excerpt">
+    <section class="slide standard" data-footer="seaborn · Murugan" data-title="matplotlib compared with seaborn" data-notebook-cells="44,58" data-notebook-source="attendee" data-code-mode="excerpt">
       <div>
         <div class="kicker">Cleaner plotting alternative · Excerpt</div><h2>seaborn: cleaner defaults, same question</h2>
         <div class="compare">
@@ -383,10 +433,10 @@ plt.show()</code></pre></div>
       </div>
     </section>
 
-    <section class="slide two" data-footer="seaborn · Murugan" data-title="Same answer, cleaner default" data-notebook-cell="53" data-notebook-source="attendee">
+    <section class="slide two" data-footer="seaborn · Murugan" data-title="sns.barplot()" data-notebook-cell="58" data-notebook-source="attendee">
       <div>
-        <div class="kicker">seaborn · Cell 53</div><h2>Same answer, cleaner default</h2>
-        <div class="code-window python"><div class="code-head"><span class="code-label">Cell 53</span><button class="copy-btn" type="button">Copy</button></div><pre><code>sns.barplot(data=food, x="Food", y="Orders")
+        <div class="kicker">Same answer, cleaner default · Cell 58</div><h2><code>sns.barplot()</code></h2>
+        <div class="code-window python"><div class="code-head"><span class="code-label">Cell 58</span><button class="copy-btn" type="button">Copy</button></div><pre><code>sns.barplot(data=food, x="Food", y="Orders")
 plt.title("Food Orders")
 plt.xlabel("Food")
 plt.ylabel("Number of Orders")
@@ -403,6 +453,15 @@ plt.show()</code></pre></div>
       </div>
     </section>
 
+    <section class="slide center" data-footer="Closing · Both" data-title="Group photo time">
+      <div class="section-title photo-prompt">
+        <div class="photo-mark" aria-hidden="true">📸</div>
+        <div class="kicker">One memory before Q&amp;A</div>
+        <h2>Group photo time</h2>
+        <p class="lead">Bring your biggest “I know what the data means” smile.</p>
+      </div>
+    </section>
+
     <section class="slide center" data-footer="Q&A · Alson & Murugan" data-title="Questions?">
       <div class="section-title closing">
         <img class="closing-logo" src="public/assets/logos/spai-logo.png" alt="SPAI" />
@@ -412,12 +471,39 @@ plt.show()</code></pre></div>
         <p class="lead accent">Next week, machine learning uses patterns to make predictions.</p>
       </div>
     </section>
+
+    <section class="slide two" data-footer="Take-home materials · Both" data-title="Download the workshop notebook">
+      <div>
+        <div class="kicker">Keep practising</div>
+        <h2>Download the workshop notebook</h2>
+        <p class="lead">Keep the exercises, rerun the examples, and try your own questions after today.</p>
+        <a class="download-link" href="./notebooks/AIDK_W2_Workshop.ipynb" download>Download AIDK_W2_Workshop.ipynb</a>
+        <a class="resource-fallback" href="https://github.com/rudybrrr/spai-aidk-workshop2/raw/refs/heads/main/notebooks/AIDK_W2_Workshop.ipynb">GitHub download fallback</a>
+      </div>
+      <div class="qr-block compact-qr">
+        <img class="qr-code" src="public/assets/images/notebook-download-qr.svg" alt="QR code linking to the Workshop 2 attendee notebook download" />
+        <p class="qr-caption">Scan for the attendee notebook</p>
+      </div>
+    </section>
+
+    <section class="slide center" data-footer="Feedback · Both" data-title="Workshop 2 feedback">
+      <div class="section-title feedback-closing">
+        <div class="kicker">Your feedback shapes Workshop 3</div>
+        <h2>How was Workshop 2?</h2>
+        <p class="lead">Scan the QR code or open the link. We’ll leave this slide up while you respond.</p>
+        <div class="qr-block compact-qr">
+          <a href="https://docs.google.com/forms/d/e/1FAIpQLSecVnlz3VnEevhEoFqhn9Winy6Ps21FKaSebncdf3-031GnjA/viewform?usp=preview"><img class="qr-code" src="public/assets/images/workshop-2-feedback-qr.svg" alt="QR code linking to the Workshop 2 feedback form" /></a>
+          <p class="qr-caption">Workshop 2 feedback form</p>
+        </div>
+        <a class="form-link" href="https://docs.google.com/forms/d/e/1FAIpQLSecVnlz3VnEevhEoFqhn9Winy6Ps21FKaSebncdf3-031GnjA/viewform?usp=preview">Open the feedback form</a>
+      </div>
+    </section>
   </main>
 
   <div class="footer">
     <div class="footer-left" id="footerLabel">AI Don’t Know · SPAI</div>
     <div class="dots" id="dots"></div>
-    <div class="slide-no" id="slideNo">1 <span>/ 32</span></div>
+    <div class="slide-no" id="slideNo">1 <span>/ 37</span></div>
   </div>
 
   <div class="controls">
@@ -427,5 +513,6 @@ plt.show()</code></pre></div>
   <script src="./src/scripts/fitSlides.js" defer></script>
   <script src="./src/scripts/navigation.js" defer></script>
   <script src="./src/scripts/copyCode.js" defer></script>
+  <script src="./src/scripts/activityTimer.js" defer></script>
 </body>
 </html>
