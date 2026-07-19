@@ -8,7 +8,8 @@
 |---|---|
 | Workshop name | AI Don't Know Workshop 2 |
 | Workshop topic | Data Analytics and Visualisation |
-| Date and time | 22 July, 3:00-5:00 PM |
+| Delivery | Online |
+| Date and time | 22 July 2026, 7.00-9.00 PM |
 | Audience | Mostly Year 1 beginners with Workshop 1 or equivalent basic Python exposure |
 | Speakers | Alson and Murugan |
 | Content source of truth | `AIDK_W2_Content_Document_Updated.md` |
@@ -180,9 +181,9 @@ Notebook section names are stable and used throughout this document: **Start Her
 
 | Slide | Title | Section | Purpose | Visible Content | Visual/Layout | Code or Data | Expected Output | Notebook Mapping | Speaker | Timing |
 |---:|---|---|---|---|---|---|---|---|---|---|
-| 1 | AI Don't Know: Workshop 2 | Opening | Welcome attendees and identify the session unambiguously. | Kicker: `SPAI Workshop Series`. Title: `AI Don't Know`. Subtitle: `Workshop 2 · Data Analytics & Visualisation`. Metadata: `22 July · 3:00-5:00 PM · Alson & Murugan`. No Workshop 1 URL. | Existing `.slide.center` + `.title-stack`. | None. | None. | **Start Here**, Cells 0-1; complete Markdown; completed notebook identical. | Alson | 2 min |
+| 1 | AI Don't Know: Workshop 2 | Opening | Welcome attendees and identify the session unambiguously. | Kicker: `SPAI Workshop Series`. Title: `AI Don't Know`. Subtitle: `Workshop 2 · Data Analytics & Visualisation`. Metadata: `Online · 22 July 2026 · 7.00-9.00 PM · Alson & Murugan`. No Workshop 1 URL. | Existing `.slide.center` + `.title-stack`. | None. | None. | **Start Here**, Cells 0-1; complete Markdown; completed notebook identical. | Alson | 2 min |
 | 2 | From Python basics to data questions | Opening | Activate Workshop 1 knowledge without reteaching it. | Title as shown. Bullets: `Variables store values`; `Lists and dictionaries organise values`; `print() lets us inspect results`. Closing question: `What can those basics tell us about a table of scores?` | Existing `.slide.standard` + `.takeaway` / `.takeaway-row`. | Tiny conceptual list only; no code. | None. | **Start Here**, Cells 0-1; complete Markdown. | Alson | 3 min |
-| 3 | Today: find patterns. Next: make predictions. | Opening | State the Workshop 2 goal and Workshop 3 connection. | Three-row roadmap: `W1 Python foundations → W2 answer questions from data → W3 use patterns to make predictions`. Goal: `By 5 PM, create a table, calculate summaries, make three chart types, and explain one insight.` | Existing `.outline-table` with W2 row accented; no new component. | No code. | None. | **Start Here**, Cells 0-1; complete Markdown. | Alson | 5 min |
+| 3 | Today: find patterns. Next: make predictions. | Opening | State the Workshop 2 goal and Workshop 3 connection. | Three-row roadmap: `W1 Python foundations → W2 answer questions from data → W3 use patterns to make predictions`. Goal: `By 9 PM, create a table, calculate summaries, make three chart types, and explain one insight.` | Existing `.outline-table` with W2 row accented; no new component. | No code. | None. | **Start Here**, Cells 0-1; complete Markdown. | Alson | 5 min |
 | 4 | What does data analytics mean? | How Data Analytics Works | Define analytics through a concrete question before libraries. | Question: `Who seems to be improving?` Show a three-row excerpt: Alex `72 → 78`, Bella `85 → 88`, Chen `60 → 70`. Bullets: `Start with a question`; `Use data as evidence`; `Explain the answer in plain English`. | Existing `.slide.two`; left question/explanation, right **new native data-table style**. | Three-row excerpt from `student_data`; exact values only. | Visual conclusion is deliberately incomplete: `We need the full table before deciding.` | **Ask a Data Question**, Cell 4; complete Markdown. | Alson | 3 min |
 | 5 | One question. Five steps. | How Data Analytics Works | Lock the core teaching loop. | Large flow: `Question → Data → Code → Output/Chart → Insight`. Under-step labels: `What do we want to know?`; `Which values help?`; `Ask Python`; `See the result`; `Say what it means`. | Existing `.flow-line`, `.flow-title`, `.flow-steps`; five columns already supported. | No code. | None. | **Ask a Data Question**, Cell 4; complete Markdown. | Alson | 4 min |
 | 6 | Start with the question, not the library | How Data Analytics Works | Give three beginner-friendly questions and the evidence each needs. | `Who improved the most? → Student scores`; `Which food item sold the most? → Food orders`; `Does studying more seem linked to higher scores? → Hours + scores`. Callout: `The question chooses the data and chart—not the other way around.` | Existing `.summary-table` / `.summary-row` plus `.note`. | Dataset names only. | None. | **Ask a Data Question**, Cell 4; complete Markdown. | Alson | 3 min |
@@ -657,7 +658,7 @@ The order deliberately establishes notebook code before final slide code, becaus
 
 ### Assumptions
 
-- The official display date is `22 July` and time is `3:00-5:00 PM`; the source does not require a year on slides, so the deck will not invent one.
+- The official delivery is online on `22 July 2026` from `7.00-9.00 PM`; the deck and notebooks display the confirmed year and delivery mode.
 - No Workshop 2 attendance form, follow-along deployment URL, or notebook download URL has been approved; these are omitted rather than left as placeholders.
 - A Workshop 2 speaker-script DOCX is not part of the requested deliverables; speaker ownership and timing are fully specified here and in the content document.
 - Existing Python dependencies in `requirements.txt` are sufficient; no new library is needed for implementation.

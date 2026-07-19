@@ -8,6 +8,11 @@ const completed = JSON.parse(readFileSync("notebooks/AIDK_W2_Workshop_Completed.
 const requirements = readFileSync("requirements.txt", "utf8");
 const source = (cell) => Array.isArray(cell.source) ? cell.source.join("") : cell.source;
 const notebookText = (notebook) => notebook.cells.map(source).join("\n");
+const confirmedSchedule = "Online · 22 July 2026 · 7.00–9.00 PM";
+
+assert.ok(content.includes("**Delivery:** Online"), "content document must identify the online delivery mode");
+assert.ok(content.includes("22 July 2026, 7.00 PM-9.00 PM"), "content document must contain the confirmed date and time");
+assert.ok(deck.includes(confirmedSchedule), "canonical deck must contain the confirmed online date and time");
 
 for (const timing of ["0-8 mins", "8-18 mins", "18-36 mins", "36-51 mins", "51-61 mins", "61-71 mins", "71-91 mins", "91-101 mins", "101-106 mins", "106-112 mins", "112-118 mins", "118-120 mins"]) {
   assert.ok(content.includes(timing), `content document is missing ${timing}`);
@@ -16,7 +21,7 @@ for (const timing of ["0-8 mins", "8-18 mins", "18-36 mins", "36-51 mins", "51-6
 const sections = deck.match(/<section\b[\s\S]*?<\/section>/g) ?? [];
 assert.equal(sections.length, 37, "canonical deck must contain 37 slides");
 assert.ok(sections[15].includes('data-title="10-minute break"'), "Slide 16 must be the dedicated break slide");
-assert.ok(sections[15].includes("We resume at 4:01 PM"), "break slide must show the exact resume time");
+assert.ok(sections[15].includes("We resume at 8:01 PM"), "break slide must show the exact resume time");
 assert.ok(!deck.includes("Alson calls"), "audience deck must not contain facilitator-only Alson instructions");
 assert.ok(!deck.includes("Murugan calls"), "audience deck must not contain facilitator-only Murugan instructions");
 
@@ -26,6 +31,7 @@ for (const notebook of [attendee, completed]) {
   assert.ok(setup.includes('"figure.figsize": (9, 5.5)'), "setup cell must set a projector-sized figure");
   assert.ok(setup.includes('"axes.titlesize": 18'), "setup cell must enlarge chart titles");
   const text = notebookText(notebook);
+  assert.ok(text.includes(confirmedSchedule), "notebook must contain the confirmed online date and time");
   for (const range of ["Slides 17–20", "Slides 21–28", "Slides 29–30", "Slides 31–32", "Slides 33–37"]) {
     assert.ok(text.includes(range), `notebook is missing ${range}`);
   }

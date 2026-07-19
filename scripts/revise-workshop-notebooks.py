@@ -39,7 +39,7 @@ def revise(path, completed):
         """
 # AI Don't Know Workshop 2: Data Analytics and Visualisation
 
-**22 July · 3:00–5:00 PM · Alson & Murugan**
+**Online · 22 July 2026 · 7.00–9.00 PM · Alson & Murugan**
 
 ## Learning outcomes
 

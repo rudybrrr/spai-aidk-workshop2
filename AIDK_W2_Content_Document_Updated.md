@@ -5,7 +5,9 @@
 **Speakers:** Alson, Murugan  
 **Content Document:** Lucas  
 **Slides:** Khant, to be created from this content document  
-**Duration:** 2 hours, 22 July, 3-5pm  
+**Delivery:** Online
+
+**Duration:** 2 hours, 22 July 2026, 7.00 PM-9.00 PM
 
 ---
 

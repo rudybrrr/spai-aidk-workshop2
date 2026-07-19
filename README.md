@@ -5,8 +5,9 @@ Beginner-friendly data analytics and visualisation workshop for mostly Year 1 st
 ## Workshop information
 
 - Topic: Data Analytics and Visualisation
-- Date: 22 July
-- Time: 3:00–5:00 PM
+- Delivery: Online
+- Date: 22 July 2026
+- Time: 7.00–9.00 PM
 - Speakers: Alson and Murugan
 - Teaching loop: Question → Data → Code → Output/Chart → Insight
 
