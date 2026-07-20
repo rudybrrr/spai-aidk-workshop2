@@ -14,12 +14,12 @@ assert.equal(standaloneDeck, canonicalDeck, "standalone deck block must exactly 
 
 const canonicalSections = canonicalDeck.match(sectionPattern) ?? [];
 const standaloneSections = standaloneDeck.match(sectionPattern) ?? [];
-assert.equal(canonicalSections.length, 37, "canonical deck must contain 37 slides");
-assert.equal(standaloneSections.length, 37, "standalone deck must contain 37 slides");
+assert.equal(canonicalSections.length, 45, "canonical deck must contain 45 slides");
+assert.equal(standaloneSections.length, 45, "standalone deck must contain 45 slides");
 
 const titles = canonicalSections.map((section) => section.match(/data-title="([^"]+)"/)?.[1]);
 assert.ok(titles.every(Boolean), "every slide must have a data-title");
-assert.equal(new Set(titles).size, 37, "slide data-title values must be unique");
+assert.equal(new Set(titles).size, 45, "slide data-title values must be unique");
 assert.ok(canonicalSections[0].includes("slide center active"), "only the first slide starts active");
 assert.equal(
   canonicalSections.slice(1).filter((section) => /class="[^"]*\bactive\b/.test(section)).length,
@@ -61,6 +61,9 @@ const assets = [
   "public/assets/images/food-orders-seaborn-bar.svg",
   "public/assets/images/notebook-download-qr.svg",
   "public/assets/images/workshop-2-feedback-qr.svg",
+  "public/assets/images/events/pixels_to_perception.png",
+  "public/assets/images/events/graphing_impact.png",
+  "public/assets/images/events/n8n.png",
   "public/assets/logos/spai-logo.png",
 ];
 for (const asset of assets) {
@@ -108,4 +111,4 @@ for (const token of forbiddenActiveTokens) {
   assert.ok(!standalone.includes(token), `standalone contains stale active token: ${token}`);
 }
 
-console.log("Workshop 2 standalone visual contract passed: 37 synced slides, required styles/assets/timers/shell behaviours, timings, and stale-content checks are present.");
+console.log("Workshop 2 standalone visual contract passed: 45 synced slides, required styles/assets/timers/shell behaviours, timings, and stale-content checks are present.");

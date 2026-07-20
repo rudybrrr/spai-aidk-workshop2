@@ -365,6 +365,19 @@
       font-size: clamp(0.95rem, 1.15vw, 1.1rem);
     }
 
+    .resource-placeholder {
+      display: inline-flex;
+      margin-top: 30px;
+      padding: 14px 20px;
+      border: 1px solid rgba(223,132,104,0.42);
+      border-radius: 999px;
+      color: var(--paper);
+      background: rgba(223,132,104,0.08);
+      font-family: var(--mono);
+      font-size: clamp(1rem, 1.3vw, 1.2rem);
+      letter-spacing: 0.04em;
+    }
+
     /* Flow */
     .flow-line {
       width: min(1120px, 100%);

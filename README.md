@@ -15,7 +15,7 @@ The workshop uses pandas as the main table tool, matplotlib as the main chart to
 
 ## Repository contents
 
-- `index.html`: canonical 37-slide web deck with recap reveals and activity/break countdowns
+- `index.html`: canonical 45-slide web deck with SPAI/setup prelude, recap reveals, and activity/break countdowns
 - `ai_dont_know_workshop_2.html`: standalone deck with inline CSS and JavaScript
 - `notebooks/AIDK_W2_Workshop.ipynb`: 61-cell attendee notebook with larger guided activity blanks
 - `notebooks/AIDK_W2_Workshop_Completed.ipynb`: 61-cell executed speaker and facilitator reference
@@ -83,7 +83,7 @@ npm run check:alignment
 npm run check:standalone-visuals
 ```
 
-`npm run build` does not create a compiled bundle. It verifies the timer state machine, two 61-cell notebooks, exact datasets and outputs, attendee activity blanks, slide-to-notebook mappings, 37-slide standalone parity, the two-hour delivery plan, local QR assets, required styles, controls, and stale active content.
+`npm run build` does not create a compiled bundle. It verifies the opening sequence, timer state machine, two 61-cell notebooks, exact datasets and outputs, attendee activity blanks, slide-to-notebook mappings, 45-slide standalone parity, the two-hour delivery plan, local QR assets, required styles, controls, and stale active content.
 
 Regenerate the two committed offline QR assets after changing either destination:
 

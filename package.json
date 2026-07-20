@@ -4,6 +4,7 @@
   "private": true,
   "description": "SPAI AI Don't Know Workshop 2: beginner-friendly data analytics and visualisation workshop slides and notebooks.",
   "scripts": {
+    "check:opening": "node scripts/check-opening-slides.mjs",
     "check:feedback-revision": "node scripts/check-feedback-revision.mjs",
     "check:timer": "node scripts/check-activity-timer.mjs",
     "generate:qr": "node scripts/generate-qr-assets.mjs",
@@ -11,7 +12,7 @@
     "check:standalone-visuals": "node scripts/check-standalone-visual-contract.mjs",
     "check:projector-readability": "node scripts/check-projector-readability.mjs",
     "check:delivery-readiness": "node scripts/check-delivery-readiness.mjs",
-    "build": "npm run check:timer && npm run check:feedback-revision && npm run check:alignment && npm run check:standalone-visuals && npm run check:projector-readability && npm run check:delivery-readiness",
+    "build": "npm run check:opening && npm run check:timer && npm run check:feedback-revision && npm run check:alignment && npm run check:standalone-visuals && npm run check:projector-readability && npm run check:delivery-readiness",
     "sync:standalone": "node scripts/sync-standalone-slides.mjs",
     "dev": "npx --yes serve .",
     "start": "npx --yes serve ."

@@ -12,7 +12,7 @@ const titles = sections.map((section) => section.match(/data-title="([^"]+)"/)?.
 const attendeeText = attendee.cells.map(source).join("\n");
 const completedText = completed.cells.map(source).join("\n");
 
-assert.equal(sections.length, 37, "feedback revision requires 37 slides");
+assert.equal(sections.length, 45, "feedback revision plus opening prelude requires 45 slides");
 assert.equal(attendee.cells.length, 61, "attendee notebook must contain 61 cells");
 assert.equal(completed.cells.length, 61, "completed notebook must contain 61 cells");
 assert.deepEqual(attendee.cells.map((cell) => cell.cell_type), completed.cells.map((cell) => cell.cell_type), "notebook cell types must align");
@@ -73,4 +73,4 @@ assert.ok(existsSync("public/assets/images/workshop-2-feedback-qr.svg"), "local 
 assert.ok(existsSync("src/scripts/activityTimer.js"), "activity timer controller must exist");
 assert.ok(standalone.includes("ACTIVITY TIMER SOURCE"), "standalone must embed the canonical timer controller");
 
-console.log("Workshop 2 feedback revision passed: 37 slides, two 61-cell notebooks, methods, timers, links, and closing flow are synchronized.");
+console.log("Workshop 2 feedback revision passed: 45 slides, two 61-cell notebooks, methods, timers, links, and closing flow are synchronized.");

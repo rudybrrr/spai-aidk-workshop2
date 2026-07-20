@@ -19,9 +19,9 @@ for (const timing of ["0-8 mins", "8-18 mins", "18-36 mins", "36-51 mins", "51-6
 }
 
 const sections = deck.match(/<section\b[\s\S]*?<\/section>/g) ?? [];
-assert.equal(sections.length, 37, "canonical deck must contain 37 slides");
-assert.ok(sections[15].includes('data-title="10-minute break"'), "Slide 16 must be the dedicated break slide");
-assert.ok(sections[15].includes("We resume at 8:01 PM"), "break slide must show the exact resume time");
+assert.equal(sections.length, 45, "canonical deck must contain 45 slides");
+assert.ok(sections[23].includes('data-title="10-minute break"'), "absolute Slide 24 must be the dedicated break slide after the eight-slide prelude");
+assert.ok(sections[23].includes("We resume at 8:01 PM"), "break slide must show the exact resume time");
 assert.ok(!deck.includes("Alson calls"), "audience deck must not contain facilitator-only Alson instructions");
 assert.ok(!deck.includes("Murugan calls"), "audience deck must not contain facilitator-only Murugan instructions");
 
