@@ -22,15 +22,65 @@ const normalize = (value) => decodeHtml(value)
   .trim();
 const sections = (html) => [...html.matchAll(/<section\b[\s\S]*?<\/section>/g)].map(([section]) => section);
 
-assert.equal(attendee.cells.length, 61, "attendee notebook must have 61 cells");
-assert.equal(completed.cells.length, 61, "completed notebook must have 61 cells");
+assert.equal(attendee.cells.length, 60, "attendee notebook must have 60 cells");
+assert.equal(completed.cells.length, 60, "completed notebook must have 60 cells");
 assert.deepEqual(attendee.cells.map((cell) => cell.cell_type), completed.cells.map((cell) => cell.cell_type), "notebooks must have matching cell types and order");
 assert.equal(attendee.cells.filter((cell) => cell.cell_type === "code").length, 22, "attendee notebook must have 22 code cells");
+
+assert.ok(source(attendee.cells[0]).includes("Attendee workbook"), "attendee notebook must identify itself as the attendee workbook");
+assert.ok(source(completed.cells[0]).includes("Completed solutions"), "completed notebook must identify itself as the completed solutions workbook");
+
+const requiredSectionHeadings = new Map([
+  [1, "## Start Here — Slides 1–11"],
+  [4, "## Ask a Data Question — Slides 12–14"],
+  [5, "## pandas: Student Scores — Slides 15–20"],
+  [19, "## Activity 1: Who Improved the Most? — Slides 21–23"],
+  [32, "## Break / Buffer — Slide 24"],
+  [33, "## NumPy: CCA Attendance — Slides 25–28"],
+  [40, "## matplotlib: Seeing Patterns — Slides 29–36"],
+  [52, "## Activity 2: Most Popular Food — Slides 37–38"],
+  [56, "## seaborn: Cleaner Defaults — Slides 39–40"],
+  [59, "## Wrap-up — Slides 41–44"],
+]);
+for (const [index, heading] of requiredSectionHeadings) {
+  assert.ok(source(attendee.cells[index]).includes(heading), `attendee cell ${index + 1} must include ${heading}`);
+  assert.ok(source(completed.cells[index]).includes(heading), `completed cell ${index + 1} must include ${heading}`);
+}
+
+const chartAltText = new Map([
+  [43, "Bar chart comparing five food items, with Chicken Rice highest at 35 orders."],
+  [45, "Line chart of CCA attendance across sessions S1 to S5, dipping at S3 and peaking at S4."],
+  [49, "Scatter plot showing quiz scores generally increasing with hours studied across five students."],
+  [53, "Labelled bar chart of food orders, with Chicken Rice the tallest bar at 35."],
+  [57, "Seaborn bar chart of food orders, with Chicken Rice highest at 35."],
+]);
+for (const [index, alt] of chartAltText) {
+  assert.equal(attendee.cells[index].metadata?.alt, alt, `attendee chart cell ${index + 1} must include useful alt text`);
+  assert.equal(completed.cells[index].metadata?.alt, alt, `completed chart cell ${index + 1} must include useful alt text`);
+}
+
+for (const staleRange of ["Slides 1–3", "Slides 4–6", "Slides 7–12", "Slides 13–15", "Slides 17–20", "Slides 21–28", "Slides 29–30", "Slides 31–32", "Slides 33–37"]) {
+  assert.ok(!attendee.cells.map(source).join("\n").includes(staleRange), `attendee notebook must not retain stale range ${staleRange}`);
+  assert.ok(!completed.cells.map(source).join("\n").includes(staleRange), `completed notebook must not retain stale range ${staleRange}`);
+}
+assert.ok(!attendee.cells.map(source).join("\n").includes("Optional Extension"), "attendee notebook must not include the removed optional extension");
+assert.ok(!completed.cells.map(source).join("\n").includes("Optional Extension"), "completed notebook must not include the removed optional extension");
+
+const attendeeCodeCells = attendee.cells.filter((cell) => cell.cell_type === "code");
+assert.ok(attendeeCodeCells.every((cell) => cell.execution_count === null), "attendee code cells must remain unexecuted");
+assert.ok(attendeeCodeCells.every((cell) => (cell.outputs ?? []).length === 0), "attendee code cells must not store outputs");
+
+const completedCodeCells = completed.cells.filter((cell) => cell.cell_type === "code");
+assert.deepEqual(completedCodeCells.map((cell) => cell.execution_count), Array.from({ length: 22 }, (_, index) => index + 1), "completed code cells must have sequential execution counts");
+for (const [index, cell] of completedCodeCells.entries()) {
+  assert.ok((cell.outputs ?? []).every((output) => output.output_type !== "error"), `completed code cell ${index + 1} must not store an error`);
+  assert.ok((cell.outputs ?? []).every((output) => output.name !== "stderr"), `completed code cell ${index + 1} must not store stderr output`);
+}
 
 const changedCells = attendee.cells
   .map((cell, index) => source(cell) === source(completed.cells[index]) ? null : index)
   .filter((index) => index !== null);
-assert.deepEqual(changedCells, [22, 24, 26, 28, 30, 53, 55], "completed notebook may fill only the seven approved activity cells");
+assert.deepEqual(changedCells, [0, 22, 24, 26, 28, 30, 53, 55], "completed notebook may differ only in its edition label and the seven approved activity cells");
 
 const attendeeBlanks = new Map([
   [22, "students[____].____()"],
@@ -151,4 +201,4 @@ for (const slidePath of slidePaths) {
   }
 }
 
-console.log("Workshop 2 alignment passed: 44 active slides, two 61-cell notebooks, exact datasets, outputs, larger blanks, and full/excerpt mappings are synchronised.");
+console.log("Workshop 2 alignment passed: 44 active slides, two 60-cell notebooks, exact datasets, outputs, larger blanks, and full/excerpt mappings are synchronised.");

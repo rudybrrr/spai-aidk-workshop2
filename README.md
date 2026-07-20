@@ -15,10 +15,10 @@ The workshop uses pandas as the main table tool, matplotlib as the main chart to
 
 ## Repository contents
 
-- `index.html`: canonical 45-slide web deck with SPAI/setup prelude, recap reveals, and activity/break countdowns
+- `index.html`: canonical 44-slide web deck with SPAI/setup prelude, recap reveals, and activity/break countdowns
 - `ai_dont_know_workshop_2.html`: standalone deck with inline CSS and JavaScript
-- `notebooks/AIDK_W2_Workshop.ipynb`: 61-cell attendee notebook with larger guided activity blanks
-- `notebooks/AIDK_W2_Workshop_Completed.ipynb`: 61-cell executed speaker and facilitator reference
+- `notebooks/AIDK_W2_Workshop.ipynb`: clean 60-cell attendee workbook with guided activity blanks and no stored outputs
+- `notebooks/AIDK_W2_Workshop_Completed.ipynb`: executed 60-cell solutions workbook for speakers, facilitators, and post-workshop release
 - `public/assets/images/`: SVG charts generated from the workshop datasets
 - `public/assets/logos/spai-logo.png`: SPAI logo used on the closing slide
 - `scripts/`: deck synchronisation and validation checks
@@ -60,7 +60,7 @@ Windows activation:
 
 Then open either notebook in VS Code, Jupyter, Google Colab, or another compatible notebook editor.
 
-During delivery, use the attendee notebook for demonstrations. Keep the completed notebook open as the speaker/facilitator backup. The completed notebook stores fresh top-to-bottom outputs; the attendee notebook intentionally leaves Cells 23, 25, 27, 29, 31, 54, and 56 incomplete.
+During delivery, use the attendee notebook for demonstrations. Keep the completed notebook open as the speaker/facilitator backup. The attendee copy intentionally has no stored outputs and leaves Cells 23, 25, 27, 29, 31, 54, and 56 incomplete. Send the clean attendee workbook before or during the session, then release the completed solutions notebook after the workshop.
 
 ## Synchronisation and validation
 
@@ -83,7 +83,7 @@ npm run check:alignment
 npm run check:standalone-visuals
 ```
 
-`npm run build` does not create a compiled bundle. It verifies the opening sequence, timer state machine, two 61-cell notebooks, exact datasets and outputs, attendee activity blanks, slide-to-notebook mappings, 45-slide standalone parity, the two-hour delivery plan, local QR assets, required styles, controls, and stale active content.
+`npm run build` does not create a compiled bundle. It verifies the opening sequence, timer state machine, two 60-cell notebooks, exact datasets and outputs, attendee activity blanks, slide-to-notebook mappings, 44-slide standalone parity, the two-hour delivery plan, local QR assets, required styles, controls, and stale active content.
 
 Regenerate the two committed offline QR assets after changing either destination:
 

@@ -17,6 +17,11 @@ const standaloneSections = standaloneDeck.match(sectionPattern) ?? [];
 assert.equal(canonicalSections.length, 44, "canonical deck must contain 44 active slides");
 assert.equal(standaloneSections.length, 44, "standalone deck must contain 44 active slides");
 
+for (const presenterName of ["Alson", "Murugan"]) {
+  assert.ok(!canonicalDeck.includes(presenterName), `canonical audience deck must not name ${presenterName}`);
+  assert.ok(!standaloneDeck.includes(presenterName), `standalone audience deck must not name ${presenterName}`);
+}
+
 const titles = canonicalSections.map((section) => section.match(/data-title="([^"]+)"/)?.[1]);
 assert.ok(titles.every(Boolean), "every slide must have a data-title");
 assert.equal(new Set(titles).size, 44, "slide data-title values must be unique");

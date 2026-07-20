@@ -8,135 +8,124 @@ NOTEBOOKS = [
     (Path("notebooks/AIDK_W2_Workshop_Completed.ipynb"), True),
 ]
 
+EXPECTED_CELL_TYPES = [
+    "markdown", "markdown", "code", "markdown", "markdown", "markdown",
+    "code", "markdown", "code", "markdown", "code", "markdown", "code",
+    "markdown", "code", "markdown", "code", "markdown", "markdown",
+    "markdown", "code", "markdown", "code", "markdown", "code", "markdown",
+    "code", "markdown", "code", "markdown", "markdown", "markdown",
+    "markdown", "markdown", "code", "markdown", "code", "markdown", "code",
+    "markdown", "markdown", "code", "markdown", "code", "markdown", "code",
+    "markdown", "code", "markdown", "code", "markdown", "markdown",
+    "markdown", "code", "markdown", "markdown", "markdown", "code",
+    "markdown", "markdown",
+]
 
-def text(cell):
-    return cell.source
+ATTENDEE_EDITION = (
+    "> **Attendee workbook** — Run the demonstrations with the speakers and "
+    "complete the guided blanks during the activities."
+)
+COMPLETED_EDITION = (
+    "> **Completed solutions** — Release after the workshop; this copy includes "
+    "possible solutions and fresh executed outputs."
+)
 
+CHART_ALT_TEXT = {
+    43: "Bar chart comparing five food items, with Chicken Rice highest at 35 orders.",
+    45: "Line chart of CCA attendance across sessions S1 to S5, dipping at S3 and peaking at S4.",
+    49: "Scatter plot showing quiz scores generally increasing with hours studied across five students.",
+    53: "Labelled bar chart of food orders, with Chicken Rice the tallest bar at 35.",
+    57: "Seaborn bar chart of food orders, with Chicken Rice highest at 35.",
+}
 
-def find_cell(cells, needle):
-    for index, cell in enumerate(cells):
-        if needle in text(cell):
-            return index
-    raise ValueError(f"Could not find notebook cell containing: {needle}")
+COMMON_MARKDOWN = {
+    1: """
+## Start Here — Slides 1–11
 
+Use this notebook alongside the final 44-slide deck. Run a live-demo cell when the speaker reaches it, then use the `Output:` note immediately below to check what you should see.
 
-def set_source(cells, needle, replacement):
-    cells[find_cell(cells, needle)].source = replacement.strip()
+**Workshop loop:** Question → Data → Code → Output/Chart → Insight
 
+| Notebook section | Matching slides |
+| --- | ---: |
+| Opening, setup, recap, and goal | 1–11 |
+| Data-question loop | 12–14 |
+| pandas | 15–20 |
+| Activity 1 | 21–23 |
+| Break | 24 |
+| NumPy | 25–28 |
+| matplotlib | 29–36 |
+| Activity 2 | 37–38 |
+| seaborn | 39–40 |
+| Wrap-up | 41–44 |
 
-def insert_after(cells, needle, new_cells):
-    index = find_cell(cells, needle) + 1
-    cells[index:index] = new_cells
+### Slides 7–9 — Prepare your notebook
 
+Run the setup cell once. During activities, complete only the guided blanks and try the optional hints before checking a full solution.
+""",
+    3: """
+Output: The setup confirms the Python version, imports all four workshop libraries, and applies projector-readable chart defaults.
+""",
+    4: """
+## Ask a Data Question — Slides 12–14
 
-def revise(path, completed):
-    notebook = nbformat.read(path, as_version=4)
-    cells = notebook.cells
+Data analytics starts with a question. Choose the columns that provide evidence, use Python to process or visualise them, and explain the result in plain English.
 
-    set_source(
-        cells,
-        "## Learning outcomes",
-        """
-# AI Don't Know Workshop 2: Data Analytics and Visualisation
+**Running question:** What is the average Quiz 2 score?
 
-**Online · 22 July 2026 · 7.00–9.00 PM · Alson & Murugan**
+Choose `Quiz2`, calculate with `.mean()`, see `78.6`, then explain what that number means.
+""",
+    5: """
+## pandas: Student Scores — Slides 15–20
 
-## Learning outcomes
+pandas is our main tool for labelled tables. A **DataFrame** is a table with rows and named columns.
 
-By the end of this workshop, you will be able to create and read a pandas DataFrame, select rows and columns with `.iloc[]`, `.loc[]`, and brackets, filter data, calculate mean/minimum/maximum/sum summaries, create a calculated column, generate regular NumPy coordinates, choose a suitable chart, make bar/line/scatter plots, try a seaborn alternative, and explain one insight in plain English.
-        """,
-    )
+### Slide 15 — Build the student table
 
-    set_source(
-        cells,
-        "## Ask a Data Question",
-        """
-## Ask a Data Question — Slides 4–6
+Create the shared dataset used throughout the pandas demonstration and Activity 1.
+""",
+    7: """
+Output: A DataFrame with five students and four columns: Name, Class, Quiz1, and Quiz2.
 
-Data analytics starts with a question. We choose the columns that can act as evidence, use Python to process or visualise them, and explain the result in plain English.
+### Slide 16 — Preview the first rows
+""",
+    9: """
+Output: The first five rows. Because this table has five students, the full table appears.
 
-Running example: **What is the average Quiz 2 score?** Pick the `Quiz2` column, calculate with `.mean()`, see `78.6`, then state what that number means.
-        """,
-    )
+### Slide 17 — Select by position and label
+""",
+    11: """
+Output: Both selections show the first two students and the Name, Class, and Quiz1 columns. `.iloc[]` uses numbered positions; `.loc[]` uses row and column labels.
 
-    set_source(
-        cells,
-        "## pandas: Student Scores",
-        """
-## pandas: Student Scores — Slides 7–12
+### Slide 18 — Select a column and filter rows
+""",
+    13: """
+Output: The Quiz1 column contains 72, 85, 60, 90, and 55; the Class B table contains Chen and Deepa.
 
-pandas is our main tool for labelled tables. A **DataFrame** is a table with rows and named columns. We will create one, inspect it, select by position and label, filter matching rows, calculate summaries, and create a new column.
-        """,
-    )
+### Slide 19 — Calculate summary values
+""",
+    15: """
+Output: Mean: 78.6, Minimum: 65, Maximum: 92, and Sum: 393.
 
-    insert_after(
-        cells,
-        "Output: The first five rows.",
-        [
-            nbformat.v4.new_code_cell(
-                """first_rows_by_position = students.iloc[0:2, 0:3]
-first_rows_by_label = students.loc[0:1, ["Name", "Class", "Quiz1"]]
-
-print("By position:")
-print(first_rows_by_position)
-print("By label:")
-print(first_rows_by_label)"""
-            ),
-            nbformat.v4.new_markdown_cell(
-                "Output: Both selections show the first two students and the Name, Class, and Quiz1 columns. `.iloc[]` uses numbered positions; `.loc[]` uses row and column labels."
-            ),
-        ],
-    )
-
-    set_source(
-        cells,
-        "quiz1_scores = students",
-        """
-quiz1_scores = students["Quiz1"]
-class_b_students = students[students["Class"] == "B"]
-
-print(quiz1_scores)
-print(class_b_students)
-        """,
-    )
-
-    set_source(
-        cells,
-        "average_quiz2 = students",
-        """
-quiz2_scores = students["Quiz2"]
-print("Mean:", quiz2_scores.mean())
-print("Minimum:", quiz2_scores.min())
-print("Maximum:", quiz2_scores.max())
-print("Sum:", quiz2_scores.sum())
-        """,
-    )
-    set_source(
-        cells,
-        "Output: The average Quiz 2 score is 78.6.",
-        "Output: Mean: 78.6, Minimum: 65, Maximum: 92, and Sum: 393.",
-    )
-    set_source(
-        cells,
-        "### Quick recap",
-        """
-### Quick recap
+### Slide 20 — Create a calculated column
+""",
+    17: """
+Output: A four-column table with totals 150, 173, 130, 182, and 120 in student order.
+""",
+    18: """
+### pandas check
 
 - `.iloc[]` selects by numbered position; `.loc[]` selects by labels.
 - Brackets select a column; a Boolean condition keeps matching rows.
 - `.mean()`, `.min()`, `.max()`, and `.sum()` summarise a column.
 - A new column can be calculated from existing columns.
 
-Before continuing, explain one of those ideas to a partner in your own words.
-        """,
-    )
-    set_source(
-        cells,
-        "## Activity 1: Who Improved the Most?",
-        """
-## Activity 1: Who Improved the Most? — Slides 13–15
+Explain one of those ideas to a partner in your own words.
+""",
+    19: """
+## Activity 1: Who Improved the Most? — Slides 21–23
 
-**Attempt time: 10 minutes**
+**Attempt time: 10 minutes** · Complete Cells 23, 25, 27, 29, and 31.
 
 1. Print the Quiz 1 column and calculate its average.
 2. Find students who scored above 80 in Quiz 2.
@@ -144,191 +133,226 @@ Before continuing, explain one of those ideas to a partner in your own words.
 4. Sort by Improvement, highest first.
 5. Write one plain-English insight.
 
-Complete Cells 23, 25, 27, 29, and 31. The speaker will call 5 minutes and 2 minutes remaining.
-        """,
-    )
+The speaker will call 5 minutes and 2 minutes remaining.
 
-    if completed:
-        set_source(
-            cells,
-            "# Possible solution: calculate the average Quiz 1 score.",
-            """
-# Possible solution: print and average the Quiz 1 column.
-quiz1_scores = students["Quiz1"]
-print(quiz1_scores)
-average_quiz1 = students["Quiz1"].mean()
-print(average_quiz1)
-            """,
-        )
-        set_source(
-            cells,
-            "# Possible solution: keep rows where Quiz 2 is above 80.",
-            """
-# Possible solution: keep rows where Quiz 2 is above 80.
-above_80 = students[students["Quiz2"] > 80]
-print(above_80)
-            """,
-        )
-        set_source(
-            cells,
-            "# Possible solution: subtract Quiz 1 from Quiz 2.",
-            """
-# Possible solution: subtract Quiz 1 from Quiz 2.
-students["Improvement"] = students["Quiz2"] - students["Quiz1"]
-print(students[["Name", "Quiz1", "Quiz2", "Improvement"]])
-            """,
-        )
-        set_source(
-            cells,
-            "# Possible solution: arrange the highest improvement first.",
-            """
-# Possible solution: arrange the highest improvement first.
-sorted_students = students.sort_values("Improvement", ascending=False)
-print(sorted_students[["Name", "Improvement"]])
-            """,
-        )
-    else:
-        set_source(
-            cells,
-            "# TODO 1: calculate the average Quiz 1 score.",
-            """
-# TODO 1: choose, print, and average the Quiz 1 column.
-quiz1_scores = students[____]
-print(quiz1_scores)
-average_quiz1 = students[____].____()
-print(average_quiz1)
-            """,
-        )
-        set_source(
-            cells,
-            "# TODO 2: keep rows where Quiz 2 is above 80.",
-            """
-# TODO 2: choose the column, comparison, and number.
-above_80 = students[students[____] ____ ____]
-print(above_80)
-            """,
-        )
-        set_source(
-            cells,
-            "# TODO 3: subtract Quiz 1 from Quiz 2.",
-            """
-# TODO 3: choose the new column, source columns, and operator.
-students[____] = students[____] ____ students[____]
-print(students[[____, ____, ____, ____]])
-            """,
-        )
-        set_source(
-            cells,
-            "# TODO 4: arrange the highest improvement first.",
-            """
-# TODO 4: choose the sort column and direction. The method is provided.
-sorted_students = students.sort_values(____, ascending=____)
-print(sorted_students[[____, ____]])
-            """,
-        )
+### Before you start — Reset the table
+""",
+    21: """
+Output: The original five-row Student Scores DataFrame, without the demo-only Total column.
 
-    set_source(
-        cells,
-        "## NumPy: CCA Attendance",
-        """
-## NumPy: CCA Attendance — Slides 17–20
+### Task 1 — Average Quiz 1
+""",
+    23: """
+Output: One decimal-number average for the five Quiz 1 scores.
 
-NumPy is the numerical foundation used by many data tools. Here it helps us calculate across several attendance values and create regular x-axis coordinates without typing every number manually.
-        """,
-    )
-    insert_after(
-        cells,
-        "Output: Mean 24.2, maximum 30, and minimum 18.",
-        [
-            nbformat.v4.new_code_cell(
-                """session_numbers = np.arange(1, 6)
-even_positions = np.linspace(0, 1, 5)
+### Task 2 — Filter Quiz 2 scores above 80
+""",
+    25: """
+Output: A filtered table containing only students whose Quiz 2 score is above 80.
 
-print("arange:", session_numbers)
-print("linspace:", even_positions)"""
-            ),
-            nbformat.v4.new_markdown_cell(
-                "Output: `np.arange(1, 6)` creates `[1, 2, 3, 4, 5]` using a fixed step; `np.linspace(0, 1, 5)` creates five evenly spaced values from 0 to 1."
-            ),
-        ],
-    )
-    set_source(
-        cells,
-        "## matplotlib: Seeing Patterns",
-        """
-## matplotlib: Seeing Patterns — Slides 21–28
+### Task 3 — Calculate Improvement
+""",
+    27: """
+Output: A table with a new Improvement column, one value for each student.
 
-We are now turning data into graphs. Choose the chart from the question:
+### Task 4 — Sort highest first
+""",
+    29: """
+Output: A two-column table ordered from the highest improvement to the lowest.
+
+### Task 5 — Write the insight
+""",
+    31: """
+<details>
+<summary><strong>Optional hints</strong></summary>
+
+1. Mean starts from `students["Quiz1"]`.
+2. Filtering compares the `Quiz2` column with 80.
+3. Improvement subtracts Quiz1 from Quiz2.
+4. Highest first means descending order.
+5. Check spelling, brackets, quotation marks, and capital letters.
+
+</details>
+""",
+    32: """
+## Break / Buffer — Slide 24
+
+Take 10 minutes. If a cell produced an error, ask a facilitator to help with imports, column-name spelling, brackets, or quotation marks. No new content is introduced during the break.
+""",
+    33: """
+## NumPy: CCA Attendance — Slides 25–28
+
+NumPy helps us calculate across several attendance values and create regular x-axis coordinates without typing every number manually.
+
+### Slide 26 — Create an array
+""",
+    35: """
+Output: A NumPy array containing 20, 25, 18, 30, and 28.
+
+### Slide 27 — Calculate attendance summaries
+""",
+    37: """
+Output: Mean 24.2, maximum 30, and minimum 18.
+
+### Slide 28 — Create regular positions
+""",
+    39: """
+Output: `np.arange(1, 6)` creates `[1, 2, 3, 4, 5]` using a fixed step; `np.linspace(0, 1, 5)` creates five evenly spaced values from 0 to 1.
+""",
+    40: """
+## matplotlib: Seeing Patterns — Slides 29–36
+
+Choose the chart from the question:
 
 - **Bar chart:** compare categories.
 - **Line chart:** track change across an ordered sequence.
 - **Scatter plot:** compare two numerical variables.
 
 After every chart, ask: **What does this chart tell us?**
-        """,
-    )
-    set_source(
-        cells,
-        'sessions = ["S1", "S2", "S3", "S4", "S5"]',
-        """
-session_labels = ["S1", "S2", "S3", "S4", "S5"]
-plt.plot(session_numbers, attendance)
-plt.xticks(session_numbers, session_labels)
-plt.title("CCA Attendance by Session")
-plt.xlabel("Session")
-plt.ylabel("Attendance")
-plt.show()
-        """,
-    )
-    set_source(
-        cells,
-        "## Activity 2: Most Popular Food",
-        """
-## Activity 2: Most Popular Food — Slides 29–30
 
-**Attempt time: 6 minutes**
+### Slide 31 — Build the food-order table
+""",
+    42: """
+Output: A five-row DataFrame containing each food item and its number of orders.
 
-Create a bar chart, add the title `Food Orders`, label the axes `Food` and `Number of Orders`, identify the tallest bar, and write one insight.
+### Slide 32 — Compare food categories
+""",
+    44: """
+Output: A basic five-bar chart with Chicken Rice highest at 35; it does not yet have an added title or axis labels.
 
-Complete Cells 54 and 56. The speaker will call 2 minutes remaining.
-        """,
-    )
-    if not completed:
-        set_source(
-            cells,
-            "# TODO: complete the plotting labels.",
-            """
-# TODO: choose the plotting method, columns, title, and labels.
-plt.____(food[____], food[____])
-plt.____(____)
-plt.____(____)
-plt.____(____)
-plt.show()
-            """,
-        )
-    set_source(cells, "## seaborn: Cleaner Defaults", "## seaborn: Cleaner Defaults — Slides 31–32\n\nSame data, same question. matplotlib offers direct control; seaborn often gives cleaner defaults for labelled data. We will recreate only the food-orders chart, not start a separate seaborn lecture.")
-    set_source(
-        cells,
-        "## Wrap-up — Slides 31–32",
-        """
-## Wrap-up — Slides 33–37
+### Slide 33 — Track attendance over time
+""",
+    46: """
+Output: A line chart showing attendance dipping at S3, peaking at S4, and ending above S1.
+
+### Slide 34 — Build the study dataset
+""",
+    48: """
+Output: A five-row DataFrame containing Student, Hours Studied, and Quiz Score.
+
+### Slide 35 — Compare two numerical variables
+""",
+    50: """
+Output: A five-point scatter plot showing a positive relationship in this small sample; it does not prove that more study always causes a higher score.
+
+### Slide 36 — Read the chart
+""",
+    51: """
+### Chart interpretation check
+
+For each chart, identify:
+
+1. **Title:** What question is this chart about?
+2. **Axes:** What does each direction measure?
+3. **Insight:** What visible pattern answers the question?
+
+Bar charts compare categories, line charts show an ordered sequence, and scatter plots compare two numbers.
+""",
+    52: """
+## Activity 2: Most Popular Food — Slides 37–38
+
+**Attempt time: 6 minutes** · Complete Cells 54 and 56.
+
+1. Create a bar chart.
+2. Add the title `Food Orders`.
+3. Label the axes `Food` and `Number of Orders`.
+4. Identify the tallest bar and write one insight.
+
+The speaker will call 2 minutes remaining.
+
+### Build the chart
+""",
+    54: """
+Output: A labelled five-bar chart with one clearly tallest bar.
+
+### Write the insight
+""",
+    56: """
+## seaborn: Cleaner Defaults — Slides 39–40
+
+Same data, same question. matplotlib offers direct control; seaborn often gives cleaner defaults for labelled data. We will recreate only the food-orders chart, not start a separate seaborn lecture.
+
+### Slide 40 — Recreate the bar chart
+""",
+    58: """
+Output: A cleaner-default bar chart using the same five food-order values; Chicken Rice remains highest at 35.
+""",
+    59: """
+## Wrap-up — Slides 41–44
 
 **Question → Data → Code → Output/Chart → Insight**
 
-- pandas: create, select, filter, summarise, and calculate table columns.
-- NumPy: numerical calculations and regular plotting coordinates.
-- matplotlib: bar, line, and scatter charts.
-- seaborn: a cleaner plotting alternative.
+- **pandas:** create, select, filter, summarise, and calculate table columns.
+- **NumPy:** perform numerical calculations and create regular plotting coordinates.
+- **matplotlib:** make bar, line, and scatter charts.
+- **seaborn:** recreate a chart with cleaner defaults.
 
-Today we looked for patterns. Next week, machine learning uses patterns to make predictions. Download the attendee notebook and complete the Workshop 2 feedback form before leaving.
+Today we looked for patterns. Next week, machine learning uses patterns to make predictions. Download the attendee notebook from Slide 44 and keep using the question-to-insight loop when you explore new data.
+""",
+}
+
+
+def set_markdown(cells, index, source):
+    if cells[index].cell_type != "markdown":
+        raise ValueError(f"Cell {index + 1} must be Markdown")
+    cells[index].source = source.strip()
+
+
+def revise(path, completed):
+    notebook = nbformat.read(path, as_version=4)
+    cells = notebook.cells
+
+    if len(cells) == 61 and cells[-1].cell_type == "markdown" and "## Optional Extension" in cells[-1].source:
+        cells.pop()
+    if len(cells) != 60:
+        raise ValueError(f"{path} should have 60 cells, found {len(cells)}")
+    cell_types = [cell.cell_type for cell in cells]
+    if cell_types != EXPECTED_CELL_TYPES:
+        raise ValueError(f"{path} cell types or order changed")
+
+    code_before = [cell.source for cell in cells if cell.cell_type == "code"]
+    edition = COMPLETED_EDITION if completed else ATTENDEE_EDITION
+    set_markdown(
+        cells,
+        0,
+        f"""
+# AI Don't Know Workshop 2: Data Analytics and Visualisation
+
+{edition}
+
+**Online · 22 July 2026 · 7.00–9.00 PM · Alson & Murugan**
+
+## What you will learn
+
+- Create and read a pandas DataFrame.
+- Select and filter rows and columns.
+- Calculate summaries and create a calculated column.
+- Use NumPy for simple calculations and plotting coordinates.
+- Choose and create bar, line, and scatter charts.
+- Recreate one chart with seaborn and explain an insight in plain English.
         """,
     )
+    for index, source in COMMON_MARKDOWN.items():
+        set_markdown(cells, index, source)
+    for index, alt_text in CHART_ALT_TEXT.items():
+        if cells[index].cell_type != "code":
+            raise ValueError(f"Chart cell {index + 1} must be code")
+        cells[index].metadata["alt"] = alt_text
 
-    assert len(cells) == 61, f"{path} should have 61 cells, found {len(cells)}"
+    code_after = [cell.source for cell in cells if cell.cell_type == "code"]
+    if code_after != code_before:
+        raise ValueError(f"{path} code cells changed during Markdown revision")
+
+    if not completed:
+        for cell in cells:
+            if cell.cell_type == "code":
+                cell.execution_count = None
+                cell.outputs = []
+
     nbformat.validate(notebook)
     nbformat.write(notebook, path)
 
 
 for notebook_path, is_completed in NOTEBOOKS:
     revise(notebook_path, is_completed)
-    print(f"Revised {notebook_path} to 61 cells")
+    print(f"Revised {notebook_path} to the final 60-cell structure")

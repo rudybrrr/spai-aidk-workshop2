@@ -13,8 +13,8 @@ const attendeeText = attendee.cells.map(source).join("\n");
 const completedText = completed.cells.map(source).join("\n");
 
 assert.equal(sections.length, 44, "the active deck must contain 44 slides while the attendance form is hidden");
-assert.equal(attendee.cells.length, 61, "attendee notebook must contain 61 cells");
-assert.equal(completed.cells.length, 61, "completed notebook must contain 61 cells");
+assert.equal(attendee.cells.length, 60, "attendee notebook must contain 60 cells");
+assert.equal(completed.cells.length, 60, "completed notebook must contain 60 cells");
 assert.deepEqual(attendee.cells.map((cell) => cell.cell_type), completed.cells.map((cell) => cell.cell_type), "notebook cell types must align");
 
 for (const title of [
@@ -73,4 +73,4 @@ assert.ok(existsSync("public/assets/images/workshop-2-feedback-qr.svg"), "local 
 assert.ok(existsSync("src/scripts/activityTimer.js"), "activity timer controller must exist");
 assert.ok(standalone.includes("ACTIVITY TIMER SOURCE"), "standalone must embed the canonical timer controller");
 
-console.log("Workshop 2 feedback revision passed: 44 active slides, hidden attendance form, two 61-cell notebooks, methods, timers, and closing flow are synchronized.");
+console.log("Workshop 2 feedback revision passed: 44 active slides, hidden attendance form, two 60-cell notebooks, methods, timers, and closing flow are synchronized.");

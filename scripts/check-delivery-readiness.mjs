@@ -6,6 +6,7 @@ const deck = readFileSync("index.html", "utf8");
 const attendee = JSON.parse(readFileSync("notebooks/AIDK_W2_Workshop.ipynb", "utf8"));
 const completed = JSON.parse(readFileSync("notebooks/AIDK_W2_Workshop_Completed.ipynb", "utf8"));
 const requirements = readFileSync("requirements.txt", "utf8");
+const readme = readFileSync("README.md", "utf8");
 const source = (cell) => Array.isArray(cell.source) ? cell.source.join("") : cell.source;
 const notebookText = (notebook) => notebook.cells.map(source).join("\n");
 const confirmedSchedule = "Online · 22 July 2026 · 7.00–9.00 PM";
@@ -32,10 +33,17 @@ for (const notebook of [attendee, completed]) {
   assert.ok(setup.includes('"axes.titlesize": 18'), "setup cell must enlarge chart titles");
   const text = notebookText(notebook);
   assert.ok(text.includes(confirmedSchedule), "notebook must contain the confirmed online date and time");
-  for (const range of ["Slides 17–20", "Slides 21–28", "Slides 29–30", "Slides 31–32", "Slides 33–37"]) {
+  for (const range of ["Slides 1–11", "Slides 12–14", "Slides 15–20", "Slides 21–23", "Slide 24", "Slides 25–28", "Slides 29–36", "Slides 37–38", "Slides 39–40", "Slides 41–44"]) {
     assert.ok(text.includes(range), `notebook is missing ${range}`);
   }
+  assert.ok(!text.includes("complete the Workshop 2 feedback form"), "notebook wrap-up must match the active deck and omit the hidden feedback form");
 }
+
+assert.ok(readme.includes("canonical 44-slide web deck"), "README must describe the canonical 44-slide deck");
+assert.ok(!readme.includes("45-slide"), "README must not retain stale 45-slide references");
+assert.ok(readme.includes("two 60-cell notebooks"), "README must describe the final 60-cell notebook contract");
+assert.ok(!readme.includes("61-cell"), "README must not retain stale 61-cell references");
+assert.ok(readme.includes("release the completed solutions notebook after the workshop"), "README must document the attendee solutions release policy");
 
 for (const dependency of ["pandas>=3.0,<4", "numpy>=2.5,<3", "matplotlib>=3.11,<4", "seaborn>=0.13,<1"]) {
   assert.ok(requirements.includes(dependency), `requirements.txt is missing ${dependency}`);
