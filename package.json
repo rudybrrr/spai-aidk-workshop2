@@ -12,7 +12,8 @@
     "check:standalone-visuals": "node scripts/check-standalone-visual-contract.mjs",
     "check:projector-readability": "node scripts/check-projector-readability.mjs",
     "check:delivery-readiness": "node scripts/check-delivery-readiness.mjs",
-    "build": "npm run check:opening && npm run check:timer && npm run check:feedback-revision && npm run check:alignment && npm run check:standalone-visuals && npm run check:projector-readability && npm run check:delivery-readiness",
+    "check:speaker-script": "node scripts/check-w2-speaker-script.mjs",
+    "build": "npm run check:opening && npm run check:timer && npm run check:feedback-revision && npm run check:alignment && npm run check:standalone-visuals && npm run check:projector-readability && npm run check:delivery-readiness && npm run check:speaker-script",
     "sync:standalone": "node scripts/sync-standalone-slides.mjs",
     "dev": "npx --yes serve .",
     "start": "npx --yes serve ."
