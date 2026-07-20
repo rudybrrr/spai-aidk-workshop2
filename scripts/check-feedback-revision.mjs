@@ -12,7 +12,7 @@ const titles = sections.map((section) => section.match(/data-title="([^"]+)"/)?.
 const attendeeText = attendee.cells.map(source).join("\n");
 const completedText = completed.cells.map(source).join("\n");
 
-assert.equal(sections.length, 45, "feedback revision plus opening prelude requires 45 slides");
+assert.equal(sections.length, 44, "the active deck must contain 44 slides while the attendance form is hidden");
 assert.equal(attendee.cells.length, 61, "attendee notebook must contain 61 cells");
 assert.equal(completed.cells.length, 61, "completed notebook must contain 61 cells");
 assert.deepEqual(attendee.cells.map((cell) => cell.cell_type), completed.cells.map((cell) => cell.cell_type), "notebook cell types must align");
@@ -34,7 +34,6 @@ for (const title of [
   "sns.barplot()",
   "Group photo time",
   "Download the workshop notebook",
-  "Workshop 2 feedback",
 ]) {
   assert.ok(titles.includes(title), `missing feedback-revision slide title: ${title}`);
 }
@@ -67,10 +66,11 @@ assert.ok(completedText.includes("Chen and Ethan improved the most, by 10 points
 
 const feedbackUrl = "https://docs.google.com/forms/d/e/1FAIpQLSecVnlz3VnEevhEoFqhn9Winy6Ps21FKaSebncdf3-031GnjA/viewform?usp=preview";
 assert.ok(canonical.includes('./notebooks/AIDK_W2_Workshop.ipynb'), "canonical deck must link the attendee notebook");
-assert.ok(canonical.includes(feedbackUrl), "canonical deck must contain the exact feedback URL");
+assert.ok(!titles.includes("Workshop 2 feedback"), "the attendance/feedback form slide must be hidden");
+assert.ok(!canonical.includes(feedbackUrl), "the hidden attendance form URL must not appear in the active deck");
 assert.ok(existsSync("public/assets/images/notebook-download-qr.svg"), "local notebook QR must exist");
 assert.ok(existsSync("public/assets/images/workshop-2-feedback-qr.svg"), "local feedback QR must exist");
 assert.ok(existsSync("src/scripts/activityTimer.js"), "activity timer controller must exist");
 assert.ok(standalone.includes("ACTIVITY TIMER SOURCE"), "standalone must embed the canonical timer controller");
 
-console.log("Workshop 2 feedback revision passed: 45 slides, two 61-cell notebooks, methods, timers, links, and closing flow are synchronized.");
+console.log("Workshop 2 feedback revision passed: 44 active slides, hidden attendance form, two 61-cell notebooks, methods, timers, and closing flow are synchronized.");

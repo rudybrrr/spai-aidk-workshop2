@@ -15,12 +15,12 @@ const deckTitles = [...deck.matchAll(/<section\b[^>]*data-title="([^"]+)"[^>]*>/
   .map((match) => decode(match[1]));
 const sectionMatches = [...markdown.matchAll(/^## Slide (\d+) — (.+)$/gm)];
 
-assert.equal(deckTitles.length, 45, "implemented deck must contain 45 titled slides");
-assert.equal(sectionMatches.length, 45, "speaker script must contain exactly 45 slide sections");
+assert.equal(deckTitles.length, 44, "implemented deck must contain 44 titled slides");
+assert.equal(sectionMatches.length, 44, "speaker script must contain exactly 44 slide sections");
 assert.deepEqual(
   sectionMatches.map((match) => Number(match[1])),
-  Array.from({ length: 45 }, (_, index) => index + 1),
-  "speaker script slide numbers must run from 1 to 45 without gaps",
+  Array.from({ length: 44 }, (_, index) => index + 1),
+  "speaker script slide numbers must run from 1 to 44 without gaps",
 );
 assert.deepEqual(
   sectionMatches.map((match) => match[2]),
@@ -52,7 +52,7 @@ assert.ok(slideBlocks[23].includes("**Speaker:** Both"), "Slide 24 break must be
 for (let slide = 25; slide <= 40; slide += 1) {
   assert.ok(slideBlocks[slide - 1].includes("**Speaker:** Murugan"), `Slide ${slide} must be led by Murugan`);
 }
-for (let slide = 41; slide <= 45; slide += 1) {
+for (let slide = 41; slide <= 44; slide += 1) {
   assert.ok(slideBlocks[slide - 1].includes("**Speaker:** Alson"), `Slide ${slide} must be led by Alson with Murugan supporting`);
 }
 
@@ -92,4 +92,4 @@ for (const forbidden of ["TBD", "01_AIDK_W1", "AIDK_W1_Starter", "AIDK_W1_Soluti
   assert.ok(!markdown.includes(forbidden), `speaker script contains forbidden stale content: ${forbidden}`);
 }
 
-console.log("Workshop 2 speaker script passed: 45 exact slide sections, implemented ownership, notebook cues, activity timings, outputs, handovers, and facilitator reference are present.");
+console.log("Workshop 2 speaker script passed: 44 exact slide sections, implemented ownership, notebook cues, activity timings, outputs, handovers, and facilitator reference are present.");

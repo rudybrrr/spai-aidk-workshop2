@@ -103,7 +103,7 @@ const fullMappings = [7, 9, 13, 15, 17, 35, 37, 39, 42, 44, 46, 48, 50, 54, 58];
 for (const slidePath of slidePaths) {
   const html = readFileSync(slidePath, "utf8");
   const slideSections = sections(html);
-  assert.equal(slideSections.length, 45, `${slidePath} must contain 45 slides`);
+  assert.equal(slideSections.length, 44, `${slidePath} must contain 44 active slides`);
 
   const mapped = slideSections
     .map((section) => {
@@ -151,4 +151,4 @@ for (const slidePath of slidePaths) {
   }
 }
 
-console.log("Workshop 2 alignment passed: 45 slides, two 61-cell notebooks, exact datasets, outputs, larger blanks, and full/excerpt mappings are synchronised.");
+console.log("Workshop 2 alignment passed: 44 active slides, two 61-cell notebooks, exact datasets, outputs, larger blanks, and full/excerpt mappings are synchronised.");

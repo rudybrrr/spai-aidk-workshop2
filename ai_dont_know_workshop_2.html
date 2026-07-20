@@ -1016,7 +1016,8 @@
       list-style: none;
     }
     .quiz-row summary::-webkit-details-marker { display: none; }
-    .quiz-row summary span { color: var(--copper); font-family: var(--mono); font-size: 0.78rem; letter-spacing: 0.12em; }
+    .quiz-row .quiz-number { color: var(--copper); font-family: var(--mono); font-size: 0.78rem; letter-spacing: 0.12em; }
+    .quiz-row .quiz-question { min-width: 0; }
     .quiz-row p { margin: -4px 0 20px 78px; color: var(--muted); }
 
     .activity-timer {
@@ -1612,9 +1613,9 @@ python -c "print('Python is working!')"</code></pre></div>
         <h2>Three quick questions</h2>
         <p class="lead">Predict each answer, then open the row to check.</p>
         <div class="quiz-list">
-          <details class="quiz-row"><summary><span>01</span>What stores a value under a name?</summary><p><strong>A variable.</strong> Example: <code>score = 85</code>.</p></details>
-          <details class="quiz-row"><summary><span>02</span>Which structure stores key–value pairs?</summary><p><strong>A dictionary.</strong> Example: <code>{"Name": "Alex"}</code>.</p></details>
-          <details class="quiz-row"><summary><span>03</span>What does <code>print()</code> help us do?</summary><p><strong>Display and inspect a result.</strong></p></details>
+          <details class="quiz-row"><summary><span class="quiz-number">01</span><span class="quiz-question">What stores a value under a name?</span></summary><p><strong>A variable.</strong> Example: <code>score = 85</code>.</p></details>
+          <details class="quiz-row"><summary><span class="quiz-number">02</span><span class="quiz-question">Which structure stores key–value pairs?</span></summary><p><strong>A dictionary.</strong> Example: <code>{"Name": "Alex"}</code>.</p></details>
+          <details class="quiz-row"><summary><span class="quiz-number">03</span><span class="quiz-question">What does <code>print()</code> help us do?</span></summary><p><strong>Display and inspect a result.</strong></p></details>
         </div>
       </div>
     </section>
@@ -2067,24 +2068,12 @@ plt.show()</code></pre></div>
       </div>
     </section>
 
-    <section class="slide center" data-footer="Feedback · Both" data-title="Workshop 2 feedback">
-      <div class="section-title feedback-closing">
-        <div class="kicker">Your feedback shapes Workshop 3</div>
-        <h2>How was Workshop 2?</h2>
-        <p class="lead">Scan the QR code or open the link. We’ll leave this slide up while you respond.</p>
-        <div class="qr-block compact-qr">
-          <a href="https://docs.google.com/forms/d/e/1FAIpQLSecVnlz3VnEevhEoFqhn9Winy6Ps21FKaSebncdf3-031GnjA/viewform?usp=preview"><img class="qr-code" src="public/assets/images/workshop-2-feedback-qr.svg" alt="QR code linking to the Workshop 2 feedback form" /></a>
-          <p class="qr-caption">Workshop 2 feedback form</p>
-        </div>
-        <a class="form-link" href="https://docs.google.com/forms/d/e/1FAIpQLSecVnlz3VnEevhEoFqhn9Winy6Ps21FKaSebncdf3-031GnjA/viewform?usp=preview">Open the feedback form</a>
-      </div>
-    </section>
   </main>
 
   <div class="footer">
     <div class="footer-left" id="footerLabel">AI Don’t Know · SPAI</div>
     <div class="dots" id="dots"></div>
-    <div class="slide-no" id="slideNo">1 <span>/ 45</span></div>
+    <div class="slide-no" id="slideNo">1 <span>/ 44</span></div>
   </div>
 
   <div class="controls">

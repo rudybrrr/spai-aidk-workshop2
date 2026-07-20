@@ -576,7 +576,8 @@
       list-style: none;
     }
     .quiz-row summary::-webkit-details-marker { display: none; }
-    .quiz-row summary span { color: var(--copper); font-family: var(--mono); font-size: 0.78rem; letter-spacing: 0.12em; }
+    .quiz-row .quiz-number { color: var(--copper); font-family: var(--mono); font-size: 0.78rem; letter-spacing: 0.12em; }
+    .quiz-row .quiz-question { min-width: 0; }
     .quiz-row p { margin: -4px 0 20px 78px; color: var(--muted); }
 
     .activity-timer {

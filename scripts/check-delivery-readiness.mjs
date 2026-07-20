@@ -19,7 +19,7 @@ for (const timing of ["0-8 mins", "8-18 mins", "18-36 mins", "36-51 mins", "51-6
 }
 
 const sections = deck.match(/<section\b[\s\S]*?<\/section>/g) ?? [];
-assert.equal(sections.length, 45, "canonical deck must contain 45 slides");
+assert.equal(sections.length, 44, "canonical deck must contain 44 active slides while the attendance form is hidden");
 assert.ok(sections[23].includes('data-title="10-minute break"'), "absolute Slide 24 must be the dedicated break slide after the eight-slide prelude");
 assert.ok(sections[23].includes("We resume at 8:01 PM"), "break slide must show the exact resume time");
 assert.ok(!deck.includes("Alson calls"), "audience deck must not contain facilitator-only Alson instructions");
@@ -50,4 +50,4 @@ for (const cue of ["low-volume music", "group photo", "feedback form", "17–20"
   assert.ok(runSheet.includes(cue), `run sheet is missing delivery cue: ${cue}`);
 }
 
-console.log("Workshop 2 delivery readiness passed: 120-minute agenda, break, notebooks, timers, music cues, photo, resources, and feedback are synchronized.");
+console.log("Workshop 2 delivery readiness passed: 120-minute agenda, break, notebooks, timers, music cues, photo, and resources are synchronized; the attendance form is hidden.");

@@ -9,7 +9,7 @@
 - **Delivery:** Online
 - **Speakers:** Alson and Murugan
 - **Duration:** 2 hours
-- **Slides:** 45
+- **Slides:** 44
 - **Attendee notebook:** `notebooks/AIDK_W2_Workshop.ipynb`
 - **Completed notebook:** `notebooks/AIDK_W2_Workshop_Completed.ipynb`
 
@@ -21,7 +21,7 @@ The paragraphs under **Suggested Script** are speaking guidance, not lines that 
 
 ## Before the Workshop
 
-- Open `index.html` or the deployed slide deck and confirm all 45 slides are present.
+- Open `index.html` or the deployed slide deck and confirm all 44 active slides are present.
 - Open `notebooks/AIDK_W2_Workshop.ipynb` for live demonstrations.
 - Keep `notebooks/AIDK_W2_Workshop_Completed.ipynb` available as backup.
 - Confirm pandas, NumPy, matplotlib, and seaborn are installed from `requirements.txt`.
@@ -41,7 +41,7 @@ The paragraphs under **Suggested Script** are speaking guidance, not lines that 
 | 1–23 | Opening, SPAI/setup prelude, recap, analytics thinking, pandas, Activity 1 | Alson | Murugan watches chat/notebook readiness and facilitates Activity 1 |
 | 24 | Ten-minute break | Both | Both help attendees resolve notebook issues |
 | 25–40 | NumPy, matplotlib, Activity 2, seaborn | Murugan | Alson monitors attendees and facilitates Activity 2 |
-| 41–45 | Recap, photo, Q&A, take-home notebook, feedback | Alson | Murugan supports the recap, answers questions, and manages closing logistics |
+| 41–44 | Recap, photo, Q&A, and take-home notebook | Alson | Murugan supports the recap, answers questions, and manages closing logistics |
 
 ## Timing Summary
 
@@ -58,7 +58,7 @@ The paragraphs under **Suggested Script** are speaking guidance, not lines that 
 | 101–106 | seaborn | 39–40 | Murugan |
 | 106–112 | Wrap-up and group photo | 41–42 | Alson with Murugan support |
 | 112–118 | Q&A | 43 | Alson and Murugan |
-| 118–120 | Take-home notebook and feedback | 44–45 | Alson with Murugan support |
+| 118–120 | Take-home notebook and closing | 44 | Alson with Murugan support |
 
 The first nine slides are a brisk welcome/setup prelude. If attendees already completed setup, move through Slides 2–9 quickly and protect the teaching and activity times.
 
@@ -1416,35 +1416,6 @@ The downloaded file is `AIDK_W2_Workshop.ipynb`.
 
 - Do not distribute the completed answer notebook as the attendee file.
 
-## Slide 45 — Workshop 2 feedback
-
-**Speaker:** Alson
-**Planned time:** 1 minute, then remain projected
-**Notebook:** None
-**Delivery type:** Closing / Feedback
-
-### Purpose
-
-Close the workshop and leave the correct Workshop 2 feedback form visible.
-
-### Suggested Script
-
-“Thank you for joining and for attempting the activities. Please scan the QR code or open the feedback link before you leave. Your feedback helps us improve Workshop 3. Murugan and I will stay for a few minutes if you need help with your notebook.”
-
-### Actions
-
-- Leave Slide 45 projected while attendees respond.
-- Murugan confirms the form opens correctly and handles final questions.
-
-### Expected Output
-
-Attendees reach the Workshop 2 feedback form.
-
-### Speaker Notes
-
-- Do not advance away from this final slide.
-- Closing line: “Thanks everyone. We’ll see you at Workshop 3.”
-
 # Facilitator Quick Reference
 
 ## Common notebook problems
@@ -1478,7 +1449,7 @@ Do not take over the keyboard unless an accessibility need requires it. Avoid pa
 | Break, 2:00 remaining | Workshop resumes in two minutes; return to the notebook | Both |
 | Activity 2 start | “You have 6 minutes to attempt this.” | Murugan |
 | Activity 2, 2:00 remaining | 2-minute reminder; check title, axes, and insight | Murugan |
-| Q&A, minute 118 | Move to notebook download and feedback | Alson |
+| Q&A, minute 118 | Move to the notebook download and closing | Alson |
 
 ## Cut-first content
 
@@ -1490,4 +1461,4 @@ If the workshop is behind schedule:
 4. Do not cut either activity.
 5. Do not remove the Workshop 3 bridge.
 
-Also compress the early SPAI/setup prelude when attendees are already ready. Do not cut the activity insights, the 10-minute break entirely, or the final feedback destination.
+Also compress the early SPAI/setup prelude when attendees are already ready. Do not cut the activity insights or the 10-minute break entirely.
